@@ -38,27 +38,27 @@
 <div>
     <fieldset class="links" style='border:1px solid grey'>
         <legend>Reports</legend>
-        <a href="/reports/ssrs-build-schedule">Build Schedule</a>
-        <a href="/reports/ssrs-incoming-builds">Incoming Builds</a>
-        <a href="/reports/ssrs-wip-custom-colour-orders">Custom Colour</a>
-        <a href="/reports/ssrs-build-outbound-view">Outbound Builds</a>
+        <a href="/reports/build-schedule">Build Schedule</a>
+        <a href="/reports/incoming-builds">Incoming Builds</a>
+        <a href="/reports/wip-custom-colour-orders">Custom Colour</a>
+        <a href="/reports/build-outbound-view">Outbound Builds</a>
         <br />
-        <a href="/reports/ssrs-build-inbound-view">Inbound Builds</a>
-        <a href="/reports/ssrs-pdi-view">View PDI's</a>
+        <a href="/reports/build-inbound-view">Inbound Builds</a>
+        <a href="/reports/pdi-view">View PDI's</a>
         <a href="/reports/packing-view">View Pack's</a>
-        <a href="/reports/ssrs-completed-bike-orders">Shipped Bikes</a>
+        <a href="/reports/completed-bike-orders">Shipped Bikes</a>
         <br />
-        <a href="/reports/ssrs-stock-demand">Stock Demand</a>
-        <a href="/reports/ssrs-essential-component-shortages">Essential Shortages</a>
-        <a href="/reports/ssrs-expected-non-essential-shortages">Non Ess Shortages</a>
-        <a href="/reports/ssrs-wip-fast-track-schedule">Fasttracks</a>
+        <a href="/reports/stock-demand">Stock Demand</a>
+        <a href="/reports/essential-component-shortages">Essential Shortages</a>
+        <a href="/reports/expected-non-essential-shortages">Non Ess Shortages</a>
+        <a href="/reports/wip-fast-track-schedule">Fasttracks</a>
         <br />
-        <a href="/reports/ssrs-frame-availability">Frame Availability</a>
-        <a href="/reports/ssrs-wip-overdue-builds">Overdue Builds</a>
+        <a href="/reports/frame-availability">Frame Availability</a>
+        <a href="/reports/wip-overdue-builds">Overdue Builds</a>
         <a href="/reports/mechanic-kpi">Mechanic KPI</a>
-        <a href="/reports/ssrs-pdi-stats">PDI Stats</a>
+        <a href="/reports/pdi-stats">PDI Stats</a>
         <br />
-        <a href="/reports/ssrs-bike-wip-stats">Bike WIP Stats</a>
-        <a href="/reports/ssrs-qlik-data">Qlik Data</a>
+        <a href="/reports/bike-wip-stats">Bike WIP Stats</a>
+        <a href="/reports/qlik-data">Qlik Data</a>
     </fieldset>
 </div>
