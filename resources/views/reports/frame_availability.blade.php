@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-@include("global.head")
+    @include("global.head")
     <body>
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
@@ -19,7 +19,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Welcome
+                   Frame Availability
                 </div>
                 @include("global.menu")
             </div>

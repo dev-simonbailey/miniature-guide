@@ -19,7 +19,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Welcome
+                    Add New Pack
                 </div>
                 @include("global.menu")
             </div>

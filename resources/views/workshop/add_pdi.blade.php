@@ -19,7 +19,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Welcome
+                   Add PDI
                 </div>
                 @include("global.menu")
             </div>
