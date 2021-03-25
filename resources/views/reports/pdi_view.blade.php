@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    @include("global.head")
+@include("global.head")
     <body>
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
@@ -16,12 +16,14 @@
                     @endauth
                 </div>
             @endif
-
+            <div>
+                @include("global.mega_menu")
+            </div>
+            <br />
             <div class="content">
                 <div class="title m-b-md">
-                    PDI View
+                    View PDI's
                 </div>
-                @include("global.menu")
             </div>
         </div>
     </body>

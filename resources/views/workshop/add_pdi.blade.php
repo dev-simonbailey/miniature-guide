@@ -16,12 +16,14 @@
                     @endauth
                 </div>
             @endif
-
+            <div>
+                @include("global.mega_menu")
+            </div>
+            <br />
             <div class="content">
                 <div class="title m-b-md">
                    Add PDI
                 </div>
-                @include("global.menu")
             </div>
         </div>
     </body>

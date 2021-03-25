@@ -15,6 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+/* HELP */
+Route::prefix('help')->group(function () {
+    Route::get('start','HelpViewController@start')->name('help.start');
+});
+
 /* ADMIN */
 Route::prefix('admin')->group(function () {
     Route::get('knowledge-base','AdminViewController@knowledge_base')->name('admin.knowledge_base');

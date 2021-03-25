@@ -22,7 +22,7 @@
             <br />
             <div class="content">
                 <div class="title m-b-md">
-                    Mechanic KPI
+                    Help Start
                 </div>
             </div>
         </div>
