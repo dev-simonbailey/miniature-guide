@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+@section('page_title')
+    {{ "Bluesky - Returns" }}
+@endsection
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 @include("global.head")
     <body>

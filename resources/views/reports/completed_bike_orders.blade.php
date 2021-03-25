@@ -1,3 +1,6 @@
+@section('page_title')
+    {{ "Bluesky - Shipped Bikes" }}
+@endsection
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 @include("global.head")
