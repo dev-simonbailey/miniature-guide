@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'WelcomeViewController@welcome')->name('welcome');
 
 /* HELP */
 Route::prefix('help')->group(function () {
@@ -75,3 +73,6 @@ Route::prefix('reports')->group(function () {
     Route::get('bike-wip-stats','ReportsViewController@bike_wip_stats')->name('reports.bike_wip_stats');
     Route::get('qlik-data','ReportsViewController@qlik_data')->name('reports.qlik_data');
 });
+
+Auth::routes();
+Route::get('/', 'WelcomeViewController@welcome')->name('welcome');

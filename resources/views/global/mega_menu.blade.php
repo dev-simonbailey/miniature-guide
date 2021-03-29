@@ -12,12 +12,40 @@ $reports    = "/reports/";
  <a href="/" class="navbar-brand">Bluesky</a>
  <div class="collapse navbar-collapse" id="mainNav">
   <ul class="navbar-nav ml-auto nav-fill">
-   <li class="nav-item px-4">
-    <a href="/" class="nav-link">Home <span class="sr-only">(current)</span></a>
-   </li>
-   <li class="nav-item px-4">
-    <a href="{{$help}}start" class="nav-link">Help</a>
-   </li>
+    
+    @if (Route::has('login'))
+            @auth
+            <li class="nav-item px-4">
+                <li class="nav-item dropdown">
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        {{ Auth::user()->name }} <span class="caret"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </div>
+                </li>
+            </li>
+            @else
+            <li class="nav-item px-4">
+                <a href="{{ route('login') }}" class="nav-link">Login</a>
+            </li>
+            @if (Route::has('register'))
+            <li class="nav-item px-4">
+                <a href="{{ route('register') }}" class="nav-link">Register</a>
+                </li>
+            @endif
+        @endauth
+    @endif  
+   @if (Route::has('login'))
+   @auth
    <li class="nav-item px-4 dropdown">
     <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</a>
     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="servicesDropdown">
@@ -67,6 +95,11 @@ $reports    = "/reports/";
        <a class="dropdown-item" href="{{$reports}}bike-wip-stats">Bike WIP Stats</a>
        <a class="dropdown-item" href="{{$reports}}qlik-data">Qlik Data</a>
       </div>
+      @endauth
+      @endif
+      <li class="nav-item px-4">
+    <a href="{{$help}}start" class="nav-link">Help</a>
+   </li>
      </div>
     </div>
    </li>
