@@ -13,8 +13,6 @@
             <div class="content">
                 <div class="title m-b-md">
                     Welcome to Bluesky
-                    <br/ >
-                    {{Auth::user()->home}}
                 </div>
             </div>
         </div>

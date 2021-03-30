@@ -55,6 +55,7 @@ $reports    = "/reports/";
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="servicesDropdown">
                 <a class="dropdown-item" href="/admin/knowledge-base">Knowledge Base</a>
                 <a class="dropdown-item" href="/admin/ilog-add">Log Interaction</a>
+                @if (auth::user()->role != "none")
                 <div class="dropdown-divider"></div>
                 <div class="d-md-flex align-items-start justify-content-start">
                     <div>   
@@ -71,7 +72,6 @@ $reports    = "/reports/";
                         <a class="dropdown-item" href="{{$dashboard}}pick-wip">Pick WIP</a>
                         <a class="dropdown-item" href="{{$dashboard}}returns">Returns</a>
                     </div>
-                    @if (auth::user()->role == "admin")
                     <div>
                         <div class="dropdown-header">Workshop</div>
                         <a class="dropdown-item" href="{{$workshop}}add-inbound-build">Add Inbound Build</a>
@@ -79,7 +79,6 @@ $reports    = "/reports/";
                         <a class="dropdown-item" href="{{$workshop}}add-pdi">Add PDI</a>
                         <a class="dropdown-item" href="{{$workshop}}add-new-pack">Add New Pack</a>
                     </div>
-                    @endif
                     <div>
                         <div class="dropdown-header">Reports</div>
                             @if (auth::user()->role == "admin")
@@ -105,6 +104,7 @@ $reports    = "/reports/";
                         </div>
                     </div>
                 </div>
+                @endif
             </li>
             @endauth
             @auth

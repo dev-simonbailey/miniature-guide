@@ -28,20 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    //protected $redirectTo = '/';
-
-    public function redirectTo() {
-        $role = Auth::user()->role; 
-        switch ($role) {
-            case 'admin':
-            case 'default':
-                return Auth::user()->home;
-                break;      
-            default:
-                return '/'; 
-            break;
-        }
-      }
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -83,7 +70,7 @@ class RegisterController extends Controller
             'name'          => $data['name'],
             'department'    => $data['department'],
             'email'         => $data['email'],
-            'role'          => 'default',
+            'role'          => 'none',
             'home'          => '/',
             'password'      => Hash::make($data['password']),
         ]);
