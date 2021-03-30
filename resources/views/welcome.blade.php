@@ -13,12 +13,8 @@
             <div class="content">
                 <div class="title m-b-md">
                     Welcome to Bluesky
-                    <br />
-                    {{ Auth::user()->name }}
                     <br/ >
-                    {{ Auth::user()->username }}
-                    <br />
-                    {{ Auth::user()->department }}
+                    {{Auth::user()->home}}
                 </div>
             </div>
         </div>

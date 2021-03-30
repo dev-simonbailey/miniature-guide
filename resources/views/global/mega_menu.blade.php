@@ -9,9 +9,11 @@ $reports    = "/reports/";
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-        @auth
+    @if (!Auth::guest())
         <a href="{{Auth::user()->home}}" class="navbar-brand">Bluesky</a>
-        @endauth
+    @else
+        <a href="/" class="navbar-brand">Bluesky</a>
+    @endif
     <div class="collapse navbar-collapse" id="mainNav">
         <ul class="navbar-nav ml-auto nav-fill">
             @if (Route::has('login'))
@@ -22,10 +24,11 @@ $reports    = "/reports/";
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                                document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
+                            <a class="dropdown-item" href="{{ Auth::user()->home }}">
+                                Home
+                            </a>
+                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                Logout
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
@@ -33,17 +36,19 @@ $reports    = "/reports/";
                         </div>
                     </li>
                 </li>
-                @else
-                <li class="nav-item px-4">
-                    <a href="{{ route('login') }}" class="nav-link">Login</a>
-                </li>
-                    @if (Route::has('register'))
+                @else            
+                @if(Route::currentRouteName() == 'register')
+                    <li class="nav-item px-4">
+                        <a href="{{ route('login') }}" class="nav-link">Login</a>
+                    </li>
+                    @endif
+                    @if(Route::currentRouteName() == 'login')
                     <li class="nav-item px-4">
                         <a href="{{ route('register') }}" class="nav-link">Register</a>
                     </li>
                     @endif
                 @endauth
-            @endif  
+            @endif
             @auth
             <li class="nav-item px-4 dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</a>
@@ -102,9 +107,13 @@ $reports    = "/reports/";
                 </div>
             </li>
             @endauth
+            @auth
+            @if(Route::currentRouteName() != 'login' || Route::currentRouteName() != 'register')
             <li class="nav-item px-4">
                 <a href="{{$help}}start" class="nav-link">Help</a>
-            </li>     
+            </li>
+            @endif
+            @endauth
         </ul>
     </div>
  </nav>
