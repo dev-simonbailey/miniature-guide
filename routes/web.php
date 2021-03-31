@@ -75,4 +75,4 @@ Route::prefix('reports')->group(function () {
 });
 
 Auth::routes();
-//Route::get('/', 'WelcomeViewController@welcome')->name('welcome');
+
