@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('page_title')
-    {{ config('app.name')}} - {{ "WIP Overdue Builds" }}
+    {{ "WIP Overdue Builds" }}
 @endsection
 
 @section('content')

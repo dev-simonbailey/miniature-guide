@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('page_title')
-    {{ config('app.name')}} - {{ "WIP Custom Colour Orders" }}
+    {{ "WIP Custom Colour Orders" }}
 @endsection
 
 @section('content')

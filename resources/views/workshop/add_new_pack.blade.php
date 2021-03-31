@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('page_title')
-    {{ config('app.name')}} - {{ "Add New Pack" }}
+    {{ "Add New Pack" }}
 @endsection
 
 @section('content')

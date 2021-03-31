@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('page_title')
-    {{ config('app.name')}} - {{ "Qlik Data" }}
+    {{ "Qlik Data" }}
 @endsection
 
 @section('content')

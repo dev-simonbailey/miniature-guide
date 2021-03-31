@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('page_title')
-    {{ config('app.name')}} - {{ "Essential Shortages" }}
+    {{ "Essential Shortages" }}
 @endsection
 
 @section('content')

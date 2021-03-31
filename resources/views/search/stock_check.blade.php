@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('page_title')
-    {{ config('app.name')}} - {{ "Stock Check" }}
+    {{ "Stock Check" }}
 @endsection
 
 @section('content')

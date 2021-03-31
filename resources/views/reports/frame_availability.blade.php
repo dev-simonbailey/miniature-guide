@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('page_title')
-    {{ config('app.name')}} - {{ "Frame Availability" }}
+    {{ "Frame Availability" }}
 @endsection
 
 @section('content')

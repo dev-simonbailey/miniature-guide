@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('page_title')
-    {{ config('app.name')}} - {{ "Add PDI" }}
+    {{ "Add PDI" }}
 @endsection
 
 @section('content')

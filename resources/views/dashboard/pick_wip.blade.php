@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('page_title')
-    {{ config('app.name')}} - {{ "Pick WIP" }}
+    {{ "Pick WIP" }}
 @endsection
 
 @section('content')

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('page_title')
-    {{ config('app.name')}} - {{ "Stock Demand" }}
+    {{ "Stock Demand" }}
 @endsection
 
 @section('content')

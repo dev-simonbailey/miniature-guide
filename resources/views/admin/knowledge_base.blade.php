@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('page_title')
-    {{ config('app.name')}} - {{ "Knowledge Base" }}
+    {{ "Knowledge Base" }}
 @endsection
 
 @section('content')

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('page_title')
-    {{ config('app.name')}} - {{ "Bike WIP" }}
+    {{ "Bike WIP" }}
 @endsection
 
 @section('content')

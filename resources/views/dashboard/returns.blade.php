@@ -2,7 +2,7 @@
 @extends('layouts.app')
 
 @section('page_title')
-    {{ config('app.name')}} - {{ "Returns" }}
+    {{ "Returns" }}
 @endsection
 
 @section('content')

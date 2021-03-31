@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('page_title')
-    {{ config('app.name')}} - {{ "Search Orders by Part" }}
+    {{ "Search Orders by Part" }}
 @endsection
 
 @section('content')

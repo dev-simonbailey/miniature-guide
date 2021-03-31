@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('page_title')
-    {{ config('app.name')}} - {{ "Log Interaction" }}
+    {{ "Log Interaction" }}
 @endsection
 
 @section('content')

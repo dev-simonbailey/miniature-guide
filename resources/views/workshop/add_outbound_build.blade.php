@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('page_title')
-    {{ config('app.name')}} - {{ "Add Outbound Build" }}
+    {{ "Add Outbound Build" }}
 @endsection
 
 @section('content')
