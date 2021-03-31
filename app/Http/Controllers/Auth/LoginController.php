@@ -22,21 +22,14 @@ class LoginController extends Controller
     use AuthenticatesUsers;
 
     /**
-     * Where to send the users after login
-     * 
-     * @return string
-     */
+    * Where to send the users after login
+    * 
+    * @return string
+    */
     protected function Authenticated(){
 
         return redirect(Auth::user()->home);
     }
-
-    /**
-     * Where to redirect users after login - Original code
-     *
-     * @var string
-     */
-    //protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
