@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('page_title')
+    {{ config('app.name')}} - {{ "Register" }}
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
