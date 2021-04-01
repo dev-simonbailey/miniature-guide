@@ -28,6 +28,7 @@ Route::prefix('admin')->group(function () {
 /* SEARCH */
 Route::prefix('search')->group(function () {
     Route::get('orders','SearchViewController@order')->name('search.order');
+    Route::post('orders','SearchViewController@uniqueorder')->name('search.order');
     Route::get('by-part','SearchViewController@by_part')->name('search.by_part');
     Route::get('customers','SearchViewController@customer')->name('search.customer');
     Route::get('stock-check','SearchViewController@stock_check')->name('search.stock_check');
