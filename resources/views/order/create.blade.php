@@ -13,6 +13,6 @@
         @error('post')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
-        <input type="submit" value="Submit">
+        <input class="btn btn-primary" type="submit" value="Submit">
     </form>
 @endsection

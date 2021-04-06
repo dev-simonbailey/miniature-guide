@@ -15,6 +15,6 @@
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
         <p>Created by user {{ $order->user->name }}</p>
-        <input type="submit" value="Update" />
+        <input class="btn btn-primary" type="submit" value="Update" />
     </form>
 @endsection

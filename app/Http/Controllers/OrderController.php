@@ -53,7 +53,7 @@ class OrderController extends Controller
             $postData
         );
 
-        return redirect()->route('order.show', ['id' => $scratch->id]);
+        return redirect()->route('order.index');
     }
 
     /**
