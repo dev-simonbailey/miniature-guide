@@ -5,8 +5,8 @@
 @endsection
 
 @section('content')
-    <h1>Edit Order ID {{ $order->scratch_id }} Details </h1>
-    <form method="POST" action="{{ route('order.update', ['id' => $order->scratch_id ]) }}">
+    <h1>Edit Order ID {{ $order->id }} Details </h1>
+    <form method="POST" action="{{ route('order.update', ['id' => $order->id ]) }}">
         @method('PUT')
         {{ csrf_field() }}
         <label for="post">Post</label>

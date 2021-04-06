@@ -23,12 +23,12 @@
         <tbody>
             @foreach($scratchData as $order)
                 <tr>
-                    <td>{{ $order->scratch_id }}</td>
+                    <td>{{ $order->id }}</td>
                     <td>{{ $order->post }}</td>
                     <td>{{ $order->user->name }}</td>
                     <td>{{ $order->created_at }}</td>
                     <td>{{ $order->updated_at }}</td>
-                    <td><a href="{{ route('order.show', ['id' => $order->scratch_id]) }}">edit</a></td>
+                    <td><a href="{{ route('order.show', ['id' => $order->id]) }}">edit</a></td>
                 </tr>
             @endforeach
         </tbody>

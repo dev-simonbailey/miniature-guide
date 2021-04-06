@@ -15,7 +15,7 @@ class ScratchTable extends Migration
     {
         // Suggest you don't add _table to table names
         Schema::create('scratch_table', function (Blueprint $table) {
-            $table->increments('scratch_id');
+            $table->increments('id');
             $table->string('post');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();

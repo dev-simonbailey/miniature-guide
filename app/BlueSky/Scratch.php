@@ -22,7 +22,7 @@ class Scratch extends Model
      *
      * @var string
      */
-    protected $primaryKey = 'scratch_id';
+    protected $primaryKey = 'id';
 
     /**
      * The attributes that are mass assignable.
