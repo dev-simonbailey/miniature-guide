@@ -5,9 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="content">
-        <div class="title m-b-md">
-            Search Customers
-        </div>
-    </div>
+<div class="title m-b-md">
+    Search Customers
+</div>
 @endsection

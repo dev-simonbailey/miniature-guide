@@ -13,11 +13,13 @@ class ScratchTable extends Migration
      */
     public function up()
     {
+        // Suggest you don't add _table to table names
         Schema::create('scratch_table', function (Blueprint $table) {
-            $table->increments('id',0);
+            $table->increments('scratch_id');
             $table->string('post');
-            $table->integer('user');
-            $table->timestamp('created_at')->nullable();
+            $table->unsignedBigInteger('user_id');
+            $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -28,6 +30,6 @@ class ScratchTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('scratch_table');
     }
 }

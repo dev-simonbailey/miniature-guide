@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\BlueSky\Scratch;
 
 class SearchViewController extends Controller
 {
@@ -18,9 +19,11 @@ class SearchViewController extends Controller
      * @return Factory|View
      */
      public function order(){
-        $scratchdata = DB::select('SELECT * FROM scratch_table WHERE user = :id', ['id' => Auth::user()->id]);
+        $scratchdata = Scratch::find(Auth::user()->id);
+
         return view(self::ROUTEPARENT.__FUNCTION__, compact('scratchdata'));
      }
+
     /**
      * @return Factory|View
      */

@@ -5,9 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="content">
-        <div class="title m-b-md">
-            Stock Check
-        </div>
-    </div>
+<div class="title m-b-md">
+    Stock Check
+</div>
 @endsection
