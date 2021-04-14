@@ -7,23 +7,27 @@
 @section('content')
     <div class="content">
         <div class="title m-b-md">
-            <form name='orders-form' method='POST' action = '/search/orders/'>
+            <form name='ordersform' method='POST' action = '/search/orders/'>
                 {{csrf_field()}}
-                <input type='text' name='order_number'>
-                <input type="submit" value="Submit">
+                <input type='text' name='ordernumber' id='ordernumber' class="@error('ordernumber') is-invalid @enderror"/>
+                @error('ordernumber')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+                <input type="submit" value="Search" class='btn btn-primary'>
+                <a href="{{ route('search.order') }}" class='btn btn-primary'>Show All</a>
             </form>
             <br />
             <center>
-            <table border='1' cellpadding='5' cellspacing='5'>
+            <table class="table">
             @php
-            if(!empty($scratchdata)){
-                foreach($scratchdata as $data)
+            if(!empty($orderdata)){
+                foreach($orderdata as $order)
                 {
                 echo "<tr>";
-                echo "<td>".$data->id."</td>";
-                echo "<td>".$data->post."</td>";
-                echo "<td>".$data->user."</td>";
-                echo "<td>".$data->created_at."</td>";
+                echo "<td>".$order->id."</td>";
+                echo "<td>".$order->ordernumber."</td>";
+                echo "<td>".$order->parts."</td>";
+                echo "<td>".$order->created_at."</td>";
                 echo "</tr>";
                 }
             }

@@ -1,15 +1,13 @@
 @extends('layouts.app')
 
 @section('page_title')
-    {{ "Welcome" }}
+    {{ "Registration Success" }}
 @endsection
 
 @section('content')
     <div class="content">
         <div class="title m-b-md">
-            Welcome to Bluesky
-            <br />
-            {{ auth()->user()->name }}
+            Registration Successful.
         </div>
     </div>
 @endsection

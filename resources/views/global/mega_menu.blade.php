@@ -18,7 +18,7 @@ $reports    = "/reports/";
         <ul class="navbar-nav ml-auto nav-fill">
             @if (Route::has('login'))
                 @auth
-                <li class="nav-item px-4"> 
+                <li class="nav-item px-4">
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }} <span class="caret"></span>
@@ -27,6 +27,16 @@ $reports    = "/reports/";
                             <a class="dropdown-item" href="{{ Auth::user()->home }}">
                                 Home
                             </a>
+                            <hr />
+                            @if( Auth::user()->role == "admin")
+                                <a class="dropdown-item" href="/register">
+                                    Create User
+                                </a>
+                                <a class="dropdown-item" href="/users/show">
+                                    Registered Users
+                                </a>
+                                <hr />
+                            @endif
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 Logout
                             </a>
@@ -36,16 +46,16 @@ $reports    = "/reports/";
                         </div>
                     </li>
                 </li>
-                @else            
+                @else
                 @if(Route::currentRouteName() == 'register')
                     <li class="nav-item px-4">
                         <a href="{{ route('login') }}" class="nav-link">Login</a>
                     </li>
                     @endif
                     @if(Route::currentRouteName() == 'login')
-                    <li class="nav-item px-4">
-                        <a href="{{ route('register') }}" class="nav-link">Register</a>
-                    </li>
+                        <li class="nav-item px-4">
+                            <a href="{{ route('register') }}" class="nav-link">Register</a>
+                        </li>
                     @endif
                 @endauth
             @endif
@@ -58,7 +68,7 @@ $reports    = "/reports/";
                 @if (auth::user()->role != "none")
                 <div class="dropdown-divider"></div>
                 <div class="d-md-flex align-items-start justify-content-start">
-                    <div>   
+                    <div>
                         <div class="dropdown-header">Search</div>
                         <a class="dropdown-item" href="{{$search}}orders">Orders</a>
                         <a class="dropdown-item" href="{{$search}}by-part">Orders by Part</a>

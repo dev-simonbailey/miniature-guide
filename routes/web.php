@@ -13,6 +13,8 @@
 
 Route::get('/', 'WelcomeViewController@welcome')->name('welcome');
 
+Route::get('/registration-success', 'RegistrationSuccessController@index');
+
 /* HELP */
 Route::prefix('help')->group(function () {
     Route::get('start','HelpViewController@start')->name('help.start');
@@ -22,6 +24,15 @@ Route::prefix('help')->group(function () {
 Route::prefix('admin')->group(function () {
     Route::get('knowledge-base','AdminViewController@knowledge_base')->name('admin.knowledge_base');
     Route::get('ilog-add','AdminViewController@ilog_add')->name('admin.ilog_add');
+});
+
+/* Registered Users */
+Route::prefix('users')->group(function () {
+    Route::get('/show', 'RegisteredUsersController@index');
+    Route::get('/edit/{user}', 'RegisteredUsersController@edit');
+    Route::get('/delete/{user}', 'RegisteredUsersController@delete');
+    Route::patch('/update/{user}', 'RegisteredUsersController@update');
+    Route::delete('/destroy/{user}', 'RegisteredUsersController@destroy');
 });
 
 

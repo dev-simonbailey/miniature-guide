@@ -18,19 +18,20 @@ class SearchViewController extends Controller
      * @return Factory|View
      */
      public function order(){
-        $scratchdata = DB::select('SELECT * FROM scratch_table WHERE user = :id', ['id' => Auth::user()->id]);
-        return view(self::ROUTEPARENT.__FUNCTION__, compact('scratchdata'));
+        //$scratchdata = DB::select('SELECT * FROM scratch_table WHERE user = :id', ['id' => Auth::user()->id]);
+        $orderdata = DB::select('SELECT * FROM orders');
+        return view(self::ROUTEPARENT.__FUNCTION__, compact('orderdata'));
      }
     /**
      * @return Factory|View
      */
     public function uniqueorder(Request $request){
-        if(empty($request->order_number)){
-            $scratchdata = DB::select('SELECT * FROM scratch_table WHERE user = :id', ['id' => Auth::user()->id]);
+        if(empty($request->ordernumber)){
+            return redirect()->route('search.order');
          } else {
-            $scratchdata = DB::select('SELECT * FROM scratch_table WHERE user = :user AND id = :id', ['user' => Auth::user()->id, 'id' => $request->order_number]);
+            $orderdata = DB::select('SELECT * FROM orders WHERE ordernumber LIKE :order', ['order' => '%'.$request->ordernumber.'%']);
         }
-        return view(self::ROUTEPARENT.'order', compact('scratchdata'));
+        return view(self::ROUTEPARENT.'order', compact('orderdata'));
     }
     /**
      * @return Factory|View
