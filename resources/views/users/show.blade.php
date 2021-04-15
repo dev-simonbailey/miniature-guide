@@ -20,8 +20,8 @@
                     <th scope="col">Home</th>
                     <th scope="col">Created At</th>
                     <th scope="col">Updated At</th>
-                    <th scope="col">Edit</th>
-                    <th scope="col">Delete</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
             </thead>
             <tbody>
                 @foreach ($users as $user)
@@ -35,7 +35,11 @@
                     <td>{{ $user->created_at }}</td>
                     <td>{{ $user->updated_at }}</td>
                     <td><a href='/users/edit/{{ $user->id }}' class="btn btn-success">Edit</a></td>
-                    <td><a href='/users/delete/{{ $user->id }}' class="btn btn-danger">Delete</a></td>
+                    @if( $user->role != "admin")
+                        <td><a href='/users/delete/{{ $user->id }}' class="btn btn-danger">Delete</a></td>
+                    @else
+                        <td>&nbsp;</td>
+                    @endif
             @endforeach
             </tbody>
         </table>

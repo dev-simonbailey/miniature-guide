@@ -27,7 +27,8 @@ class RegisteredUsersController extends Controller
     {
         if(Auth::user()->role == "admin")
         {
-            $users = User::all()->except(Auth::id());
+            //$users = User::all()->except(Auth::id());
+            $users = User::all()->sortByDesc("name");
             return view('users.show', compact('users'));
         }
         else

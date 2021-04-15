@@ -36,6 +36,10 @@ $reports    = "/reports/";
                                     Registered Users
                                 </a>
                                 <hr />
+                                <a class="dropdown-item" href="/roles/show">
+                                    Roles
+                                </a>
+                                <hr />
                             @endif
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 Logout
