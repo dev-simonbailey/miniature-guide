@@ -66,7 +66,7 @@ class RegisteredUsersController extends Controller
 
         $user->update($data);
 
-        return redirect("/users/show");
+        return redirect()->route("users.show");
     }
 
     public function delete(User $user)
@@ -87,7 +87,7 @@ class RegisteredUsersController extends Controller
 
         $userToDelete->delete();
 
-        return redirect("/users/show");
+        return redirect()->route("users.show");
     }
 
 }

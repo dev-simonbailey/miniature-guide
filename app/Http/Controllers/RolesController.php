@@ -27,16 +27,45 @@ class RolesController extends Controller
     {
         if(Auth::user()->role == "admin")
         {
-            //$users = User::all()->except(Auth::id());
             $roles = Roles::all();
-
-            //dd($roles);
             return view('roles.show', compact('roles'));
-            //return view('roles.show');
         }
         else
         {
             return view('welcome');
         }
+    }    public function edit($role)
+    {
+        //$this->authorize('update', $user->profile);
+
+        $details = Roles::findOrFail($role);
+
+        return view('roles.edit', compact('details'));
+    }
+    public function update(Roles $role)
+    {
+
+        //$this->authorize('update', $user->profile);
+
+        $data = request()->validate([
+            'role'      =>  'required',
+            'index'     =>  'required',
+            'create'    =>  'required',
+            'store'     =>  'required',
+            'show'      =>  'required',
+            'edit'      =>  'required',
+            'update'    =>  'required',
+            'destroy'   =>  'required',
+        ]);
+
+        $role->update($data);
+
+        return redirect()->route('roles.show');
+    }
+
+
+    public function add()
+    {
+        return view('roles.add');
     }
 }

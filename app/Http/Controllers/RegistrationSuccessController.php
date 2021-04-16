@@ -23,6 +23,6 @@ class RegistrationSuccessController extends Controller
      */
     public function index()
     {
-        return redirect("/users/show");
+        return redirect()->route('users.show');
     }
 }

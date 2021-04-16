@@ -28,20 +28,21 @@ Route::prefix('admin')->group(function () {
 
 /* Registered Users */
 Route::prefix('users')->group(function () {
-    Route::get('/show', 'RegisteredUsersController@index');
-    Route::get('/edit/{user}', 'RegisteredUsersController@edit');
-    Route::get('/delete/{user}', 'RegisteredUsersController@delete');
-    Route::patch('/update/{user}', 'RegisteredUsersController@update');
-    Route::delete('/destroy/{user}', 'RegisteredUsersController@destroy');
+    Route::get('/show', 'RegisteredUsersController@index')->name('users.show');
+    Route::get('/edit/{user}', 'RegisteredUsersController@edit')->name('users.edit');
+    Route::get('/delete/{user}', 'RegisteredUsersController@delete')->name('users.delete');
+    Route::patch('/update/{user}', 'RegisteredUsersController@update')->name('users.update');
+    Route::delete('/destroy/{user}', 'RegisteredUsersController@destroy')->name('users.destroy');
 });
 
 /* Roles */
 Route::prefix('roles')->group(function () {
-    Route::get('/show', 'RolesController@index');
-    Route::get('/edit/{user}', 'RolesController@edit');
-    Route::get('/delete/{user}', 'RolesController@delete');
-    Route::patch('/update/{user}', 'RolesController@update');
-    Route::delete('/destroy/{user}', 'RolesController@destroy');
+    Route::get('/show', 'RolesController@index')->name('roles.show');
+    Route::get('/add', 'RolesController@add')->name('roles.add');
+    Route::get('/edit/{role}', 'RolesController@edit')->name('roles.edit');
+    Route::get('/delete/{role}', 'RolesController@delete')->name('roles.delete');
+    Route::patch('/update/{role}', 'RolesController@update')->name('roles.update');
+    Route::delete('/destroy/{role}', 'RolesController@destroy')->name('roles.destroy');
 });
 
 

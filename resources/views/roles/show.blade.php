@@ -7,7 +7,7 @@
 @section('content')
     <div class="content">
         <div class="title m-b-md">
-            Roles.
+            Roles
         </div>
         <table class="table-striped table-bordered w-100">
             <thead>
@@ -79,7 +79,7 @@
                     </td>
                     <td>{{ $role->created_at }}</td>
                     <td>{{ $role->updated_at }}</td>
-                    <td><a href='/users/edit/{{ $role->id }}' class="btn btn-success">Edit</a></td>
+                    <td><a href='/roles/edit/{{ $role->id }}' class="btn btn-success">Edit</a></td>
             @endforeach
             </tbody>
         </table>

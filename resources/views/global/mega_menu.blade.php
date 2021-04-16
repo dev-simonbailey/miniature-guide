@@ -36,8 +36,11 @@ $reports    = "/reports/";
                                     Registered Users
                                 </a>
                                 <hr />
+                                <a class="dropdown-item" href="/roles/add">
+                                    Create Role
+                                </a>
                                 <a class="dropdown-item" href="/roles/show">
-                                    Roles
+                                    Registered Roles
                                 </a>
                                 <hr />
                             @endif
