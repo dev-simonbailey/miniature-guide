@@ -66,6 +66,38 @@ class RolesController extends Controller
 
     public function add()
     {
+
         return view('roles.add');
+
     }
+
+    public function store(Roles $role)
+    {
+
+        $data = request()->validate([
+            'role'      =>  'required',
+            'index'     =>  'required',
+            'create'    =>  'required',
+            'store'     =>  'required',
+            'show'      =>  'required',
+            'edit'      =>  'required',
+            'update'    =>  'required',
+            'destroy'   =>  'required',
+        ]);
+
+        $role->create([
+            'role'      =>  $data['role'],
+            'index'     =>  $data['index'],
+            'create'    =>  $data['create'],
+            'store'     =>  $data['store'],
+            'show'      =>  $data['show'],
+            'edit'      =>  $data['edit'],
+            'update'    =>  $data['update'],
+            'destroy'   =>  $data['destroy'],
+        ]);
+
+        return redirect()->route('roles.show');
+
+    }
+
 }

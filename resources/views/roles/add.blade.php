@@ -6,9 +6,8 @@
 
 @section('content')
     <div class="content">
-        <form action="/roles/create" enctype="multipart/form-data" method="POST">
+        <form action="/roles/store" enctype="multipart/form-data" method="POST">
             @csrf
-            @method('PATCH')
             <div class="row">
                 <div class="col-2 offset-5">
                     <div class="row">

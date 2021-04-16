@@ -39,6 +39,7 @@ Route::prefix('users')->group(function () {
 Route::prefix('roles')->group(function () {
     Route::get('/show', 'RolesController@index')->name('roles.show');
     Route::get('/add', 'RolesController@add')->name('roles.add');
+    Route::post('/store', 'RolesController@store')->name('roles.store');
     Route::get('/edit/{role}', 'RolesController@edit')->name('roles.edit');
     Route::get('/delete/{role}', 'RolesController@delete')->name('roles.delete');
     Route::patch('/update/{role}', 'RolesController@update')->name('roles.update');
