@@ -4,15 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class RegistrationSuccessController extends Controller
-{
-        /**
+class RegistrationSuccessController extends Controller {
+
+    /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->middleware('auth');
     }
 
@@ -21,8 +20,7 @@ class RegistrationSuccessController extends Controller
      *
      * @return Factory|View
      */
-    public function index()
-    {
+    public function index() {
         return redirect()->route('users.show');
     }
 }

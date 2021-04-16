@@ -71,20 +71,15 @@
                                 @enderror
                             </div>
                         </div>
-
-
                         <div class="form-group row">
                             <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
 
                             <div class="col-md-6">
-                                <!-- change to select and draw options from ROLES-->
-                                <input id="role" type="text" class="form-control @error('role') is-invalid @enderror" name="role" value="{{ old('role') }}" required autocomplete="role">
-
-                                @error('role')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <select name="role" id="role" class="form-control">
+                                    @foreach ($roles as $role)
+                                    <option value="{{ $role->role }}">{{ $role->role }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 

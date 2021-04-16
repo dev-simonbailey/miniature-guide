@@ -11,8 +11,8 @@
 |
 */
 
-Route::get('/', 'WelcomeViewController@welcome');
-
+Route::get('/', 'WelcomeViewController@welcome')->name('welcome');
+Route::get('/register', 'WelcomeViewController@welcome')->name('welcome');
 Route::get('/registration-success', 'RegistrationSuccessController@index');
 
 /* HELP */
@@ -29,6 +29,7 @@ Route::prefix('admin')->group(function () {
 /* Registered Users */
 Route::prefix('users')->group(function () {
     Route::get('/show', 'RegisteredUsersController@index')->name('users.show');
+    Route::get('/add', 'RegisteredUsersController@add')->name('users.add');
     Route::get('/edit/{user}', 'RegisteredUsersController@edit')->name('users.edit');
     Route::get('/delete/{user}', 'RegisteredUsersController@delete')->name('users.delete');
     Route::patch('/update/{user}', 'RegisteredUsersController@update')->name('users.update');

@@ -7,14 +7,15 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class HelpViewController extends Controller
-{
+class HelpViewController extends Controller {
+
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     const ROUTEPARENT = 'help.';
+
     /**
      * @return Factory|View
      */
-     public function start(){
+     public function start() {
          return view(self::ROUTEPARENT.__FUNCTION__);
      }
 }

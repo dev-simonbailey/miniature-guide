@@ -4,15 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class WelcomeViewController extends Controller
-{
+class WelcomeViewController extends Controller {
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->middleware('auth');
     }
 
@@ -21,8 +20,7 @@ class WelcomeViewController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function welcome()
-    {
+    public function welcome() {
         return view('welcome');
     }
 }

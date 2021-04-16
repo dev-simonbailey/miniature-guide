@@ -12,7 +12,7 @@
             <div class="row">
                 <div class="col-2 offset-5">
                     <div class="row">
-                        <h1>Edit Role</h1>
+                        <h1>Edit Permissions</h1>
                     </div>
                     <div class="form-group row">
                         <label for="role" class="col-form-label">{{ __('Role') }}</label>

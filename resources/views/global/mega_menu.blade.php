@@ -29,7 +29,7 @@ $reports    = "/reports/";
                             </a>
                             <hr />
                             @if( Auth::user()->role == "admin")
-                                <a class="dropdown-item" href="/register">
+                                <a class="dropdown-item" href="/users/add">
                                     Create User
                                 </a>
                                 <a class="dropdown-item" href="/users/show">
