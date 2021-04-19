@@ -47,11 +47,21 @@ Route::prefix('roles')->group(function () {
     Route::delete('/destroy/{role}', 'RolesController@destroy')->name('roles.destroy');
 });
 
+/* ORDERS */
+Route::prefix('orders')->group(function () {
+    Route::get('index','OrdersController@index')->name('orders.index');
+    Route::get('create','OrdersController@create')->name('orders.create');
+    Route::get('store','OrdersController@store')->name('orders.store');
+    Route::get('show','OrdersController@show')->name('orders.show');
+    Route::get('edit','OrdersController@edit')->name('orders.edit');
+    Route::get('update','OrdersController@update')->name('orders.update');
+    Route::get('destroy','OrdersController@destroy')->name('orders.destroy');
+});
 
 /* SEARCH */
 Route::prefix('search')->group(function () {
-    Route::get('orders','SearchViewController@order');
-    Route::post('orders','SearchViewController@uniqueorder');
+    //Route::get('orders','OrdersController@order')->name('search.order');
+    Route::post('orders','OrdersController@uniqueorder');
     Route::get('by-part','SearchViewController@by_part');
     Route::get('customers','SearchViewController@customer');
     Route::get('stock-check','SearchViewController@stock_check');

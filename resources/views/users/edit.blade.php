@@ -6,7 +6,6 @@
 
 @section('content')
     <div class="content">
-        @foreach ($details as $detail)
         <form action="/users/update/{{ $detail->id }}" enctype="multipart/form-data" method="POST">
             @csrf
             @method('PATCH')
@@ -112,6 +111,5 @@
                 </div>
             </div>
         </form>
-        @endforeach
     </div>
 @endsection

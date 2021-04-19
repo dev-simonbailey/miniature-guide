@@ -7,21 +7,21 @@
 @section('content')
     <div class="content">
         <div class="title m-b-md">
-            <form name='ordersform' method='POST' action = '/search/orders/'>
+            <form name='ordersform' method='POST' action = '/orders/search/'>
                 {{csrf_field()}}
                 <input type='text' name='ordernumber' id='ordernumber' class="@error('ordernumber') is-invalid @enderror"/>
                 @error('ordernumber')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
                 <input type="submit" value="Search" class='btn btn-primary'>
-                <a href="{{ route('search.order') }}" class='btn btn-primary'>Show All</a>
+                <a href="{{ route('orders.index') }}" class='btn btn-primary'>Show All</a>
             </form>
             <br />
             <center>
             <table class="table">
             @php
-            if(!empty($orderdata)){
-                foreach($orderdata as $order)
+            if(!empty($orders)){
+                foreach($orders as $order)
                 {
                 echo "<tr>";
                 echo "<td>".$order->id."</td>";

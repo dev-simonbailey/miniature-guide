@@ -45,8 +45,8 @@ class RegisteredUsersController extends Controller {
 
     public function edit(User $user) {
         //$this->authorize('update', $user->profile);
-        $details = User::findOrFail($user);
-        return view('users.edit', compact('details'));
+        $detail = User::findOrFail($user->id);
+        return view('users.edit', compact('detail'));
     }
 
     public function update(User $user){

@@ -1,6 +1,7 @@
 @php
 $help       = "/help/";
 $search     = "/search/";
+$orders     = "/orders/";
 $dashboard  = "/dashboard/";
 $workshop   = "/workshop/";
 $reports    = "/reports/";
@@ -77,7 +78,7 @@ $reports    = "/reports/";
                 <div class="d-md-flex align-items-start justify-content-start">
                     <div>
                         <div class="dropdown-header">Search</div>
-                        <a class="dropdown-item" href="{{$search}}orders">Orders</a>
+                        <a class="dropdown-item" href="{{$orders}}index">Orders</a>
                         <a class="dropdown-item" href="{{$search}}by-part">Orders by Part</a>
                         <a class="dropdown-item" href="{{$search}}customers">Customers</a>
                         <a class="dropdown-item" href="{{$search}}stock-check">Stock Check</a>
