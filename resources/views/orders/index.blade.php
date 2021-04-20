@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('page_title')
-    {{ "Search Orders" }}
+    {{ "Orders" }}
 @endsection
 
 @section('content')

@@ -1,7 +1,6 @@
 @php
 $help       = "/help/";
 $search     = "/search/";
-$orders     = "/orders/";
 $dashboard  = "/dashboard/";
 $workshop   = "/workshop/";
 $reports    = "/reports/";
@@ -71,31 +70,31 @@ $reports    = "/reports/";
             <li class="nav-item px-4 dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="servicesDropdown">
-                <a class="dropdown-item" href="/admin/knowledge-base">Knowledge Base</a>
-                <a class="dropdown-item" href="/admin/ilog-add">Log Interaction</a>
+                <a class="dropdown-item" href="/knowledgebase/index">Knowledge Base</a>
+                <a class="dropdown-item" href="/loginteractions/index">Log Interaction</a>
                 @if (auth::user()->role != "none")
                 <div class="dropdown-divider"></div>
                 <div class="d-md-flex align-items-start justify-content-start">
                     <div>
                         <div class="dropdown-header">Search</div>
-                        <a class="dropdown-item" href="{{$orders}}index">Orders</a>
-                        <a class="dropdown-item" href="{{$search}}by-part">Orders by Part</a>
-                        <a class="dropdown-item" href="{{$search}}customers">Customers</a>
-                        <a class="dropdown-item" href="{{$search}}stock-check">Stock Check</a>
+                        <a class="dropdown-item" href="/orders/index">Orders</a>
+                        <a class="dropdown-item" href="/ordersbypart/index">Orders by Part</a>
+                        <a class="dropdown-item" href="/customers/index">Customers</a>
+                        <a class="dropdown-item" href="/stockcheck/index">Stock Check</a>
                     </div>
                     <div>
                         <div class="dropdown-header">Dashboards</div>
-                        <a class="dropdown-item" href="{{$dashboard}}bike-wip">Bike WIP</a>
-                        <a class="dropdown-item" href="{{$dashboard}}pac-wip">PAC WIP</a>
-                        <a class="dropdown-item" href="{{$dashboard}}pick-wip">Pick WIP</a>
-                        <a class="dropdown-item" href="{{$dashboard}}returns">Returns</a>
+                        <a class="dropdown-item" href="/bikewip/index">Bike WIP</a>
+                        <a class="dropdown-item" href="/pacwip/index">PAC WIP</a>
+                        <a class="dropdown-item" href="/pickwip/index">Pick WIP</a>
+                        <a class="dropdown-item" href="/returns/index">Returns</a>
                     </div>
                     <div>
                         <div class="dropdown-header">Workshop</div>
-                        <a class="dropdown-item" href="{{$workshop}}add-inbound-build">Add Inbound Build</a>
-                        <a class="dropdown-item" href="{{$workshop}}add-outbound-build">Add Outbound Build</a>
-                        <a class="dropdown-item" href="{{$workshop}}add-pdi">Add PDI</a>
-                        <a class="dropdown-item" href="{{$workshop}}add-new-pack">Add New Pack</a>
+                        <a class="dropdown-item" href="addinboundbuild/index">Add Inbound Build</a>
+                        <a class="dropdown-item" href="addoutboundbuild/index">Add Outbound Build</a>
+                        <a class="dropdown-item" href="addpdi/index">Add PDI</a>
+                        <a class="dropdown-item" href="addnewpack/index">Add New Pack</a>
                     </div>
                     <div>
                         <div class="dropdown-header">Reports</div>
