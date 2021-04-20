@@ -59,11 +59,6 @@ $reports    = "/reports/";
                         <a href="{{ route('login') }}" class="nav-link">Login</a>
                     </li>
                     @endif
-                    @if(Route::currentRouteName() == 'login')
-                        <li class="nav-item px-4">
-                            <a href="{{ route('register') }}" class="nav-link">Register</a>
-                        </li>
-                    @endif
                 @endauth
             @endif
             @auth
