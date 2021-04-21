@@ -208,14 +208,14 @@ Route::prefix('addpdi')->group(function () {
 
 /* ADDNEWPACK */
 Route::prefix('addnewpack')->group(function () {
-    Route::get('index','AddPdiController@index')->name('addnewpack.index');
-    Route::get('show','AddPdiController@show')->name('addnewpack.show');
-    Route::get('create','AddPdiController@create')->name('addnewpack.create');
-    Route::post('store','AddPdiController@store')->name('addnewpack.store');
-    Route::get('edit','AddPdiController@edit')->name('addnewpack.edit');
-    Route::patch('update','AddPdiController@update')->name('addnewpack.update');
-    Route::get('delete','AddPdiController@delete')->name('addnewpack.delete');
-    Route::delete('destroy','AddPdiController@destroy')->name('addnewpack.destroy');
+    Route::get('index','AddNewPackController@index')->name('addnewpack.index');
+    Route::get('show','AddNewPackController@show')->name('addnewpack.show');
+    Route::get('create','AddNewPackController@create')->name('addnewpack.create');
+    Route::post('store','AddNewPackController@store')->name('addnewpack.store');
+    Route::get('edit','AddNewPackController@edit')->name('addnewpack.edit');
+    Route::patch('update','AddNewPackController@update')->name('addnewpack.update');
+    Route::get('delete','AddNewPackController@delete')->name('addnewpack.delete');
+    Route::delete('destroy','AddNewPackController@destroy')->name('addnewpack.destroy');
 });
 
 

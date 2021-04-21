@@ -21,9 +21,8 @@ class AddNewPackController extends Controller
      */
      public function index() {
         if($this->CheckPermissions(__FUNCTION__)){
-            //$orders = Orders::all()->sortByDesc("created_at");
-            //return view('ordersbypart.index', compact('orders'));
-            dd('AUTHORISED');
+            //dd('AUTHORISED');
+            return view('addnewpack.index');
         } else {
             dd('NOT AUTHORISED');
         }

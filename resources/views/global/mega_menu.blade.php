@@ -86,10 +86,10 @@ $reports    = "/reports/";
                     </div>
                     <div>
                         <div class="dropdown-header">Workshop</div>
-                        <a class="dropdown-item" href="addinboundbuild/index">Add Inbound Build</a>
-                        <a class="dropdown-item" href="addoutboundbuild/index">Add Outbound Build</a>
-                        <a class="dropdown-item" href="addpdi/index">Add PDI</a>
-                        <a class="dropdown-item" href="addnewpack/index">Add New Pack</a>
+                        <a class="dropdown-item" href="/addinboundbuild/index">Add Inbound Build</a>
+                        <a class="dropdown-item" href="/addoutboundbuild/index">Add Outbound Build</a>
+                        <a class="dropdown-item" href="/addpdi/index">Add PDI</a>
+                        <a class="dropdown-item" href="/addnewpack/index">Add New Pack</a>
                     </div>
                     <div>
                         <div class="dropdown-header">Reports</div>
