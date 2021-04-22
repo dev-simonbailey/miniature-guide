@@ -54,6 +54,7 @@ class RolesController extends Controller {
                 'show'      =>  'required',
                 'edit'      =>  'required',
                 'update'    =>  'required',
+                'remove'    =>  'required',
                 'destroy'   =>  'required',
             ]);
             $role->update($data);
@@ -81,6 +82,7 @@ class RolesController extends Controller {
                 'show'      =>  'required',
                 'edit'      =>  'required',
                 'update'    =>  'required',
+                'remove'    =>  'required',
                 'destroy'   =>  'required',
             ]);
             $role->create([
@@ -91,6 +93,7 @@ class RolesController extends Controller {
                 'show'      =>  $data['show'],
                 'edit'      =>  $data['edit'],
                 'update'    =>  $data['update'],
+                'remove'    =>  $data['remove'],
                 'destroy'   =>  $data['destroy'],
             ]);
             return redirect()->route('roles.show');

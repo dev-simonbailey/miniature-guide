@@ -7,13 +7,9 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class OrdersByPartController extends Controller
-{
+class OrdersByPartController extends Controller {
 
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
-    public $opName;
-    public $isAuth;
 
     public function __construct() {
         $this->isAuth = new PermissionsController();

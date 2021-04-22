@@ -10,10 +10,6 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class ReportsController extends Controller {
 
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-    const ROUTEPARENT = 'reports.';
-
-    public $opName;
-    public $isAuth;
 
     public function __construct() {
         $this->isAuth = new PermissionsController();

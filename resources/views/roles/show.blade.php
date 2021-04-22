@@ -19,6 +19,7 @@
                     <th scope="col">Show</th>
                     <th scope="col">Edit</th>
                     <th scope="col">Update</th>
+                    <th scope="col">Delete</th>
                     <th scope="col">Destroy</th>
                     <th scope="col">Created At</th>
                     <th scope="col">Updated At</th>
@@ -65,6 +66,13 @@
                     </td>
                     <td>
                         @if($role->update == 1)
+                            Allowed
+                        @else
+                            Not Allowed
+                        @endif
+                    </td>
+                    <td>
+                        @if($role->remove == 1)
                             Allowed
                         @else
                             Not Allowed

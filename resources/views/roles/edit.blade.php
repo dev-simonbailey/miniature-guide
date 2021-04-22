@@ -103,6 +103,18 @@
                         </select>
                     </div>
                     <div class="form-group row">
+                        <label for="remove" class="col-form-label">{{ __('Delete') }}</label>
+                        <select name="remove" id="index" class='form-control'>
+                            @if($details->remove == 1)
+                                <option value="0">Not Allowed</option>
+                                <option value="1" selected>Allowed</option>
+                            @else
+                                <option value="0" selected>Not Allowed</option>
+                                <option value="1">Allowed</option>
+                            @endif
+                        </select>
+                    </div>
+                    <div class="form-group row">
                         <label for="destroy" class="col-form-label">{{ __('Destroy') }}</label>
                         <select name="destroy" id="index" class='form-control'>
                             @if($details->destroy == 1)

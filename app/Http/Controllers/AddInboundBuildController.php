@@ -7,13 +7,9 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class AddInboundBuildController extends Controller
-{
+class AddInboundBuildController extends Controller {
 
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
-    public $opName;
-    public $isAuth;
 
     public function __construct() {
         $this->isAuth = new PermissionsController();
@@ -44,7 +40,7 @@ class AddInboundBuildController extends Controller
      }
 
     /**
-     * @return Factory|View
+     * @return void
      */
      public function store() {
         if($this->isAuth->CheckPermissions(__FUNCTION__)){
@@ -59,7 +55,7 @@ class AddInboundBuildController extends Controller
      */
      public function show() {
         if($this->isAuth->CheckPermissions(__FUNCTION__)){
-            dd('AUTHORISED');
+            return view('errors.200');
         } else {
             return view('errors.403');
         }
@@ -70,7 +66,7 @@ class AddInboundBuildController extends Controller
      */
      public function edit() {
         if($this->isAuth->CheckPermissions(__FUNCTION__)){
-            dd('AUTHORISED');
+            return view('errors.200');
         } else {
             return view('errors.403');
         }
@@ -81,6 +77,7 @@ class AddInboundBuildController extends Controller
      */
      public function update() {
         if($this->isAuth->CheckPermissions(__FUNCTION__)){
+            // Do control operations
             dd('AUTHORISED');
         } else {
             return view('errors.403');
@@ -92,7 +89,7 @@ class AddInboundBuildController extends Controller
      */
      public function delete(){
         if($this->isAuth->CheckPermissions('remove')){
-            dd('AUTHORISED');
+            return view('errors.200');
         } else {
             return view('errors.403');
         }
