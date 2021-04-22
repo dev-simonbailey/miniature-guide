@@ -11,11 +11,11 @@ class AddInboundBuildController extends Controller {
 
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function __construct() {
+     public function __construct() {
         $this->isAuth = new PermissionsController();
         $path = explode('\\', __CLASS__);
         $this->opName = strtolower(str_replace('Controller','',array_pop($path)));
-    }
+     }
 
     /**
      * @return Factory|View
@@ -23,6 +23,17 @@ class AddInboundBuildController extends Controller {
      public function index() {
         if($this->isAuth->CheckPermissions(__FUNCTION__)){
             return view($this->opName.'.'.__FUNCTION__);
+        } else {
+            return view('errors.403');
+        }
+     }
+
+    /**
+     * @return Factory|View
+     */
+     public function show() {
+        if($this->isAuth->CheckPermissions(__FUNCTION__)){
+            dd('AUTHORISED');
         } else {
             return view('errors.403');
         }
@@ -40,7 +51,13 @@ class AddInboundBuildController extends Controller {
      }
 
     /**
-     * @return void
+     * @return Factory|View
+     */
+     public function getstore() {
+        return view('errors.403');
+     }
+    /**
+     * @return Factory|View
      */
      public function store() {
         if($this->isAuth->CheckPermissions(__FUNCTION__)){
@@ -53,9 +70,9 @@ class AddInboundBuildController extends Controller {
     /**
      * @return Factory|View
      */
-     public function show() {
+     public function edit() {
         if($this->isAuth->CheckPermissions(__FUNCTION__)){
-            return view('errors.200');
+            dd('AUTHORISED');
         } else {
             return view('errors.403');
         }
@@ -64,12 +81,8 @@ class AddInboundBuildController extends Controller {
     /**
      * @return Factory|View
      */
-     public function edit() {
-        if($this->isAuth->CheckPermissions(__FUNCTION__)){
-            return view('errors.200');
-        } else {
-            return view('errors.403');
-        }
+     public function getupdate() {
+        return view('errors.403');
      }
 
     /**
@@ -77,7 +90,6 @@ class AddInboundBuildController extends Controller {
      */
      public function update() {
         if($this->isAuth->CheckPermissions(__FUNCTION__)){
-            // Do control operations
             dd('AUTHORISED');
         } else {
             return view('errors.403');
@@ -89,10 +101,17 @@ class AddInboundBuildController extends Controller {
      */
      public function delete(){
         if($this->isAuth->CheckPermissions('remove')){
-            return view('errors.200');
+            dd('AUTHORISED');
         } else {
             return view('errors.403');
         }
+     }
+
+    /**
+     * @return Factory|View
+     */
+     public function getdestroy() {
+        return view('errors.403');
      }
 
     /**

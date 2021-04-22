@@ -12,11 +12,11 @@ class OrdersController extends Controller {
 
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function __construct() {
+     public function __construct() {
         $this->isAuth = new PermissionsController();
         $path = explode('\\', __CLASS__);
         $this->opName = strtolower(str_replace('Controller','',array_pop($path)));
-    }
+     }
 
     /**
      * @return Factory|View
@@ -25,6 +25,17 @@ class OrdersController extends Controller {
         if($this->isAuth->CheckPermissions(__FUNCTION__)){
             $orders = Orders::all()->sortByDesc("created_at");
             return view($this->opName.'.'.__FUNCTION__, compact('orders'));
+        } else {
+            return view('errors.403');
+        }
+     }
+
+     /**
+     * @return Factory|View
+     */
+     public function show() {
+        if($this->isAuth->CheckPermissions(__FUNCTION__)){
+            dd('AUTHORISED');
         } else {
             return view('errors.403');
         }
@@ -41,21 +52,17 @@ class OrdersController extends Controller {
         }
      }
 
-    /**
+     /**
      * @return Factory|View
      */
-     public function store() {
-        if($this->isAuth->CheckPermissions(__FUNCTION__)){
-            dd('AUTHORISED');
-        } else {
-            return view('errors.403');
-        }
+     public function getstore() {
+        return view('errors.403');
      }
 
     /**
      * @return Factory|View
      */
-     public function show() {
+     public function store() {
         if($this->isAuth->CheckPermissions(__FUNCTION__)){
             dd('AUTHORISED');
         } else {
@@ -72,6 +79,13 @@ class OrdersController extends Controller {
         } else {
             return view('errors.403');
         }
+     }
+
+    /**
+     * @return Factory|View
+     */
+     public function getupdate() {
+        return view('errors.403');
      }
 
     /**
@@ -94,6 +108,13 @@ class OrdersController extends Controller {
         } else {
             return view('errors.403');
         }
+     }
+
+    /**
+     * @return Factory|View
+     */
+     public function getdestroy() {
+        return view('errors.403');
      }
 
     /**

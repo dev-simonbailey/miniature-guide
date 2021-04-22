@@ -29,6 +29,17 @@ class BikeWipController extends Controller {
      }
 
     /**
+     * @return Factory|View
+     */
+    public function show() {
+        if($this->isAuth->CheckPermissions(__FUNCTION__)){
+            dd('AUTHORISED');
+        } else {
+            return view('errors.403');
+        }
+     }
+
+    /**
      * @return void
      */
      public function create() {
@@ -42,18 +53,13 @@ class BikeWipController extends Controller {
     /**
      * @return Factory|View
      */
-     public function store() {
-        if($this->isAuth->CheckPermissions(__FUNCTION__)){
-            dd('AUTHORISED');
-        } else {
-            return view('errors.403');
-        }
+    public function getstore() {
+        return view('errors.403');
      }
-
     /**
      * @return Factory|View
      */
-     public function show() {
+     public function store() {
         if($this->isAuth->CheckPermissions(__FUNCTION__)){
             dd('AUTHORISED');
         } else {
@@ -70,6 +76,13 @@ class BikeWipController extends Controller {
         } else {
             return view('errors.403');
         }
+     }
+
+    /**
+     * @return Factory|View
+     */
+    public function getupdate() {
+        return view('errors.403');
      }
 
     /**
@@ -95,6 +108,13 @@ class BikeWipController extends Controller {
      }
 
     /**
+     * @return Factory|View
+     */
+    public function getdestroy() {
+        return view('errors.403');
+    }
+
+    /**
      * @return void
      */
      public function destroy(){
@@ -103,5 +123,4 @@ class BikeWipController extends Controller {
         } else {
             return view('errors.403');
         }
-     }
 }

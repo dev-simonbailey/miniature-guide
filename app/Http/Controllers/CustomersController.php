@@ -11,11 +11,11 @@ class CustomersController extends Controller {
 
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function __construct() {
+     public function __construct() {
         $this->isAuth = new PermissionsController();
         $path = explode('\\', __CLASS__);
         $this->opName = strtolower(str_replace('Controller','',array_pop($path)));
-    }
+     }
 
     /**
      * @return Factory|View
@@ -23,6 +23,17 @@ class CustomersController extends Controller {
      public function index() {
         if($this->isAuth->CheckPermissions(__FUNCTION__)){
             return view($this->opName.'.'.__FUNCTION__);
+        } else {
+            return view('errors.403');
+        }
+     }
+
+    /**
+     * @return Factory|View
+     */
+     public function show() {
+        if($this->isAuth->CheckPermissions(__FUNCTION__)){
+            dd('AUTHORISED');
         } else {
             return view('errors.403');
         }
@@ -42,18 +53,14 @@ class CustomersController extends Controller {
     /**
      * @return Factory|View
      */
-     public function store() {
-        if($this->isAuth->CheckPermissions(__FUNCTION__)){
-            dd('AUTHORISED');
-        } else {
-            return view('errors.403');
-        }
+     public function getstore() {
+        return view('errors.403');
      }
 
     /**
      * @return Factory|View
      */
-     public function show() {
+     public function store() {
         if($this->isAuth->CheckPermissions(__FUNCTION__)){
             dd('AUTHORISED');
         } else {
@@ -70,6 +77,13 @@ class CustomersController extends Controller {
         } else {
             return view('errors.403');
         }
+     }
+
+    /**
+     * @return Factory|View
+     */
+     public function getupdate() {
+        return view('errors.403');
      }
 
     /**
@@ -95,6 +109,13 @@ class CustomersController extends Controller {
      }
 
     /**
+     * @return Factory|View
+     */
+     public function getdestroy() {
+        return view('errors.403');
+     }
+
+    /**
      * @return void
      */
      public function destroy(){
@@ -104,4 +125,5 @@ class CustomersController extends Controller {
             return view('errors.403');
         }
      }
+
 }
