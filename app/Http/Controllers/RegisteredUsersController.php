@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 Use Auth;
 Use App\User;
 Use App\Roles;
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
 
 class RegisteredUsersController extends Controller {
 
@@ -29,7 +29,7 @@ class RegisteredUsersController extends Controller {
             $users = User::all()->sortByDesc("name");
             return view('users.show', compact('users'));
         } else {
-            return view('welcome');
+            return view('errors.403');
         }
     }
 
@@ -39,7 +39,7 @@ class RegisteredUsersController extends Controller {
             $roles = Roles::all()->sortByDesc("name");
             return view('users.add', compact('roles'));
         } else {
-            return view('welcome');
+            return view('errors.403');
         }
     }
 
@@ -51,30 +51,42 @@ class RegisteredUsersController extends Controller {
 
     public function update(User $user){
         //$this->authorize('update', $user->profile);
-        $data = request()->validate([
-            'name'          =>  'required',
-            'username'      =>  'required',
-            'email'         =>  'required|email',
-            'department'    =>  'required',
-            'department'    =>  'required',
-            'role'          =>  'required',
-            'home'          =>  'required'
-        ]);
-        $user->update($data);
-        return redirect()->route("users.show");
+        if(Auth::user()->role == "admin") {
+            $data = request()->validate([
+                'name'          =>  'required',
+                'username'      =>  'required',
+                'email'         =>  'required|email',
+                'department'    =>  'required',
+                'department'    =>  'required',
+                'role'          =>  'required',
+                'home'          =>  'required'
+            ]);
+            $user->update($data);
+            return redirect()->route("users.show");
+        } else {
+            return view('errors.403');
+        }
     }
 
     public function delete(User $user) {
         //$this->authorize('update', $user->profile);
-        $details = User::findOrFail($user);
-        return view('users.delete', compact('details'));
+        if(Auth::user()->role == "admin") {
+            $details = User::findOrFail($user);
+            return view('users.delete', compact('details'));
+        } else {
+            return view('errors.403');
+        }
     }
 
     public function destroy(User $user) {
         //$this->authorize('update', $user->profile);
-        $userToDelete = User::findOrFail($user->id);
-        $userToDelete->delete();
-        return redirect()->route("users.show");
+        if(Auth::user()->role == "admin") {
+            $userToDelete = User::findOrFail($user->id);
+            $userToDelete->delete();
+            return redirect()->route("users.show");
+        } else {
+            return view('errors.403');
+        }
     }
 
 }

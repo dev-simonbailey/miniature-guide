@@ -20,14 +20,9 @@ Route::prefix('help')->group(function () {
     Route::get('start','HelpViewController@start');
 });
 
-/* ADMIN */
-Route::prefix('admin')->group(function () {
-    Route::get('knowledge-base','AdminViewController@knowledge_base');
-    //Route::get('ilog-add','AdminViewController@ilog_add');
-});
-
 /* REGISTERED USERS */
 Route::prefix('users')->group(function () {
+    Route::get('/index', 'RegisteredUsersController@index')->name('users.show');
     Route::get('/show', 'RegisteredUsersController@index')->name('users.show');
     Route::get('/add', 'RegisteredUsersController@add')->name('users.add');
     Route::get('/edit/{user}', 'RegisteredUsersController@edit')->name('users.edit');
@@ -38,6 +33,7 @@ Route::prefix('users')->group(function () {
 
 /* ROLES */
 Route::prefix('roles')->group(function () {
+    Route::get('/index', 'RolesController@index')->name('roles.show');
     Route::get('/show', 'RolesController@index')->name('roles.show');
     Route::get('/add', 'RolesController@add')->name('roles.add');
     Route::post('/store', 'RolesController@store')->name('roles.store');

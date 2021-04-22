@@ -2,79 +2,110 @@
 
 namespace App\Http\Controllers;
 
-
-Use App\Roles;
-//Use App\Orders;
+Use App\Http\Controllers\PermissionsController;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-//use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-//use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
-//use Illuminate\Http\Request;
 
 class AddNewPackController extends Controller
 {
+
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    public $opName;
+    public $isAuth;
+
+    public function __construct() {
+        $this->isAuth = new PermissionsController();
+        $path = explode('\\', __CLASS__);
+        $this->opName = strtolower(str_replace('Controller','',array_pop($path)));
+    }
+
     /**
      * @return Factory|View
      */
      public function index() {
-        if($this->CheckPermissions(__FUNCTION__)){
-            //dd('AUTHORISED');
-            return view('addnewpack.index');
+        if($this->isAuth->CheckPermissions(__FUNCTION__)){
+            return view($this->opName.'.'.__FUNCTION__);
         } else {
-            dd('NOT AUTHORISED');
+            return view('errors.403');
         }
      }
+
+    /**
+     * @return void
+     */
      public function create() {
-        if($this->CheckPermissions(__FUNCTION__)){
+        if($this->isAuth->CheckPermissions(__FUNCTION__)){
             dd('AUTHORISED');
         } else {
-            dd('NOT AUTHORISED');
+            return view('errors.403');
         }
      }
 
+    /**
+     * @return Factory|View
+     */
      public function store() {
-        if($this->CheckPermissions(__FUNCTION__)){
+        if($this->isAuth->CheckPermissions(__FUNCTION__)){
             dd('AUTHORISED');
         } else {
-            dd('NOT AUTHORISED');
+            return view('errors.403');
         }
      }
 
+    /**
+     * @return Factory|View
+     */
      public function show() {
-        if($this->CheckPermissions(__FUNCTION__)){
+        if($this->isAuth->CheckPermissions(__FUNCTION__)){
             dd('AUTHORISED');
         } else {
-            dd('NOT AUTHORISED');
+            return view('errors.403');
         }
      }
 
+    /**
+     * @return Factory|View
+     */
      public function edit() {
-        if($this->CheckPermissions(__FUNCTION__)){
+        if($this->isAuth->CheckPermissions(__FUNCTION__)){
             dd('AUTHORISED');
         } else {
-            dd('NOT AUTHORISED');
+            return view('errors.403');
         }
      }
 
+    /**
+     * @return void
+     */
      public function update() {
-        if($this->CheckPermissions(__FUNCTION__)){
+        if($this->isAuth->CheckPermissions(__FUNCTION__)){
             dd('AUTHORISED');
         } else {
-            dd('NOT AUTHORISED');
+            return view('errors.403');
         }
      }
 
-     public function destroy(){
-        if($this->CheckPermissions(__FUNCTION__)){
+    /**
+     * @return Factory|View
+     */
+     public function delete(){
+        if($this->isAuth->CheckPermissions('remove')){
             dd('AUTHORISED');
         } else {
-            dd('NOT AUTHORISED');
+            return view('errors.403');
         }
      }
-     public function CheckPermissions($operation) {
-        return Roles::where('role', Auth::user()->role)->pluck($operation)->first();
-    }
+
+    /**
+     * @return void
+     */
+     public function destroy(){
+        if($this->isAuth->CheckPermissions(__FUNCTION__)){
+            dd('AUTHORISED');
+        } else {
+            return view('errors.403');
+        }
+     }
 }
