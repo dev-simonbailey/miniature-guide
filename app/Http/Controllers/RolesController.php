@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers;
 
-Use Auth;
-Use App\User;
-Use App\Roles;
+use Auth;
+use App\User;
+use App\Roles;
 use Illuminate\Http\Request;
 
-class RolesController extends Controller {
+class RolesController extends Controller
+{
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('auth');
     }
 
@@ -23,9 +25,10 @@ class RolesController extends Controller {
      *
      * @return Factory|View
      */
-    public function index() {
+    public function index()
+    {
 
-        if(Auth::user()->role == "admin") {
+        if (Auth::user()->role == "admin") {
             $roles = Roles::all();
             return view('roles.show', compact('roles'));
         } else {
@@ -33,9 +36,10 @@ class RolesController extends Controller {
         }
     }
 
-    public function edit($role) {
+    public function edit($role)
+    {
         //$this->authorize('update', $user->profile);
-        if(Auth::user()->role == "admin") {
+        if (Auth::user()->role == "admin") {
             $details = Roles::findOrFail($role);
             return view('roles.edit', compact('details'));
         } else {
@@ -43,9 +47,10 @@ class RolesController extends Controller {
         }
     }
 
-    public function update(Roles $role) {
+    public function update(Roles $role)
+    {
         //$this->authorize('update', $user->profile);
-        if(Auth::user()->role == "admin") {
+        if (Auth::user()->role == "admin") {
             $data = request()->validate([
                 'role'      =>  'required',
                 'index'     =>  'required',
@@ -64,16 +69,18 @@ class RolesController extends Controller {
         }
     }
 
-    public function add() {
-        if(Auth::user()->role == "admin") {
+    public function add()
+    {
+        if (Auth::user()->role == "admin") {
             return view('roles.add');
         } else {
             return view('errors.403');
         }
     }
 
-    public function store(Roles $role) {
-        if(Auth::user()->role == "admin") {
+    public function store(Roles $role)
+    {
+        if (Auth::user()->role == "admin") {
             $data = request()->validate([
                 'role'      =>  'required',
                 'index'     =>  'required',

@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers;
 
-Use Auth;
-Use App\User;
-Use App\Roles;
+use Auth;
+use App\User;
+use App\Roles;
 //use Illuminate\Http\Request;
 
-class RegisteredUsersController extends Controller {
+class RegisteredUsersController extends Controller
+{
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('auth');
     }
 
@@ -23,8 +25,9 @@ class RegisteredUsersController extends Controller {
      *
      * @return Factory|View
      */
-    public function index() {
-        if(Auth::user()->role == "admin") {
+    public function index()
+    {
+        if (Auth::user()->role == "admin") {
             //$users = User::all()->except(Auth::id());
             $users = User::all()->sortByDesc("name");
             return view('users.show', compact('users'));
@@ -33,8 +36,9 @@ class RegisteredUsersController extends Controller {
         }
     }
 
-    public function add(){
-        if(Auth::user()->role == "admin") {
+    public function add()
+    {
+        if (Auth::user()->role == "admin") {
             //$users = User::all()->except(Auth::id());
             $roles = Roles::all()->sortByDesc("name");
             return view('users.add', compact('roles'));
@@ -43,15 +47,17 @@ class RegisteredUsersController extends Controller {
         }
     }
 
-    public function edit(User $user) {
+    public function edit(User $user)
+    {
         //$this->authorize('update', $user->profile);
         $detail = User::findOrFail($user->id);
         return view('users.edit', compact('detail'));
     }
 
-    public function update(User $user){
+    public function update(User $user)
+    {
         //$this->authorize('update', $user->profile);
-        if(Auth::user()->role == "admin") {
+        if (Auth::user()->role == "admin") {
             $data = request()->validate([
                 'name'          =>  'required',
                 'username'      =>  'required',
@@ -68,9 +74,10 @@ class RegisteredUsersController extends Controller {
         }
     }
 
-    public function delete(User $user) {
+    public function delete(User $user)
+    {
         //$this->authorize('update', $user->profile);
-        if(Auth::user()->role == "admin") {
+        if (Auth::user()->role == "admin") {
             $details = User::findOrFail($user);
             return view('users.delete', compact('details'));
         } else {
@@ -78,9 +85,10 @@ class RegisteredUsersController extends Controller {
         }
     }
 
-    public function destroy(User $user) {
+    public function destroy(User $user)
+    {
         //$this->authorize('update', $user->profile);
-        if(Auth::user()->role == "admin") {
+        if (Auth::user()->role == "admin") {
             $userToDelete = User::findOrFail($user->id);
             $userToDelete->delete();
             return redirect()->route("users.show");
@@ -88,5 +96,4 @@ class RegisteredUsersController extends Controller {
             return view('errors.403');
         }
     }
-
 }
