@@ -217,24 +217,24 @@ Route::prefix('addnewpack')->group(function () {
 
 /* Reports */
 Route::prefix('reports')->group(function () {
-    Route::get('build-schedule','ReportsViewController@build_schedule');
-    Route::get('incoming-builds','ReportsViewController@incoming_builds');
-    Route::get('wip-custom-colour-orders','ReportsViewController@wip_custom_colour_orders');
-    Route::get('build-outbound-view','ReportsViewController@build_outbound_view');
-    Route::get('build-inbound-view','ReportsViewController@build_inbound_view');
-    Route::get('pdi-view','ReportsViewController@pdi_view');
-    Route::get('packing-view','ReportsViewController@packing_view');
-    Route::get('completed-bike-orders','ReportsViewController@completed_bike_orders');
-    Route::get('stock-demand','ReportsViewController@stock_demand');
-    Route::get('essential-component-shortages','ReportsViewController@essential_component_shortages');
-    Route::get('expected-non-essential-shortages','ReportsViewController@expected_non_essential_shortages');
-    Route::get('wip-fast-track-schedule','ReportsViewController@wip_fast_track_schedule');
-    Route::get('frame-availability','ReportsViewController@frame_availability');
-    Route::get('wip-overdue-builds','ReportsViewController@wip_overdue_builds');
-    Route::get('mechanic-kpi','ReportsViewController@mechanic_kpi');
-    Route::get('pdi-stats','ReportsViewController@pdi_stats');
-    Route::get('bike-wip-stats','ReportsViewController@bike_wip_stats');
-    Route::get('qlik-data','ReportsViewController@qlik_data');
+    Route::get('build-schedule','ReportsController@build_schedule')->name('reports.build_schedule');
+    Route::get('incoming-builds','ReportsController@incoming_builds')->name('reports.incomingbuilds');
+    Route::get('wip-custom-colour-orders','ReportsController@wip_custom_colour_orders')->name('reports.wipcustomcolourorders');
+    Route::get('build-outbound','ReportsController@build_outbound')->name('reports.buildoutbound');
+    Route::get('build-inbound','ReportsController@build_inbound')->name('reports.buildinbound');
+    Route::get('pdi','ReportsController@pdi')->name('reports.pdi');
+    Route::get('packing','ReportsController@packing')->name('reports.packing');
+    Route::get('shipped-bikes','ReportsController@shipped_bikes')->name('reports.shipped_bikes');
+    Route::get('stock-demand','ReportsController@stock_demand')->name('reports.stock_demand');
+    Route::get('essential-component-shortages','ReportsController@essential_component_shortages')->name('reports.essential_component_shortages');
+    Route::get('expected-non-essential-shortages','ReportsController@expected_non_essential_shortages')->name('reports.expected_non_essential_shortages');
+    Route::get('wip-fast-track-schedule','ReportsController@wip_fast_track_schedule')->name('reports.wip_fast_track_schedule');
+    Route::get('frame-availability','ReportsController@frame_availability')->name('reports.frame_availability');
+    Route::get('wip-overdue-builds','ReportsController@wip_overdue_builds')->name('reports.wip_overdue_builds');
+    Route::get('mechanic-kpi','ReportsController@mechanic_kpi')->name('reports.mechanic_kpi');
+    Route::get('pdi-stats','ReportsController@pdi_stats')->name('reports.pdi_stats');
+    Route::get('bike-wip-stats','ReportsController@bike_wip_stats')->name('reports.bike_wip_stats');
+    Route::get('qlik-data','ReportsController@qlik_data')->name('reports.qlik_data');
 });
 
 Auth::routes();

@@ -96,12 +96,12 @@ $reports    = "/reports/";
                             @if (auth::user()->role == "admin")
                             <a class="dropdown-item" href="{{$reports}}build-schedule">Build Schedule</a>
                             <a class="dropdown-item" href="{{$reports}}incoming-builds">Incoming Builds</a>
-                            <a class="dropdown-item" href="{{$reports}}build-inbound-view">Inbound Builds</a>
-                            <a class="dropdown-item" href="{{$reports}}build-outbound-view">Outbound Builds</a>
+                            <a class="dropdown-item" href="{{$reports}}build-inbound">Inbound Builds</a>
+                            <a class="dropdown-item" href="{{$reports}}build-outbound">Outbound Builds</a>
                             <a class="dropdown-item" href="{{$reports}}wip-custom-colour-orders">WIP Custom Colour Orders</a>
-                            <a class="dropdown-item" href="{{$reports}}pdi-view">View PDI's</a>
-                            <a class="dropdown-item" href="{{$reports}}packing-view">View Pack's</a>
-                            <a class="dropdown-item" href="{{$reports}}completed-bike-orders">Shipped Bikes</a>
+                            <a class="dropdown-item" href="{{$reports}}pdi">View PDI's</a>
+                            <a class="dropdown-item" href="{{$reports}}packing">View Pack's</a>
+                            <a class="dropdown-item" href="{{$reports}}shipped-bikes">Shipped Bikes</a>
                             <a class="dropdown-item" href="{{$reports}}mechanic-kpi">Mechanic KPI</a>
                             <a class="dropdown-item" href="{{$reports}}pdi-stats">PDI Stats</a>
                             <a class="dropdown-item" href="{{$reports}}bike-wip-stats">Bike WIP Stats</a>
