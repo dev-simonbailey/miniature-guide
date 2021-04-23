@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 class WelcomeViewController extends Controller
 {
+
     /**
      * Create a new controller instance.
      *

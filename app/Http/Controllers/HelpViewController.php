@@ -9,12 +9,15 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class HelpViewController extends Controller
 {
+
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     const ROUTEPARENT = 'help.';
+
     /**
      * @return Factory|View
      */
-     public function start(){
-         return view(self::ROUTEPARENT.__FUNCTION__);
-     }
+    public function start()
+    {
+        return view(self::ROUTEPARENT . __FUNCTION__);
+    }
 }
