@@ -17,23 +17,18 @@
                 <a href="{{ route('orders.index') }}" class='btn btn-primary'>Show All</a>
             </form>
             <br />
-            <center>
             <table class="table">
-            @php
-            if(!empty($orders)){
-                foreach($orders as $order)
-                {
-                echo "<tr>";
-                echo "<td>".$order->id."</td>";
-                echo "<td>".$order->ordernumber."</td>";
-                echo "<td>".$order->parts."</td>";
-                echo "<td>".$order->created_at."</td>";
-                echo "</tr>";
-                }
-            }
-            @endphp
+            @if(!empty($orders))
+                @foreach($orders as $order)
+                <tr>
+                <td>{{ $order->id }}</td>
+                <td>{{ $order->ordernumber }}</td>
+                <td>{{ $order->parts }}</td>
+                <td>{{ $order->created_at }}</td>
+                </tr>
+                @endforeach
+            @endif
             </table>
-            </center>
         </div>
     </div>
 @endsection
