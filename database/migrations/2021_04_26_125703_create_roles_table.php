@@ -16,15 +16,7 @@ class CreateRolesTable extends Migration
         Schema::create('roles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('role');
-            $table->boolean('index')->default(true);
-            $table->boolean('create')->default(false);
-            $table->boolean('store')->default(false);
-            $table->boolean('show')->default(true);
-            $table->boolean('edit')->default(false);
-            $table->boolean('update')->default(false);
-            $table->boolean('remove')->default(false);
-            $table->boolean('destroy')->default(false);
-            $table->timestamps();
+            $table->unsignedBigInteger('user_id');
         });
     }
 

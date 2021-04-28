@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ScratchTable extends Migration
+class RoleUserPivotTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class ScratchTable extends Migration
      */
     public function up()
     {
-        Schema::create('scratch_table', function (Blueprint $table) {
-            $table->increments('id',0);
-            $table->string('post');
-            $table->integer('user');
-            $table->timestamp('created_at')->nullable();
+        Schema::create('roles_user', function (Blueprint $table) {
+            $table->unsignedBigInteger('roles_id');
+            $table->unsignedBigInteger('user_id');
+            $table->primary(['roles_id', 'user_id']);
         });
     }
 
@@ -28,6 +27,6 @@ class ScratchTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('roles_user');
     }
 }

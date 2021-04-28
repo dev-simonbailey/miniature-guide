@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
+use App\User;
+use App\Roles;
+use App\Permissions;
 
 class WelcomeViewController extends Controller
 {
@@ -24,6 +28,18 @@ class WelcomeViewController extends Controller
      */
     public function welcome()
     {
-        return view('welcome');
+        $userrole = Auth::user()->role;
+
+        $rolepermissions = Roles::where('id', $userrole)->first();
+
+        $permissions = Permissions::where('id',$rolepermissions->permissions_id)->first();
+
+        dd($permissions);
+
+
+            return view('welcome');
+
+
+        dd('Nothing here');
     }
 }

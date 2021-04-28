@@ -10,6 +10,8 @@
             Welcome to Bluesky
             <br />
             {{ auth()->user()->name }}
+            <br />
+            <span>{{ Auth::User()->role }}</span>
         </div>
     </div>
 @endsection

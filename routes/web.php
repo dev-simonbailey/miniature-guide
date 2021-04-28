@@ -13,6 +13,9 @@
 
 use App\Http\Controllers\AddNewPackController;
 
+
+Route::get('/users', 'UsersController@index');
+
 Route::get('/', 'WelcomeViewController@welcome')->name('welcome');
 Route::get('/register', 'WelcomeViewController@welcome')->name('welcome');
 Route::get('/registration-success', 'RegistrationSuccessController@index');

@@ -3,12 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use PermissionsRolesPivotTable;
 
-class Roles extends Model
+class Permissions extends Model
 {
 
-    protected $table = 'roles';
+    protected $table = 'permissions';
 
     /**
      * The attributes that are mass assignable.
@@ -16,8 +15,10 @@ class Roles extends Model
      * @var array
      */
     protected $fillable = [
-        'role',
-        'user_id'
+        'create',
+        'read',
+        'update',
+        'destroy'
     ];
 
     /**
