@@ -33,4 +33,9 @@ class Roles extends Model
      * @var array
      */
     protected $casts = [];
+
+    public function getRolePermissions()
+    {
+        return $this->belongsToMany(Permissions::class);
+    }
 }
