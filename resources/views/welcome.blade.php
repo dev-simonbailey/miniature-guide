@@ -11,7 +11,7 @@
             <br />
             {{ auth()->user()->name }}
             <br />
-            <span>{{ Auth::User()->role }}</span>
+            <span>{{ $role }}</span>
         </div>
     </div>
 @endsection

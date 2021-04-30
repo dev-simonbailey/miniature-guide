@@ -28,18 +28,8 @@ class WelcomeViewController extends Controller
      */
     public function welcome()
     {
-        $userrole = Auth::user()->role;
+        $role = User::find(Auth::User()->id)->getRoles->get(0)->role;
 
-        $rolepermissions = Roles::where('id', $userrole)->first();
-
-        $permissions = Permissions::where('id',$rolepermissions->permissions_id)->first();
-
-        dd($permissions);
-
-
-            return view('welcome');
-
-
-        dd('Nothing here');
+        return view('welcome', compact('role'));
     }
 }

@@ -25,10 +25,10 @@ $reports    = "/reports/";
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ Auth::user()->home }}">
-                                Home
+                                Home {{ $role }}
                             </a>
                             <hr />
-                            @if( Auth::user()->role == "admin")
+                            @if( $role == "admin")
                                 <a class="dropdown-item" href="/users/add">
                                     Create User
                                 </a>
@@ -93,7 +93,7 @@ $reports    = "/reports/";
                     </div>
                     <div>
                         <div class="dropdown-header">Reports</div>
-                            @if (auth::user()->role == "admin")
+                            @if ($role == "admin")
                             <a class="dropdown-item" href="{{$reports}}build-schedule">Build Schedule</a>
                             <a class="dropdown-item" href="{{$reports}}incoming-builds">Incoming Builds</a>
                             <a class="dropdown-item" href="{{$reports}}build-inbound">Inbound Builds</a>

@@ -11,13 +11,26 @@ class CreateDefaultRole extends Seeder
      */
     public function run()
     {
+        // admin role
         DB::table('roles')->insert([
-            'role'              => 'admin',
-            'user_id'           => 1
+            'role'          =>  'admin',
+            'create'        =>  1,
+            'read'          =>  1,
+            'update'        =>  1,
+            'destroy'       =>  1,
+            'created_at'    => date('Y-m-d H:i:s'),
+            'updated_at'    => date('Y-m-d H:i:s')
         ]);
+
+        // sales role
         DB::table('roles')->insert([
-            'role'              => 'sales',
-            'user_id'           => 1
+            'role'          =>  'sales',
+            'create'        =>  1,
+            'read'          =>  0,
+            'update'        =>  0,
+            'destroy'       =>  0,
+            'created_at'    => date('Y-m-d H:i:s'),
+            'updated_at'    => date('Y-m-d H:i:s')
         ]);
     }
 }

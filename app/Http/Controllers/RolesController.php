@@ -30,6 +30,9 @@ class RolesController extends Controller
 
         if (Auth::user()->role == "admin") {
             $roles = Roles::all();
+
+            //dd($roles);
+
             return view('roles.show', compact('roles'));
         } else {
             return view('errors.403');
@@ -41,7 +44,12 @@ class RolesController extends Controller
         //$this->authorize('update', $user->profile);
         if (Auth::user()->role == "admin") {
             $details = Roles::findOrFail($role);
-            return view('roles.edit', compact('details'));
+
+            $permissions = $details->getRolePermissions;
+
+            dd($permissions);
+
+           return view('roles.edit', compact('details'));
         } else {
             return view('errors.403');
         }

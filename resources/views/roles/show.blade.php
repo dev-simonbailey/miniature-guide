@@ -21,8 +21,6 @@
                     <th scope="col">Update</th>
                     <th scope="col">Delete</th>
                     <th scope="col">Destroy</th>
-                    <th scope="col">Created At</th>
-                    <th scope="col">Updated At</th>
                     <th scope="col"></th>
             </thead>
             <tbody>
@@ -85,8 +83,6 @@
                             Not Allowed
                         @endif
                     </td>
-                    <td>{{ $role->created_at }}</td>
-                    <td>{{ $role->updated_at }}</td>
                     <td><a href='/roles/edit/{{ $role->id }}' class="btn btn-success">Edit</a></td>
             @endforeach
             </tbody>

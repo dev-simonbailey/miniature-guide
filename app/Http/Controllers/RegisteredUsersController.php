@@ -28,17 +28,15 @@ class RegisteredUsersController extends Controller
     public function index()
     {
 
-        $users = User::all()->sortByDesc("name");
+        //$users = User::all()->sortByDesc("name");
 
-        dd($users);
-
-        //if (Auth::user()->role == "admin") {
-        //    //$users = User::all()->except(Auth::id());
-        //    $users = User::all()->sortByDesc("name");
-        //    return view('users.show', compact('users'));
-        //} else {
-        //    return view('errors.403');
-        //}
+        if (Auth::user()->role == "admin") {
+            //$users = User::all()->except(Auth::id());
+            $users = User::all()->sortByDesc("name");
+            return view('users.show', compact('users'));
+        } else {
+            return view('errors.403');
+        }
     }
 
     public function add()

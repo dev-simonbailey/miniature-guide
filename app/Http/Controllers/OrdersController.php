@@ -25,9 +25,10 @@ class OrdersController extends Controller
      */
     public function index()
     {
+        $role = $this-user_role; //User::find(Auth::User()->id)->getRoles->get(0)->role;
         if ($this->isAuth->CheckPermissions(__FUNCTION__)) {
             $orders = Orders::all()->sortByDesc("created_at");
-            return view($this->opName . '.' . __FUNCTION__, compact('orders'));
+            return view($this->opName . '.' . __FUNCTION__, compact('orders', 'role'));
         } else {
             return view('errors.403');
         }

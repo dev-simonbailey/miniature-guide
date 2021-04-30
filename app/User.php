@@ -46,7 +46,7 @@ class User extends Authenticatable
 
     public function getRoles()
     {
-        return $this->belongsToMany(Roles::class);
+        return $this->belongsToMany(Roles::class,'roles_user');
     }
 
     public function getUserRolesPermissions()
@@ -55,3 +55,13 @@ class User extends Authenticatable
     }
 
 }
+
+/*
+
+https://laravel.io/forum/10-17-2014-nested-many-to-many-relationships#15823
+
+'project_id', // Foreign key on the environments table...
+'environment_id', // Foreign key on the deployments table...
+'id', // Local key on the projects table...
+'id' // Local key on the environments table...
+*/

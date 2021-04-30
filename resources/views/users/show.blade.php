@@ -38,7 +38,7 @@
                     @if( $user->role != "admin")
                         <td><a href='/users/delete/{{ $user->id }}' class="btn btn-danger">Delete</a></td>
                     @else
-                        <td>&nbsp;</td>
+                    <td><a href='#' class="btn btn-dark" disabled>Delete</a></td>
                     @endif
             @endforeach
             </tbody>

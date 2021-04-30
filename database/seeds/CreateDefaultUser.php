@@ -16,9 +16,10 @@ class CreateDefaultUser extends Seeder
             'email'         => 'simon@ribble.com',
             'username'      => 'SimonB',
             'department'    => 'IT',
-            'role'          => 'admin',
             'home'          => '/',
-            'password'      => Hash::make('the_wheels_on_the_bus')
+            'password'      => Hash::make('the_wheels_on_the_bus'),
+            'created_at'    => date('Y-m-d H:i:s'),
+            'updated_at'    => date('Y-m-d H:i:s')
         ]);
     }
 }
