@@ -11,8 +11,6 @@
             <br />
             {{ auth()->user()->name }}
             <br />
-            <span>{{ $role }}</span>
-            <br />
             @can('pdi_edit')
                 <a href="#">PDI edit</a>
                 <br />

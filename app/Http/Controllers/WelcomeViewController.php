@@ -28,9 +28,10 @@ class WelcomeViewController extends Controller
      */
     public function welcome()
     {
-        $role = Auth::User()->roles->first()->name;
+        //$role = Auth::User()->roles->first()->name;
 
-        return view('welcome', compact('role'));
+        //return view('welcome', compact('role'));
+        return view('welcome');
     }
 }
 

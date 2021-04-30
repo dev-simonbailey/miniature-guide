@@ -25,10 +25,10 @@ $reports    = "/reports/";
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ Auth::user()->home }}">
-                                Home {{ $role }}
+                                Home
                             </a>
                             <hr />
-                            @if( $role == "admin")
+                            @can('admin')
                                 <a class="dropdown-item" href="/users/add">
                                     Create User
                                 </a>
@@ -43,7 +43,7 @@ $reports    = "/reports/";
                                     Registered Roles
                                 </a>
                                 <hr />
-                            @endif
+                            @endcan
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 Logout
                             </a>
@@ -93,7 +93,7 @@ $reports    = "/reports/";
                     </div>
                     <div>
                         <div class="dropdown-header">Reports</div>
-                            @if ($role == "admin")
+                        @can('admin')
                             <a class="dropdown-item" href="{{$reports}}build-schedule">Build Schedule</a>
                             <a class="dropdown-item" href="{{$reports}}incoming-builds">Incoming Builds</a>
                             <a class="dropdown-item" href="{{$reports}}build-inbound">Inbound Builds</a>
@@ -106,7 +106,7 @@ $reports    = "/reports/";
                             <a class="dropdown-item" href="{{$reports}}pdi-stats">PDI Stats</a>
                             <a class="dropdown-item" href="{{$reports}}bike-wip-stats">Bike WIP Stats</a>
                             <a class="dropdown-item" href="{{$reports}}qlik-data">Qlik Data</a>
-                            @endif
+                        @endcan
                             <a class="dropdown-item" href="{{$reports}}stock-demand">Stock Demand</a>
                             <a class="dropdown-item" href="{{$reports}}essential-component-shortages">Essential Shortages</a>
                             <a class="dropdown-item" href="{{$reports}}expected-non-essential-shortages">Non Ess Shortages</a>
