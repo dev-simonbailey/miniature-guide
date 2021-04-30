@@ -15,7 +15,5 @@ class DatabaseSeeder extends Seeder
 
         $this->call(CreateDefaultRole::class);
 
-        $this->call(CreateDefaultRoleUserPivot::class);
-
     }
 }

@@ -1,5 +1,8 @@
 <?php
 
+use App\Permission;
+use App\Role;
+use App\User;
 use Illuminate\Database\Seeder;
 
 class CreateDefaultRole extends Seeder
@@ -11,26 +14,41 @@ class CreateDefaultRole extends Seeder
      */
     public function run()
     {
-        // admin role
-        DB::table('roles')->insert([
-            'role'          =>  'admin',
-            'create'        =>  1,
-            'read'          =>  1,
-            'update'        =>  1,
-            'destroy'       =>  1,
-            'created_at'    => date('Y-m-d H:i:s'),
-            'updated_at'    => date('Y-m-d H:i:s')
-        ]);
+        $permissions = [
+            'admin',
+            'pdi_view',
+            'pdi_edit',
+            'pdi_delete',
+            'reports'
+        ];
 
-        // sales role
-        DB::table('roles')->insert([
-            'role'          =>  'sales',
-            'create'        =>  1,
-            'read'          =>  0,
-            'update'        =>  0,
-            'destroy'       =>  0,
-            'created_at'    => date('Y-m-d H:i:s'),
-            'updated_at'    => date('Y-m-d H:i:s')
-        ]);
+        foreach ($permissions as $name) {
+            $permission = new Permission();
+            $permission->name = $name;
+            $permission->label = ucwords(str_replace('_', ' ', $name));
+            $permission->save();
+        }
+
+        $roles = [
+            'admin',
+            'sales',
+            'mechanic',
+            'pdi',
+            'mechanic_manager'
+        ];
+        foreach ($roles as $name) {
+            $role = new Role();
+            $role->name = $name;
+            $role->save();
+        }
+
+        Role::where('name', 'admin');
+        $role->assignPermission(Permission::first());
+
+        $user = User::first();
+        $user->assignRole($role);
     }
 }
+
+
+

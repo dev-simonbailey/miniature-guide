@@ -3,13 +3,10 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use PermissionsRolesPivotTable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Roles extends Model
+class Role extends Model
 {
-
-    protected $table = 'roles';
-
     /**
      * The attributes that are mass assignable.
      *
@@ -17,7 +14,6 @@ class Roles extends Model
      */
     protected $fillable = [
         'role',
-        'user_id'
     ];
 
     /**
@@ -34,8 +30,13 @@ class Roles extends Model
      */
     protected $casts = [];
 
-    public function getRolesPermissions()
+    public function permissions(): BelongsToMany
     {
-        return $this->belongsToMany(Permissions::class);
+        return $this->belongsToMany(Permission::class);
+    }
+
+    public function assignPermission(Permission $permission)
+    {
+        $this->permissions()->save($permission);
     }
 }

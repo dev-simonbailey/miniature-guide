@@ -2,10 +2,9 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\Model;
 
 class User extends Authenticatable
 {
@@ -20,7 +19,6 @@ class User extends Authenticatable
         'username',
         'name',
         'department',
-        'role',
         'home',
         'email',
         'password'
@@ -44,24 +42,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function getRoles()
+    public function roles(): BelongsToMany
     {
-        return $this->belongsToMany(Roles::class,'roles_user');
+        return $this->belongsToMany(Role::class);
     }
 
-    public function getUserRolesPermissions()
+    public function assignRole(Role $role)
     {
-        return $this->hasManyThrough(Permissions::class, Roles::class);
+        $this->roles()->save($role);
     }
 
+    public function hasRole($role)
+    {
+        if (is_string($role)) {
+            return $this->roles->contains('name', $role);
+        }
+
+        return $role->intersect($this->roles);
+    }
 }
-
-/*
-
-https://laravel.io/forum/10-17-2014-nested-many-to-many-relationships#15823
-
-'project_id', // Foreign key on the environments table...
-'environment_id', // Foreign key on the deployments table...
-'id', // Local key on the projects table...
-'id' // Local key on the environments table...
-*/
