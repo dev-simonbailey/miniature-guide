@@ -27,16 +27,8 @@ class RegisteredUsersController extends Controller
      */
     public function index()
     {
-
-        //$users = User::all()->sortByDesc("name");
-
-        if (Auth::user()->role == "admin") {
-            //$users = User::all()->except(Auth::id());
-            $users = User::all()->sortByDesc("name");
-            return view('users.show', compact('users'));
-        } else {
-            return view('errors.403');
-        }
+        $users = User::all()->sortByDesc("name");
+        return view('users.show', compact('users'));
     }
 
     public function add()

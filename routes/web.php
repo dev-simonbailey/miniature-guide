@@ -13,6 +13,12 @@
 
 use App\Http\Controllers\AddNewPackController;
 
+Route::group(['middleware' => 'role:admin'], function () {
+    Route::resource('users/index', 'RegisteredUsersController');
+    Route::resource('users/show', 'RegisteredUsersController');
+});
+
+
 
 Route::get('/users', 'UsersController@index');
 
@@ -27,8 +33,8 @@ Route::prefix('help')->group(function () {
 
 /* REGISTERED USERS */
 Route::prefix('users')->group(function () {
-    Route::get('/index', 'RegisteredUsersController@index')->name('users.show');
-    Route::get('/show', 'RegisteredUsersController@index')->name('users.show');
+    //Route::get('/index', 'RegisteredUsersController@index')->name('users.show');
+    //Route::get('/show', 'RegisteredUsersController@index')->name('users.show');
     Route::get('/add', 'RegisteredUsersController@add')->name('users.add');
     Route::get('/edit/{user}', 'RegisteredUsersController@edit')->name('users.edit');
     Route::patch('/update/{user}', 'RegisteredUsersController@update')->name('users.update');
