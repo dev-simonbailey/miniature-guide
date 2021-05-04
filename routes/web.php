@@ -11,16 +11,31 @@
 |
 */
 
-use App\Http\Controllers\AddNewPackController;
 
-Route::group(['middleware' => 'role:admin'], function () {
-    Route::resource('users/index', 'RegisteredUsersController');
-    Route::resource('users/show', 'RegisteredUsersController');
+Route::prefix('users')->group(function () {
+
+    Route::get('/', 'RolesController@index')->name('roles.show');
+    Route::get('/show', 'RolesController@index')->name('roles.show');
+    Route::get('/add', 'RegisteredUsersController@add')->name('users.add');
+    Route::get('/edit/{user}', 'RegisteredUsersController@edit')->name('users.edit');
+    Route::get('/delete/{user}', 'RegisteredUsersController@delete')->name('users.delete');
+
+    Route::group(['middleware' => 'role:admin'], function () {
+        Route::resource('/', 'RegisteredUsersController');
+        Route::resource('/show', 'RegisteredUsersController');
+        //Route::resource('/add', 'RegisteredUsersController');
+        Route::resource('/edit','RegisteredUsersController');
+
+        //Route::resource('/update/{user}', 'RegisteredUsersController');
+        //Route::resource('/delete/{user}', 'RegisteredUsersController');
+        //Route::resource('/destroy/{user}', 'RegisteredUsersController');
+    });
 });
 
 
 
-Route::get('/users', 'UsersController@index');
+
+//Route::get('/users', 'UsersController@index');
 
 Route::get('/', 'WelcomeViewController@welcome')->name('welcome');
 Route::get('/register', 'WelcomeViewController@welcome')->name('welcome');
@@ -32,15 +47,15 @@ Route::prefix('help')->group(function () {
 });
 
 /* REGISTERED USERS */
-Route::prefix('users')->group(function () {
+//Route::prefix('users')->group(function () {
     //Route::get('/index', 'RegisteredUsersController@index')->name('users.show');
     //Route::get('/show', 'RegisteredUsersController@index')->name('users.show');
-    Route::get('/add', 'RegisteredUsersController@add')->name('users.add');
-    Route::get('/edit/{user}', 'RegisteredUsersController@edit')->name('users.edit');
-    Route::patch('/update/{user}', 'RegisteredUsersController@update')->name('users.update');
-    Route::get('/delete/{user}', 'RegisteredUsersController@delete')->name('users.delete');
-    Route::delete('/destroy/{user}', 'RegisteredUsersController@destroy')->name('users.destroy');
-});
+    //Route::get('/add', 'RegisteredUsersController@add')->name('users.add');
+    //Route::get('/edit/{user}', 'RegisteredUsersController@edit')->name('users.edit');
+    //Route::patch('/update/{user}', 'RegisteredUsersController@update')->name('users.update');
+    //Route::get('/delete/{user}', 'RegisteredUsersController@delete')->name('users.delete');
+    //Route::delete('/destroy/{user}', 'RegisteredUsersController@destroy')->name('users.destroy');
+//});
 
 /* ROLES */
 Route::prefix('roles')->group(function () {

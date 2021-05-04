@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Roles;
 //use Illuminate\Http\Request;
@@ -23,23 +23,21 @@ class RegisteredUsersController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return Factory|View
+     * @return Factory|View|array|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
-    {
-        $users = User::all()->sortByDesc("name");
-        return view('users.show', compact('users'));
+    public function index() {
+
+        $usersdata = User::all()->sortByDesc("name");
+
+        return view('users.show', compact('usersdata'));
+
     }
 
     public function add()
     {
-        if (Auth::user()->role == "admin") {
-            //$users = User::all()->except(Auth::id());
-            $roles = Roles::all()->sortByDesc("name");
-            return view('users.add', compact('roles'));
-        } else {
-            return view('errors.403');
-        }
+        //dd('add ya');
+        //$roles = Roles::all()->sortByDesc("name");
+        return view('users.add', compact('roles'));
     }
 
     public function edit(User $user)
@@ -57,7 +55,6 @@ class RegisteredUsersController extends Controller
                 'name'          =>  'required',
                 'username'      =>  'required',
                 'email'         =>  'required|email',
-                'department'    =>  'required',
                 'department'    =>  'required',
                 'role'          =>  'required',
                 'home'          =>  'required'

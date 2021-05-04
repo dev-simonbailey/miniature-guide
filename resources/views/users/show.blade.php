@@ -16,7 +16,7 @@
                     <th scope="col">Username</th>
                     <th scope="col">Email</th>
                     <th scope="col">Department</th>
-                    <th scope="col">Role</th>
+                    <th scope="col">Role(s)</th>
                     <th scope="col">Home</th>
                     <th scope="col">Created At</th>
                     <th scope="col">Updated At</th>
@@ -24,19 +24,27 @@
                     <th scope="col"></th>
             </thead>
             <tbody>
-                @foreach ($users as $user)
+                @foreach ($usersdata as $userdetails)
                 <tr>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->username }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>{{ $user->department }}</td>
-                    <td>{{ $user->role }}</td>
-                    <td>{{ $user->home }}</td>
-                    <td>{{ $user->created_at }}</td>
-                    <td>{{ $user->updated_at }}</td>
-                    <td><a href='/users/edit/{{ $user->id }}' class="btn btn-success">Edit</a></td>
-                    @if( $user->role != "admin")
-                        <td><a href='/users/delete/{{ $user->id }}' class="btn btn-danger">Delete</a></td>
+                    <td>{{ $userdetails->name }}</td>
+                    <td>{{ $userdetails->username }}</td>
+                    <td>{{ $userdetails->email }}</td>
+                    <td>{{ $userdetails->department }}</td>
+                    @php
+                        $usersroles = App\User::find($userdetails->id)->roles;
+                        $assigned_roles = '';
+                        foreach ($usersroles as $roles) {
+                            $assigned_roles .= ucwords(str_replace('_'," ",$roles->name)).", ";
+                        }
+                        $assigned_roles = rtrim($assigned_roles,", ");
+                    @endphp
+                    <td>{{$assigned_roles}}</td>
+                    <td>{{ $userdetails->home }}</td>
+                    <td>{{ $userdetails->created_at }}</td>
+                    <td>{{ $userdetails->updated_at }}</td>
+                    <td><a href='/users/edit/{{ $userdetails->id }}' class="btn btn-success">Edit</a></td>
+                    @if( $userdetails->role != "admin")
+                        <td><a href='/users/delete/{{ $userdetails->id }}' class="btn btn-danger">Delete</a></td>
                     @else
                     <td><a href='#' class="btn btn-dark" disabled>Delete</a></td>
                     @endif
