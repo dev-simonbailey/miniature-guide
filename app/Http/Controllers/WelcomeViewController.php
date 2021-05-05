@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
-use App\User;
 use App\Roles;
 use App\Permissions;
 
@@ -28,9 +27,6 @@ class WelcomeViewController extends Controller
      */
     public function welcome()
     {
-        //$role = Auth::User()->roles->first()->name;
-
-        //return view('welcome', compact('role'));
         return view('welcome');
     }
 }

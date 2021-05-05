@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\View\Factory;
+use Illuminate\View\View;
 
 class RegistrationSuccessController extends Controller
 {
@@ -24,6 +26,7 @@ class RegistrationSuccessController extends Controller
      */
     public function index()
     {
-        return redirect()->route('users.show');
+        //return redirect()->route('users.show');
+        return view('/users/');
     }
 }

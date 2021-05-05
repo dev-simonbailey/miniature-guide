@@ -76,18 +76,21 @@
                     </div>
                     <div class="form-group row">
                         <label for="role" class="col-form-label">{{ __('Role') }}</label>
-                            <input
-                                id="role"
-                                type="text"
-                                class="form-control @error('role') is-invalid @enderror"
-                                name="role" value="{{ old('role') ?? $detail->role}}"
-                                autocomplete="role"
-                                autofocus>
-                            @error('role')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                        <select multiple="multiple" name="role" class="form-control">
+                            @foreach($roles as $role)
+                                <option
+                                    value="{{ $role->name }}"
+                                    @if($usersroles->contains('name', $role->name))selected="selected"@endif>
+                                    {{ $role->name }}
+                                </option>
+                                }
+                            @endforeach
+                        </select>
+                        @error('role')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="form-group row">
                         <label for="home" class="col-form-label">{{ __('Home') }}</label>
@@ -105,7 +108,7 @@
                             @enderror
                     </div>
                     <div class="row pt-4">
-                        <a href="/users/show" class='btn btn-primary mr-3'>Cancel</a>
+                        <a href="/users" class='btn btn-primary mr-3'>Cancel</a>
                         <button class="btn btn-success">Update User</button>
                     </div>
                 </div>

@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 
 class RoleMiddleware
 {
+
+    public $found = false;
+
     /**
      * Handle an incoming request.
      *
@@ -18,13 +21,11 @@ class RoleMiddleware
      */
     public function handle(Request $request, Closure $next, ...$user_roles)
     {
-
         foreach($user_roles as $role){
-            if (Auth::User()->hasRole($role)) {
+            if (Auth::User()->hasRole(trim($role))) {
                 return $next($request);
             }
         }
-        return view('errors.403');
+        abort('403');
     }
-
 }

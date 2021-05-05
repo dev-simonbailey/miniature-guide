@@ -28,11 +28,11 @@ $reports    = "/reports/";
                                 Home
                             </a>
                             <hr />
-                            @can('admin')
+                            @if(Auth::User()->hasRole('admin'))
                                 <a class="dropdown-item" href="/users/add">
                                     Create User
                                 </a>
-                                <a class="dropdown-item" href="/users/show">
+                                <a class="dropdown-item" href="/users">
                                     Registered Users
                                 </a>
                                 <hr />
@@ -43,7 +43,7 @@ $reports    = "/reports/";
                                     Registered Roles
                                 </a>
                                 <hr />
-                            @endcan
+                            @endif
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 Logout
                             </a>
@@ -67,7 +67,6 @@ $reports    = "/reports/";
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="servicesDropdown">
                 <a class="dropdown-item" href="/knowledgebase/index">Knowledge Base</a>
                 <a class="dropdown-item" href="/loginteractions/index">Log Interaction</a>
-                @if (auth::user()->role != "none")
                 <div class="dropdown-divider"></div>
                 <div class="d-md-flex align-items-start justify-content-start">
                     <div>
@@ -93,7 +92,7 @@ $reports    = "/reports/";
                     </div>
                     <div>
                         <div class="dropdown-header">Reports</div>
-                        @can('admin')
+                        @if(Auth::User()->hasRole('admin'))
                             <a class="dropdown-item" href="{{$reports}}build-schedule">Build Schedule</a>
                             <a class="dropdown-item" href="{{$reports}}incoming-builds">Incoming Builds</a>
                             <a class="dropdown-item" href="{{$reports}}build-inbound">Inbound Builds</a>
@@ -106,7 +105,7 @@ $reports    = "/reports/";
                             <a class="dropdown-item" href="{{$reports}}pdi-stats">PDI Stats</a>
                             <a class="dropdown-item" href="{{$reports}}bike-wip-stats">Bike WIP Stats</a>
                             <a class="dropdown-item" href="{{$reports}}qlik-data">Qlik Data</a>
-                        @endcan
+                        @endif
                             <a class="dropdown-item" href="{{$reports}}stock-demand">Stock Demand</a>
                             <a class="dropdown-item" href="{{$reports}}essential-component-shortages">Essential Shortages</a>
                             <a class="dropdown-item" href="{{$reports}}expected-non-essential-shortages">Non Ess Shortages</a>
@@ -116,7 +115,6 @@ $reports    = "/reports/";
                         </div>
                     </div>
                 </div>
-                @endif
             </li>
             @endauth
             @auth

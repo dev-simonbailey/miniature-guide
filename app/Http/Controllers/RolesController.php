@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
-use App\User;
+use App\Role;
 use App\Roles;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\View\Factory;
+use Illuminate\View\View;
 
 class RolesController extends Controller
 {
@@ -27,38 +29,21 @@ class RolesController extends Controller
      */
     public function index()
     {
-
-        if (Auth::user()->role == "admin") {
-            $roles = Roles::all();
-
-            //dd($roles);
-
-            return view('roles.show', compact('roles'));
-        } else {
-            return view('errors.403');
-        }
+        $roles = Role::all();
+        return view('roles.show', compact('roles'));
     }
 
     public function edit($role)
     {
-        //$this->authorize('update', $user->profile);
-        if (Auth::user()->role == "admin") {
-            $details = Roles::findOrFail($role);
+        $details = Role::findOrFail($role);
+        $permissions = $details->getRolePermissions;
+        dd($permissions);
+        return view('roles.edit', compact('details'));
 
-            $permissions = $details->getRolePermissions;
-
-            dd($permissions);
-
-           return view('roles.edit', compact('details'));
-        } else {
-            return view('errors.403');
-        }
     }
 
     public function update(Roles $role)
     {
-        //$this->authorize('update', $user->profile);
-        if (Auth::user()->role == "admin") {
             $data = request()->validate([
                 'role'      =>  'required',
                 'index'     =>  'required',
@@ -72,9 +57,6 @@ class RolesController extends Controller
             ]);
             $role->update($data);
             return redirect()->route('roles.show');
-        } else {
-            return view('errors.403');
-        }
     }
 
     public function add()

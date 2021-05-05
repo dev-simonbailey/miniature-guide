@@ -112,7 +112,7 @@
                             @enderror
                     </div>
                     <div class="row pt-4">
-                        <a href="/users/show" class='btn btn-primary mr-3'>Cancel</a>
+                        <a href="/users" class='btn btn-primary mr-3'>Cancel</a>
                         <button class="btn btn-danger">Delete User</button>
                     </div>
                 </div>

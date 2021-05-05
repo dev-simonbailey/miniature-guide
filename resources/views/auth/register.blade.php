@@ -78,6 +78,7 @@
 
                             <div class="col-md-6">
                                 <!-- change to select and draw options from ROLES-->
+
                                 <input id="role" type="text" class="form-control @error('role') is-invalid @enderror" name="role" value="{{ old('role') }}" required autocomplete="role">
 
                                 @error('role')

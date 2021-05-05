@@ -43,7 +43,7 @@
                     <td>{{ $userdetails->created_at }}</td>
                     <td>{{ $userdetails->updated_at }}</td>
                     <td><a href='/users/edit/{{ $userdetails->id }}' class="btn btn-success">Edit</a></td>
-                    @if( $userdetails->role != "admin")
+                    @if( $userdetails->id != Auth::User()->id)
                         <td><a href='/users/delete/{{ $userdetails->id }}' class="btn btn-danger">Delete</a></td>
                     @else
                     <td><a href='#' class="btn btn-dark" disabled>Delete</a></td>
