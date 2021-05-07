@@ -12,12 +12,8 @@
 */
 
 
-
-
-
-
-
-//Route::get('/users', 'UsersController@index');
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'WelcomeViewController@welcome')->name('welcome');
 Route::get('/register', 'WelcomeViewController@welcome')->name('welcome');
@@ -33,6 +29,7 @@ Route::prefix('users')->group(function () {
     Route::get('/', ['middleware' => 'role:admin', 'uses' => 'RegisteredUsersController@show'])->name('users.show');
     Route::get('/show', ['middleware' => 'role:admin', 'uses' => 'RegisteredUsersController@show'])->name('users.show');
     Route::get('/add', ['middleware' => 'role:admin', 'uses' => 'RegisteredUsersController@add'])->name('users.add');
+    Route::post('/store', ['middleware' => 'role:admin', 'uses' => 'RegisteredUsersController@store'])->name('users.store');
     Route::get('/edit/{user}', ['middleware' => 'role:admin', 'uses' => 'RegisteredUsersController@edit'])->name('users.edit');
     Route::patch('/update/{user}', ['middleware' => 'role:admin', 'uses' => 'RegisteredUsersController@update'])->name('users.update');
     Route::get('/delete/{user}', ['middleware' => 'role:admin', 'uses' => 'RegisteredUsersController@delete'])->name('users.delete');
@@ -41,20 +38,14 @@ Route::prefix('users')->group(function () {
 
 /* ROLES */
 Route::prefix('roles')->group(function () {
-    Route::get('/index', 'RolesController@index')->name('roles.show');
-    Route::get('/show', 'RolesController@index')->name('roles.show');
-
-    Route::get('/add', 'RolesController@add')->name('roles.add');
-    Route::get('/store','LogInteractionsController@getstore')->name('errors.403');
-    Route::post('/store', 'RolesController@store')->name('roles.store');
-
-    Route::get('/edit/{role}', 'RolesController@edit')->name('roles.edit');
-    Route::get('/update','KnowledgeBaseController@getupdate')->name('errors.403');
-    Route::patch('/update/{role}', 'RolesController@update')->name('roles.update');
-
-    Route::get('/delete/{role}', 'RolesController@delete')->name('roles.delete');
-    Route::get('/destroy','RolesController@getdestroy')->name('errors.403');
-    Route::delete('/destroy/{role}', 'RolesController@destroy')->name('roles.destroy');
+    Route::get('/', ['middleware' => 'role:admin', 'uses' => 'RolesController@index'])->name('roles.index');
+    Route::get('/show', ['middleware' => 'role:admin', 'uses' => 'RolesController@index'])->name('roles.index');
+    Route::get('/add', ['middleware' => 'role:admin', 'uses' => 'RolesController@add'])->name('roles.add');
+    Route::post('/store', ['middleware' => 'role:admin', 'uses' => 'RolesController@store'])->name('roles.store');
+    Route::get('/edit/{user}', ['middleware' => 'role:admin', 'uses' => 'RolesController@edit'])->name('roles.edit');
+    Route::patch('/update/{user}', ['middleware' => 'role:admin', 'uses' => 'RolesController@update'])->name('roles.update');
+    Route::get('/delete/{user}', ['middleware' => 'role:admin', 'uses' => 'RolesController@delete'])->name('roles.delete');
+    Route::delete('/destroy/{user}', ['middleware' => 'role:admin', 'uses' => 'RolesController@destroy'])->name('roles.destroy');
 });
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Permission;
 use App\Role;
 use App\Roles;
 use Illuminate\Http\Request;
@@ -29,73 +30,68 @@ class RolesController extends Controller
      */
     public function index()
     {
-        $roles = Role::all();
-        return view('roles.show', compact('roles'));
+        $permissions = Permission::all(); // All permissions
+
+        $roles = Role::all()->sortBy("name");
+        return view('roles.show', compact('roles','permissions'));
     }
 
     public function edit($role)
     {
-        $details = Role::findOrFail($role);
-        $permissions = $details->getRolePermissions;
-        dd($permissions);
-        return view('roles.edit', compact('details'));
+        $role_details = Role::find($role);
+        $permission_details = Role::find($role)->permissions;
+        //dd($role_details);
+        return view('roles.edit', compact('role_details','permission_details'));
 
     }
 
     public function update(Roles $role)
     {
-            $data = request()->validate([
-                'role'      =>  'required',
-                'index'     =>  'required',
-                'create'    =>  'required',
-                'store'     =>  'required',
-                'show'      =>  'required',
-                'edit'      =>  'required',
-                'update'    =>  'required',
-                'remove'    =>  'required',
-                'destroy'   =>  'required',
-            ]);
-            $role->update($data);
-            return redirect()->route('roles.show');
+        $data = request()->validate([
+            'role'      =>  'required',
+            'index'     =>  'required',
+            'create'    =>  'required',
+            'store'     =>  'required',
+            'show'      =>  'required',
+            'edit'      =>  'required',
+            'update'    =>  'required',
+            'remove'    =>  'required',
+            'destroy'   =>  'required',
+        ]);
+        $role->update($data);
+        return redirect()->route('roles.show');
     }
 
     public function add()
     {
-        if (Auth::user()->role == "admin") {
-            return view('roles.add');
-        } else {
-            return view('errors.403');
-        }
+        return view('roles.add');
     }
 
     public function store(Roles $role)
     {
-        if (Auth::user()->role == "admin") {
-            $data = request()->validate([
-                'role'      =>  'required',
-                'index'     =>  'required',
-                'create'    =>  'required',
-                'store'     =>  'required',
-                'show'      =>  'required',
-                'edit'      =>  'required',
-                'update'    =>  'required',
-                'remove'    =>  'required',
-                'destroy'   =>  'required',
-            ]);
-            $role->create([
-                'role'      =>  $data['role'],
-                'index'     =>  $data['index'],
-                'create'    =>  $data['create'],
-                'store'     =>  $data['store'],
-                'show'      =>  $data['show'],
-                'edit'      =>  $data['edit'],
-                'update'    =>  $data['update'],
-                'remove'    =>  $data['remove'],
-                'destroy'   =>  $data['destroy'],
-            ]);
-            return redirect()->route('roles.show');
-        } else {
-            return view('errors.403');
-        }
+        $data = request()->validate([
+            'role'      =>  'required',
+            'index'     =>  'required',
+            'create'    =>  'required',
+            'store'     =>  'required',
+            'show'      =>  'required',
+            'edit'      =>  'required',
+            'update'    =>  'required',
+            'remove'    =>  'required',
+            'destroy'   =>  'required',
+        ]);
+        $role->create([
+            'role'      =>  $data['role'],
+            'index'     =>  $data['index'],
+            'create'    =>  $data['create'],
+            'store'     =>  $data['store'],
+            'show'      =>  $data['show'],
+            'edit'      =>  $data['edit'],
+            'update'    =>  $data['update'],
+            'remove'    =>  $data['remove'],
+            'destroy'   =>  $data['destroy'],
+        ]);
+        return redirect()->route('roles.show');
+
     }
 }

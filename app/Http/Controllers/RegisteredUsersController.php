@@ -30,7 +30,11 @@ class RegisteredUsersController extends Controller
      * @return Factory|View
      */
     public function show() {
-        $usersdata = User::all()->sortByDesc("name");
+        //Model::withTrashed()->get();
+        $usersdata = User::withTrashed()->get()->sortByDesc("name");
+
+        //$usersdata = User::get()->sortByDesc("name");
+        //dd($usersdata);
         return view('users.show', compact('usersdata'));
     }
 
@@ -68,10 +72,4 @@ class RegisteredUsersController extends Controller
         return view('users.delete', compact('details'));
     }
 
-    public function destroy(User $user)
-    {
-        $userToDelete = User::findOrFail($user->id);
-        $userToDelete->delete();
-        return redirect()->route("users.show");
-    }
 }

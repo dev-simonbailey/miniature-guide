@@ -30,24 +30,34 @@
                     <td>{{ $userdetails->username }}</td>
                     <td>{{ $userdetails->email }}</td>
                     <td>{{ $userdetails->department }}</td>
+
                     @php
-                        $usersroles = App\User::find($userdetails->id)->roles;
-                        $assigned_roles = '';
-                        foreach ($usersroles as $roles) {
-                            $assigned_roles .= ucwords(str_replace('_'," ",$roles->name)).", ";
-                        }
-                        $assigned_roles = rtrim($assigned_roles,", ");
+                        $assigned_roles = $userdetails->id;
+                        //$usersroles = App\User::find($userdetails->id)->withTrashed();
+                        //$usersroles = App\User::find($userdetails->id)->roles;
+                        //$assigned_roles = '';
+                        //foreach ($usersroles as $roles) {
+                        //    $assigned_roles .= ucwords(str_replace('_'," ",$roles->name)).", ";
+                        //}
+                        //$assigned_roles = rtrim($assigned_roles,", ");
                     @endphp
                     <td>{{$assigned_roles}}</td>
+
                     <td>{{ $userdetails->home }}</td>
                     <td>{{ $userdetails->created_at }}</td>
                     <td>{{ $userdetails->updated_at }}</td>
                     <td><a href='/users/edit/{{ $userdetails->id }}' class="btn btn-success">Edit</a></td>
+
                     @if( $userdetails->id != Auth::User()->id)
-                        <td><a href='/users/delete/{{ $userdetails->id }}' class="btn btn-danger">Delete</a></td>
+                        @if($userdetails->deleted_at == null)
+                            <td><a href='/users/delete/{{ $userdetails->id }}' class="btn btn-danger">Delete</a></td>
+                        @else
+                            <td><a href='/users/delete/{{ $userdetails->id }}' class="btn btn-warning">Restore</a></td>
+                        @endif
                     @else
                     <td><a href='#' class="btn btn-dark" disabled>Delete</a></td>
                     @endif
+
             @endforeach
             </tbody>
         </table>

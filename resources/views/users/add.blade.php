@@ -75,7 +75,7 @@
                             <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
 
                             <div class="col-md-6">
-                                <select multiple="multiple" name="role" id="role" class="form-control">
+                                <select multiple="multiple" name="role[]" id="role" class="form-control">
                                     @foreach ($roles as $role)
                                         <option value="{{ $role->name }}">{{ $role->name }}</option>
                                     @endforeach

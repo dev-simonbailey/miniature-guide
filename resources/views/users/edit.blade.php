@@ -76,14 +76,9 @@
                     </div>
                     <div class="form-group row">
                         <label for="role" class="col-form-label">{{ __('Role') }}</label>
-                        <select multiple="multiple" name="role" class="form-control">
+                        <select multiple="multiple" name="role[]" id="role" class="form-control">
                             @foreach($roles as $role)
-                                <option
-                                    value="{{ $role->name }}"
-                                    @if($usersroles->contains('name', $role->name))selected="selected"@endif>
-                                    {{ $role->name }}
-                                </option>
-                                }
+                                <option value="{{ $role->name }}" @if($usersroles->contains('name', $role->name))selected="selected"@endif>{{ $role->name }}</option>
                             @endforeach
                         </select>
                         @error('role')

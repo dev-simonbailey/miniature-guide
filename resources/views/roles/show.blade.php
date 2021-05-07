@@ -13,76 +13,36 @@
             <thead>
                 <tr>
                     <th scope="col">Role</th>
-                    <th scope="col">Index</th>
+                    <th scope="col">View</th>
                     <th scope="col">Create</th>
-                    <th scope="col">Store</th>
-                    <th scope="col">Show</th>
                     <th scope="col">Edit</th>
-                    <th scope="col">Update</th>
                     <th scope="col">Delete</th>
-                    <th scope="col">Destroy</th>
                     <th scope="col"></th>
             </thead>
             <tbody>
                 @foreach ($roles as $role)
                 <tr>
-                    <td>{{ $role->role }}</td>
-                    <td>
-                        @if($role->index == 1)
-                            Allowed
-                        @else
-                            Not Allowed
-                        @endif
-                    </td>
-                    <td>
-                        @if($role->create == 1)
-                            Allowed
-                        @else
-                            Not Allowed
-                        @endif
-                    </td>
-                    <td>
-                        @if($role->store == 1)
-                            Allowed
-                        @else
-                            Not Allowed
-                        @endif
-                    </td>
-                    <td>
-                        @if($role->show == 1)
-                            Allowed
-                        @else
-                            Not Allowed
-                        @endif
-                    </td>
-                    <td>
-                        @if($role->edit == 1)
-                            Allowed
-                        @else
-                            Not Allowed
-                        @endif
-                    </td>
-                    <td>
-                        @if($role->update == 1)
-                            Allowed
-                        @else
-                            Not Allowed
-                        @endif
-                    </td>
-                    <td>
-                        @if($role->remove == 1)
-                            Allowed
-                        @else
-                            Not Allowed
-                        @endif
-                    </td>
-                    <td>
-                        @if($role->destroy == 1)
-                            Allowed
-                        @else
-                            Not Allowed
-                        @endif
-                    </td>
+                    <td>{{ $role->label }}</td>
+                    @can($role->name.'_view')
+                        <td class="bg-success text-white">Allowed</td>
+                    @else
+                        <td class="bg-danger text-white">Not Allowed</td>
+                    @endcan
+                    @can($role->name.'_create')
+                        <td class="bg-success text-white">Allowed</td>
+                    @else
+                        <td class="bg-danger text-white">Not Allowed</td>
+                    @endcan
+                    @can($role->name.'_edit')
+                        <td class="bg-success text-white">Allowed</td>
+                    @else
+                        <td class="bg-danger text-white">Not Allowed</td>
+                    @endcan
+                    @can($role->name.'_delete')
+                        <td class="bg-success text-white">Allowed</td>
+                    @else
+                        <td class="bg-danger text-white">Not Allowed</td>
+                    @endcan
                     <td><a href='/roles/edit/{{ $role->id }}' class="btn btn-success">Edit</a></td>
             @endforeach
             </tbody>
