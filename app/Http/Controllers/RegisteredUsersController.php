@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Role;
 use Illuminate\View\Factory;
@@ -21,7 +20,6 @@ class RegisteredUsersController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        //$this->middleware('role');
     }
 
     /**
@@ -30,11 +28,7 @@ class RegisteredUsersController extends Controller
      * @return Factory|View
      */
     public function show() {
-        //Model::withTrashed()->get();
         $usersdata = User::withTrashed()->get()->sortByDesc("name");
-
-        //$usersdata = User::get()->sortByDesc("name");
-        //dd($usersdata);
         return view('users.show', compact('usersdata'));
     }
 
@@ -44,12 +38,11 @@ class RegisteredUsersController extends Controller
         return view('users.add', compact('roles'));
     }
 
-    public function edit(User $user)
+    public function edit($id)
     {
-        $detail = User::findOrFail($user->id);
+        $selecteduser = User::withTrashed()->findorfail($id);
         $roles = Role::all()->sortBy("name");
-        $usersroles = User::find($user->id)->roles;
-        return view('users.edit', compact('detail','roles', 'usersroles'));
+        return view('users.edit', compact('selecteduser','roles'));
     }
 
     public function update(User $user)
@@ -63,13 +56,19 @@ class RegisteredUsersController extends Controller
             'home'          =>  'required'
         ]);
         $user->update($data);
+        $user->assignRolesByID(request()->role);
         return redirect()->route("users.show");
     }
 
-    public function delete(User $user)
+    public function deleteUser($id)
     {
-        $details = User::findOrFail($user);
-        return view('users.delete', compact('details'));
+        User::softDelete($id);
+        return $this->show();
+    }
+    public function restore($id)
+    {
+        User::softRestore($id);
+        return $this->show();
     }
 
 }

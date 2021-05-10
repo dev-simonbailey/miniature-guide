@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="content">
-        <form action="/users/update/{{ $detail->id }}" enctype="multipart/form-data" method="POST">
+        <form action="/users/update/{{ $selecteduser->id }}" enctype="multipart/form-data" method="POST">
             @csrf
             @method('PATCH')
             <div class="row">
@@ -20,7 +20,7 @@
                                 id="name"
                                 type="text"
                                 class="form-control @error('name') is-invalid @enderror"
-                                name="name" value="{{ old('name') ?? $detail->name}}"
+                                name="name" value="{{ old('name') ?? $selecteduser->name}}"
                                 autocomplete="name"
                                 autofocus>
                             @error('name')
@@ -35,7 +35,7 @@
                                 id="username"
                                 type="text"
                                 class="form-control @error('username') is-invalid @enderror"
-                                name="username" value="{{ old('username') ?? $detail->username}}"
+                                name="username" value="{{ old('username') ?? $selecteduser->username}}"
                                 autocomplete="username"
                                 autofocus>
                             @error('username')
@@ -50,7 +50,7 @@
                                 id="email"
                                 type="text"
                                 class="form-control @error('email') is-invalid @enderror"
-                                name="email" value="{{ old('email') ?? $detail->email}}"
+                                name="email" value="{{ old('email') ?? $selecteduser->email}}"
                                 autocomplete="email"
                                 autofocus>
                             @error('email')
@@ -65,7 +65,7 @@
                                 id="department"
                                 type="text"
                                 class="form-control @error('department') is-invalid @enderror"
-                                name="department" value="{{ old('department') ?? $detail->department}}"
+                                name="department" value="{{ old('department') ?? $selecteduser->department}}"
                                 autocomplete="department"
                                 autofocus>
                             @error('department')
@@ -78,7 +78,7 @@
                         <label for="role" class="col-form-label">{{ __('Role') }}</label>
                         <select multiple="multiple" name="role[]" id="role" class="form-control">
                             @foreach($roles as $role)
-                                <option value="{{ $role->name }}" @if($usersroles->contains('name', $role->name))selected="selected"@endif>{{ $role->name }}</option>
+                                <option value="{{ $role->name }}" @if($selecteduser->roles->contains('name', $role->name))selected="selected"@endif>{{ $role->name }}</option>
                             @endforeach
                         </select>
                         @error('role')
@@ -93,7 +93,7 @@
                                 id="home"
                                 type="text"
                                 class="form-control @error('home') is-invalid @enderror"
-                                name="home" value="{{ old('home') ?? $detail->home}}"
+                                name="home" value="{{ old('home') ?? $selecteduser->home}}"
                                 autocomplete="role"
                                 autofocus>
                             @error('role')

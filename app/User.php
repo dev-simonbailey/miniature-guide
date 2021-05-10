@@ -11,6 +11,7 @@ class User extends Authenticatable
 {
     use Notifiable, SoftDeletes;
 
+    public $role = [];
     /**
      * The attributes that are mass assignable.
      *
@@ -45,7 +46,7 @@ class User extends Authenticatable
 
     public function roles(): BelongsToMany
     {
-        return $this->belongsToMany(Role::class)->withTrashed();
+        return $this->belongsToMany(Role::class);
     }
 
     public function assignRole(Role $role)
@@ -53,24 +54,34 @@ class User extends Authenticatable
         $this->roles()->save($role);
     }
 
+    public function assignRolesByID(array $roleID) {
+        $roles = Role::where('id',['in'=>$roleID]);
+        $this->roles()->saveMany($roles);
+    }
+
     public function hasRole($role)
     {
         if (is_string($role)) {
             return $this->roles->contains('name', $role);
         }
-
         return $role->intersect($this->roles);
     }
 
-    public function softDelete($userid)
+    public function roleNames(): string
     {
-        User::find($userid)->delete();
-        return "User Deleted";
+        $roleNames = array_map(function(Role $role) {
+            return $role->name;
+        }, $this->roles->all());
+        return implode(',', $roleNames);
     }
 
-    public function softRestore($userid)
+    static function softDelete($id)
     {
-        User::withTrashed()->where('id', $userid)->restore();
-        return "User Restored";
+        User::find($id)->delete();
+    }
+
+    static function softRestore($id)
+    {
+        User::withTrashed()->where('id', $id)->restore();
     }
 }

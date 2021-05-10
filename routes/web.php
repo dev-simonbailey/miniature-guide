@@ -30,11 +30,12 @@ Route::prefix('users')->group(function () {
     Route::get('/show', ['middleware' => 'role:admin', 'uses' => 'RegisteredUsersController@show'])->name('users.show');
     Route::get('/add', ['middleware' => 'role:admin', 'uses' => 'RegisteredUsersController@add'])->name('users.add');
     Route::post('/store', ['middleware' => 'role:admin', 'uses' => 'RegisteredUsersController@store'])->name('users.store');
-    Route::get('/edit/{user}', ['middleware' => 'role:admin', 'uses' => 'RegisteredUsersController@edit'])->name('users.edit');
+    Route::get('/edit/{id}', ['middleware' => 'role:admin', 'uses' => 'RegisteredUsersController@edit'])->name('users.edit');
     Route::patch('/update/{user}', ['middleware' => 'role:admin', 'uses' => 'RegisteredUsersController@update'])->name('users.update');
-    Route::get('/delete/{user}', ['middleware' => 'role:admin', 'uses' => 'RegisteredUsersController@delete'])->name('users.delete');
-    Route::delete('/destroy/{user}', ['middleware' => 'role:admin', 'uses' => 'RegisteredUsersController@destroy'])->name('users.destroy');
+    Route::get('/delete/{id}', ['middleware' => 'role:admin', 'uses' => 'RegisteredUsersController@deleteUser']);
+    Route::get('/restore/{id}', ['middleware' => 'role:admin', 'uses' => 'RegisteredUsersController@restore'])->name('users.restoreUser');
 });
+
 
 /* ROLES */
 Route::prefix('roles')->group(function () {
@@ -42,10 +43,10 @@ Route::prefix('roles')->group(function () {
     Route::get('/show', ['middleware' => 'role:admin', 'uses' => 'RolesController@index'])->name('roles.index');
     Route::get('/add', ['middleware' => 'role:admin', 'uses' => 'RolesController@add'])->name('roles.add');
     Route::post('/store', ['middleware' => 'role:admin', 'uses' => 'RolesController@store'])->name('roles.store');
-    Route::get('/edit/{user}', ['middleware' => 'role:admin', 'uses' => 'RolesController@edit'])->name('roles.edit');
-    Route::patch('/update/{user}', ['middleware' => 'role:admin', 'uses' => 'RolesController@update'])->name('roles.update');
-    Route::get('/delete/{user}', ['middleware' => 'role:admin', 'uses' => 'RolesController@delete'])->name('roles.delete');
-    Route::delete('/destroy/{user}', ['middleware' => 'role:admin', 'uses' => 'RolesController@destroy'])->name('roles.destroy');
+    Route::get('/edit/{role}', ['middleware' => 'role:admin', 'uses' => 'RolesController@edit'])->name('roles.edit');
+    Route::patch('/update/{role}', ['middleware' => 'role:admin', 'uses' => 'RolesController@update'])->name('roles.update');
+    Route::get('/delete/{role}', ['middleware' => 'role:admin', 'uses' => 'RolesController@delete'])->name('roles.delete');
+    Route::delete('/destroy/{role}', ['middleware' => 'role:admin', 'uses' => 'RolesController@destroy'])->name('roles.destroy');
 });
 
 
