@@ -54,9 +54,10 @@ class User extends Authenticatable
         $this->roles()->save($role);
     }
 
-    public function assignRolesByID(array $roleID) {
-        $roles = Role::where('id',['in'=>$roleID]);
-        $this->roles()->saveMany($roles);
+    public function assignRolesByID(array $ids) {
+        $this->roles()->detach();
+        $roles = Role::whereIn('id', $ids);
+        $this->roles()->saveMany($roles->get());
     }
 
     public function hasRole($role)

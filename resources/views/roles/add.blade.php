@@ -14,34 +14,19 @@
                         <h1>Create Role</h1>
                     </div>
                     <div class="form-group row">
-                        <label for="role-name" class="col-form-label">{{ __('Role Name') }}</label>
+                        <label for="role" class="col-form-label">{{ __('Role Label') }}</label>
                             <input
-                                id="role-name"
+                                id="role"
                                 type="text"
-                                class="form-control @error('role-name') is-invalid @enderror"
-                                name="role-name" value=""
-                                autocomplete="role-name"
+                                class="form-control @error('role') is-invalid @enderror"
+                                name="role" value=""
+                                autocomplete="role"
                                 autofocus>
-                            @error('role-name')
+                            @error('role')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                    </div>
-                    <div class="form-group row">
-                        <label for="role-label" class="col-form-label">{{ __('Role Label') }}</label>
-                        <input
-                            id="role-label"
-                            type="text"
-                            class="form-control @error('role-label') is-invalid @enderror"
-                            name="role-label" value=""
-                            autocomplete="role-label"
-                            autofocus>
-                        @error('role-label')
-                        <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                        @enderror
                     </div>
                     <div class="form-group row">
                         <label for="view" class="col-form-label">{{ __('View') }}</label>
@@ -72,7 +57,7 @@
                         </select>
                     </div>
                     <div class="row pt-4">
-                        <button class="btn btn-success">Add Role</button>
+                        <input type="submit" class="btn btn-success" value="Add Role" >
                     </div>
                 </div>
             </div>

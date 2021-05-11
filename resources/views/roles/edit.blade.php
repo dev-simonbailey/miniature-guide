@@ -30,7 +30,6 @@
                                 </span>
                             @enderror
                     </div>
-
                     <div class="form-group row">
                         <label for="view" class="col-form-label">{{ __('View') }}</label>
                         <select name="view" id="view" class='form-control'>
@@ -68,8 +67,8 @@
                         </select>
                     </div>
                     <div class="form-group row">
-                        <label for="show" class="col-form-label">{{ __('Delete') }}</label>
-                        <select name="show" id="show" class='form-control'>
+                        <label for="delete" class="col-form-label">{{ __('Delete') }}</label>
+                        <select name="delete" id="delete" class='form-control'>
                             @can($role_details->name."_delete")
                                 <option value="0">Not Allowed</option>
                                 <option value="1" selected>Allowed</option>

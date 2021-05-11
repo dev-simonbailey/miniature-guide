@@ -43,7 +43,7 @@
                     @else
                         <td class="bg-danger text-white">Not Allowed</td>
                     @endcan
-                    <td><a href='/roles/edit/{{ $role->id }}' class="btn btn-success">Edit</a></td>
+                    <td style="width:150px;"><a href='/roles/edit/{{ $role->id }}' class="btn btn-success" style="min-width:120px;">Edit</a></td>
             @endforeach
             </tbody>
         </table>

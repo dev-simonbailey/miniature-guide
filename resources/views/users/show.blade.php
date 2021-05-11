@@ -34,17 +34,22 @@
                     <td>{{ $userdetails->home }}</td>
                     <td>{{ $userdetails->created_at }}</td>
                     <td>{{ $userdetails->updated_at }}</td>
-                    <td><a href='/users/edit/{{ $userdetails->id }}' class="btn btn-success" style="min-width:100px;">Edit</a></td>
+
+                    @if(empty($userdetails->roleNames()))
+                        <td style="width:150px;"><a href='/users/edit/{{ $userdetails->id }}' class="btn btn-warning" style="min-width:120px;">Assign Role(s)</a></td>
+                    @else
+                        <td style="width:150px;"><a href='/users/edit/{{ $userdetails->id }}' class="btn btn-success" style="min-width:120px;">Edit</a></td>
+                    @endif
 
                     @if( $userdetails->id != Auth::User()->id)
                         @if($userdetails->deleted_at == null)
 
-                            <td><a href='/users/delete/{{ $userdetails->id }}' class="btn btn-danger" style="min-width:100px;">Delete</a></td>
+                            <td style="width:150px;"><a href='/users/delete/{{ $userdetails->id }}' class="btn btn-danger" style="min-width:120px;">Delete</a></td>
                         @else
-                            <td><a href='/users/restore/{{ $userdetails->id }}' class="btn btn-warning" style="min-width:100px;">Restore</a></td>
+                            <td style="width:150px;"><a href='/users/restore/{{ $userdetails->id }}' class="btn btn-warning" style="min-width:120px;">Restore</a></td>
                         @endif
                     @else
-                    <td><a href='#' class="btn btn-dark" style="min-width:100px;" disabled>Delete</a></td>
+                    <td style="width:150px;"><a href='#' class="btn btn-dark" style="min-width:120px;" disabled>Delete</a></td>
                     @endif
 
             @endforeach

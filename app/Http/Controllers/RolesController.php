@@ -4,15 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Permission;
 use App\Role;
-use App\Roles;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\Factory;
 use Illuminate\View\View;
 
 class RolesController extends Controller
 {
 
+    public $permission_ids = [];
     /**
      * Create a new controller instance.
      *
@@ -45,21 +47,60 @@ class RolesController extends Controller
 
     }
 
-    public function update(Roles $role)
+    public function update(Role $role, Request $request)
     {
         $data = request()->validate([
             'role'      =>  'required',
-            'index'     =>  'required',
+            'view'      =>  'required',
             'create'    =>  'required',
-            'store'     =>  'required',
-            'show'      =>  'required',
             'edit'      =>  'required',
-            'update'    =>  'required',
-            'remove'    =>  'required',
-            'destroy'   =>  'required',
+            'delete'    =>  'required',
         ]);
-        $role->update($data);
-        return redirect()->route('roles.show');
+
+        //$role = new Role();
+        $role->name = str_replace(" ", "_", strtolower($data['role']));
+        $role->label = $data['role'];
+
+        $role->firstOrCreate(
+            ['name' => $role->name],
+            ['label' => $role->label]
+        );
+
+        if($request['view'] == 1) {
+            $permission = Permission::create([
+                'name'  => $role->name."_view",
+                'label' => $role->label." View"
+            ]);
+            array_push($this->permission_ids, $permission->id);
+        }
+
+        if($request['create'] == 1) {
+            $permission = Permission::create([
+                'name'  => $role->name."_create",
+                'label' => $role->label." Create"
+            ]);
+            array_push($this->permission_ids, $permission->id);
+        }
+
+        if($request['edit'] == 1) {
+            $permission = Permission::create([
+                'name'  => $role->name."_edit",
+                'label' => $role->label." Edit"
+            ]);
+            array_push($this->permission_ids, $permission->id);
+        }
+
+        if($request['delete'] == 1) {
+            $permission = Permission::create([
+                'name'  => $role->name."_delete",
+                'label' => $role->label." Delete"
+            ]);
+            array_push($this->permission_ids, $permission->id);
+        }
+
+        $role->assignPermissionsByID($this->permission_ids);
+
+        return redirect()->route('roles.index');
     }
 
     public function add()
@@ -67,31 +108,59 @@ class RolesController extends Controller
         return view('roles.add');
     }
 
-    public function store(Roles $role)
+    public function store(Request $request)
     {
         $data = request()->validate([
             'role'      =>  'required',
-            'index'     =>  'required',
+            'view'      =>  'required',
             'create'    =>  'required',
-            'store'     =>  'required',
-            'show'      =>  'required',
             'edit'      =>  'required',
-            'update'    =>  'required',
-            'remove'    =>  'required',
-            'destroy'   =>  'required',
+            'delete'    =>  'required',
         ]);
-        $role->create([
-            'role'      =>  $data['role'],
-            'index'     =>  $data['index'],
-            'create'    =>  $data['create'],
-            'store'     =>  $data['store'],
-            'show'      =>  $data['show'],
-            'edit'      =>  $data['edit'],
-            'update'    =>  $data['update'],
-            'remove'    =>  $data['remove'],
-            'destroy'   =>  $data['destroy'],
-        ]);
-        return redirect()->route('roles.show');
 
+        $role = new Role();
+        $role->name = str_replace(" ", "_", strtolower($data['role']));
+        $role->label = $data['role'];
+
+        $role = Role::firstOrCreate(
+            ['name' => $role->name],
+            ['label' => $role->label]
+        );
+
+        if($request['view'] == 1) {
+            $permission = Permission::create([
+                'name'  => $role->name."_view",
+                'label' => $role->label." View"
+            ]);
+            array_push($this->permission_ids, $permission->id);
+        }
+
+        if($request['create'] == 1) {
+            $permission = Permission::create([
+                'name'  => $role->name."_create",
+                'label' => $role->label." Create"
+            ]);
+            array_push($this->permission_ids, $permission->id);
+        }
+
+        if($request['edit'] == 1) {
+            $permission = Permission::create([
+                'name'  => $role->name."_edit",
+                'label' => $role->label." Edit"
+            ]);
+            array_push($this->permission_ids, $permission->id);
+        }
+
+        if($request['delete'] == 1) {
+            $permission = Permission::create([
+                'name'  => $role->name."_delete",
+                'label' => $role->label." Delete"
+            ]);
+            array_push($this->permission_ids, $permission->id);
+        }
+
+        $role->assignPermissionsByID($this->permission_ids);
+
+        return redirect()->route('roles.index');
     }
 }
