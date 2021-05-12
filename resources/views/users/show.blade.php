@@ -7,7 +7,7 @@
 @section('content')
     <div class="content">
         <div class="title m-b-md">
-            Registered Users.
+            Users
         </div>
         <table class="table-striped table-bordered w-100">
             <thead>
@@ -49,7 +49,7 @@
                             <td style="width:150px;"><a href='/users/restore/{{ $userdetails->id }}' class="btn btn-warning" style="min-width:120px;">Restore</a></td>
                         @endif
                     @else
-                    <td style="width:150px;"><a href='#' class="btn btn-dark" style="min-width:120px;" disabled>Delete</a></td>
+                    <td style="width:150px;">&nbsp;</td>
                     @endif
 
             @endforeach

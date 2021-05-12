@@ -12,7 +12,7 @@ class RoleMiddleware
     public $found = false;
 
     /**
-     * Handle an incoming request.
+     * Handle an incoming request and check if the user has the correct role level
      *
      * @param Request $request
      * @param Closure $next

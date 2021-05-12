@@ -4,17 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Permission;
 use App\Role;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\View\Factory;
 use Illuminate\View\View;
 
 class RolesController extends Controller
 {
 
+    /**
+     * Array to hold permission id's for create and update methods
+     *
+     * @var array
+     */
     public $permission_ids = [];
+
     /**
      * Create a new controller instance.
      *
@@ -26,9 +31,9 @@ class RolesController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Show the Roles list
      *
-     * @return Factory|View
+     * @return Application|Factory|View
      */
     public function index()
     {
@@ -38,6 +43,12 @@ class RolesController extends Controller
         return view('roles.show', compact('roles','permissions'));
     }
 
+    /**
+     * Show the edit page for the selected role
+     *
+     * @param $role
+     * @return Application|Factory|View
+     */
     public function edit($role)
     {
         $role_details = Role::find($role);
@@ -47,6 +58,13 @@ class RolesController extends Controller
 
     }
 
+    /**
+     * Update the selected role
+     *
+     * @param Role $role
+     * @param Request $request
+     * @return RedirectResponse
+     */
     public function update(Role $role, Request $request)
     {
         $data = request()->validate([
@@ -103,11 +121,23 @@ class RolesController extends Controller
         return redirect()->route('roles.index');
     }
 
+    /**
+     * Show the add role page
+     *
+     * @return Application|Factory|View
+     *
+     */
     public function add()
     {
         return view('roles.add');
     }
 
+    /**
+     * Create the role along with its selected permissions
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     */
     public function store(Request $request)
     {
         $data = request()->validate([

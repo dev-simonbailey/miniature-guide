@@ -17,6 +17,11 @@ class Permission extends Model
         'label'
     ];
 
+    /**
+     * Establish relationship
+     *
+     * @return BelongsToMany
+     */
     public function roles(): BelongsToMany
     {
         return $this->belongsToMany(Role::class);
