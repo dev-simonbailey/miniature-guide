@@ -11,6 +11,7 @@
             <br />
             {{ auth()->user()->name }}
             <br />
+            {{--
             @if(Auth::User()->hasRole('admin'))
                 <a href="#">Add Admin User</a>
                 <br />
@@ -35,6 +36,7 @@
                 <a href="#">This user has no role!!!</a>
                 <br />
             @endif
+            --}}
         </div>
     </div>
 @endsection

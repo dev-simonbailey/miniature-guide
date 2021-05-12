@@ -20,7 +20,7 @@
                                 id="role"
                                 type="text"
                                 class="form-control @error('role') is-invalid @enderror"
-                                name="role" value="{{ old('role') ?? $role_details->name}}"
+                                name="role" value="{{ old('role') ?? $role_details->label}}"
                                 autocomplete="role"
                                 autofocus
                                 readonly>
