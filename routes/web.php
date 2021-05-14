@@ -89,8 +89,10 @@ Route::prefix('loginteractions')->group(function () {
 
 /* ORDERS */
 Route::prefix('orders')->group(function () {
-    Route::get('/index','OrdersController@index')->name('orders.index');
-    Route::get('/show','OrdersController@show')->name('orders.show');
+    Route::get('/', ['middleware' => 'role:admin', 'uses' => 'OrdersController@index'])->name('orders.index');
+
+    Route::post('/show/', ['middleware' => 'role:admin', 'uses' => 'OrdersController@show'])->name('orders.show');
+
 
     Route::get('/create','OrdersController@create')->name('orders.create');
     Route::get('/store','OrdersController@getstore')->name('errors.403');

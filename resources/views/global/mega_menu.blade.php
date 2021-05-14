@@ -71,7 +71,7 @@ $reports    = "/reports/";
                 <div class="d-md-flex align-items-start justify-content-start">
                     <div>
                         <div class="dropdown-header">Search</div>
-                        <a class="dropdown-item" href="/orders/index">Orders</a>
+                        <a class="dropdown-item" href="/orders">Orders</a>
                         <a class="dropdown-item" href="/ordersbypart/index">Orders by Part</a>
                         <a class="dropdown-item" href="/customers/index">Customers</a>
                         <a class="dropdown-item" href="/stockcheck/index">Stock Check</a>

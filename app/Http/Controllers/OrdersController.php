@@ -6,8 +6,11 @@ use App\Orders;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\Request;
 use Illuminate\View\Factory;
 use Illuminate\View\View;
+use GuzzleHttp\Client;
+
 
 class OrdersController extends Controller
 {
@@ -27,16 +30,40 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        $orders = Orders::all()->sortByDesc("created_at");
-        return view($this->opName. '.' . __FUNCTION__, compact('orders'));
+        $client = new Client;
+        $request = $client->request('GET', 'http://localhost:8080/api/authors');
+        $response = $request->getBody();
+        $authors = json_decode($response->getContents(),true);
+        //dd($authors);
+        //$orders = Orders::all()->sortByDesc("created_at");
+        return view($this->opName. '.' . __FUNCTION__, compact('authors'));
     }
 
     /**
-     * @return Factory|View
+     * Get an order by ordernumber\
+     *
+     * @param $ordernumber
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|View
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function show()
+    public function show(Request $request)
     {
-        return view('errors.200');
+        $client = new Client;
+        try {
+            $response = $client->get('http://localhost:8080/api/authors/id', [
+                'connect_timeout' => 10,
+                'query' => [
+                    'id' => $request->ordernumber
+                ]
+            ]);
+            $author = json_decode($response->getBody(), true);
+            return view($this->opName. '.' . __FUNCTION__, compact('author'));
+        } catch (\Exception $e) {
+            if($e->getCode() == 400){
+                $error = "No author found";
+                return view($this->opName. '.' . __FUNCTION__, compact('error'));
+                }
+        }
     }
 
     /**
