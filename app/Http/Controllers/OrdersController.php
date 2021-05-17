@@ -49,8 +49,6 @@ class OrdersController extends Controller
      */
     public function show(Request $request)
     {
-
-        //dd($request);
         request()->validate([
             'ordernumber' =>  'required'
         ]);
@@ -73,8 +71,15 @@ class OrdersController extends Controller
                 }
         }
         $order = json_decode($response->getBody(), true);
-        //dd($orders);
-        return view($this->opName. '.' . __FUNCTION__, compact('order'));
+        switch($order['currency_symbol']){
+            case "GBP":
+                $currency_symbol = "£";
+                break;
+            case "EURO":
+                $currency_symbol = "€";
+                break;
+        }
+        return view($this->opName. '.' . __FUNCTION__, compact('order','currency_symbol'));
     }
 
     /**

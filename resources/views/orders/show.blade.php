@@ -18,16 +18,6 @@
                 </div>
             </div>
         @else
-            @php
-            switch($order['currency_symbol']){
-                case("GBP"):
-                $currency_symbol = "£";
-                break;
-                case("EURO"):
-                $currency_symbol = "€";
-                break;
-            }
-            @endphp
             <table class="table-striped table-bordered w-50 my-auto" style="margin: 0 auto;">
                 <tbody>
                 <tr>
@@ -125,7 +115,6 @@
                 <tr>
                     <td class="text-left">Del Complete</td>
                     <td class="text-left">{{ $order['del_complete'] }}</td>
-
                 </tr>
                 <tr>
                     <td class="text-left">Source</td>
