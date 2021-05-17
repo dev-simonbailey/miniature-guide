@@ -32,16 +32,16 @@ class OrdersController extends Controller
     public function index()
     {
         $client = new Client;
-        $request = $client->request('GET', 'http://localhost:8080/api/authors');
+        $request = $client->request('GET', 'http://localhost:8080/api/orders');
         $response = $request->getBody();
-        $authors = json_decode($response->getContents(),true);
+        $orders = json_decode($response->getContents(),true);
         //dd($authors);
         //$orders = Orders::all()->sortByDesc("created_at");
-        return view($this->opName. '.' . __FUNCTION__, compact('authors'));
+        return view($this->opName. '.' . __FUNCTION__, compact('orders'));
     }
 
     /**
-     * Get an order by ordernumber\
+     * Get an order by order number
      *
      * @param $ordernumber
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|View
@@ -49,20 +49,19 @@ class OrdersController extends Controller
      */
     public function show(Request $request)
     {
-        $data = request()->validate([
+
+        //dd($request);
+        request()->validate([
             'ordernumber' =>  'required'
         ]);
-
         $client = new Client;
         try {
-            $response = $client->get('http://localhost:8080/api/authors/id', [
+            $response = $client->get('http://localhost:8080/api/orders/search-by-order-number', [
                 'connect_timeout' => 10,
                 'query' => [
-                    'id' => $request->ordernumber
+                    'ordernumber' => $request->ordernumber
                 ]
             ]);
-            $author = json_decode($response->getBody(), true);
-            return view($this->opName. '.' . __FUNCTION__, compact('author'));
         } catch (ClientException $e) {
             if($e->getCode() == 400){
                 $message = json_decode((string) $e->getResponse()->getBody(), true);
@@ -70,10 +69,12 @@ class OrdersController extends Controller
                     'message'   => $message['Message'],
                     'data'      => $message['Data']
                 ];
-                //dd($error);
                 return view($this->opName. '.' . __FUNCTION__, compact('error'));
                 }
         }
+        $order = json_decode($response->getBody(), true);
+        //dd($orders);
+        return view($this->opName. '.' . __FUNCTION__, compact('order'));
     }
 
     /**
