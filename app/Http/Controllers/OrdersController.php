@@ -8,6 +8,9 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
 use Illuminate\View\Factory;
 use Illuminate\View\View;
 use GuzzleHttp\Client;
@@ -34,9 +37,9 @@ class OrdersController extends Controller
         $client = new Client;
         $request = $client->request('GET', 'http://localhost:8080/api/orders');
         $response = $request->getBody();
-        $orders = json_decode($response->getContents(),true);
-        //dd($authors);
-        //$orders = Orders::all()->sortByDesc("created_at");
+        $orders_response = Collection::make(json_decode($response->getContents(),true));
+        $orders = $this->paginate($orders_response,5);
+        $orders->withPath('/orders/');
         return view($this->opName. '.' . __FUNCTION__, compact('orders'));
     }
 
@@ -70,8 +73,8 @@ class OrdersController extends Controller
                 return view($this->opName. '.' . __FUNCTION__, compact('error'));
                 }
         }
-        $order = json_decode($response->getBody(), true);
-        switch($order['currency_symbol']){
+        $order_array = json_decode($response->getBody(), true);
+        switch($order_array['currency_symbol']){
             case "GBP":
                 $currency_symbol = "£";
                 break;
@@ -79,6 +82,7 @@ class OrdersController extends Controller
                 $currency_symbol = "€";
                 break;
         }
+        $order = collect($order_array);
         return view($this->opName. '.' . __FUNCTION__, compact('order','currency_symbol'));
     }
 
@@ -152,5 +156,17 @@ class OrdersController extends Controller
     public function destroy()
     {
         return view('errors.200');
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function paginate($items, $perPage = 5, $page = null, $options = [])
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
 }

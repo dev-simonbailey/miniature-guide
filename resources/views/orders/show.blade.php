@@ -8,7 +8,7 @@
     <div class="content">
         <a href="{{ route('orders.index') }}" class='btn btn-primary ml-1' style="float:left;">Back</a>
         <div class="title m-b-md my-auto">
-            Order: {{ $order['ref_no'] }}
+            Order: {{ $order->ref_no }}
         </div>
         <br />
         @if(!empty($error))

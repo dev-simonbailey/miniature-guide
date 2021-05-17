@@ -62,5 +62,12 @@
             @endif
             </tbody>
         </table>
+        <br />
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center text-center">
+                {{ $orders->links() }}
+            </div>
+        </div>
+
     </div>
 @endsection
