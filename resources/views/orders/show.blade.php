@@ -20,8 +20,10 @@
         </form>
         <br />
         @if(!empty($error))
-            <div>
-                <h2>ERROR: {{ $error}}</h2>
+            <div class="alert alert-danger">
+                <div class="row">
+                    <div class="col">ERROR: {{ $error['message']}}: {{ $error['data']['ID'] }}</div>
+                </div>
             </div>
         @else
         <table class="table-striped table-bordered w-100">

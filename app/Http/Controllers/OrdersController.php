@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Orders;
+use GuzzleHttp\Exception\ClientException;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -48,6 +49,10 @@ class OrdersController extends Controller
      */
     public function show(Request $request)
     {
+        $data = request()->validate([
+            'ordernumber' =>  'required'
+        ]);
+
         $client = new Client;
         try {
             $response = $client->get('http://localhost:8080/api/authors/id', [
@@ -58,9 +63,14 @@ class OrdersController extends Controller
             ]);
             $author = json_decode($response->getBody(), true);
             return view($this->opName. '.' . __FUNCTION__, compact('author'));
-        } catch (\Exception $e) {
+        } catch (ClientException $e) {
             if($e->getCode() == 400){
-                $error = "No author found";
+                $message = json_decode((string) $e->getResponse()->getBody(), true);
+                $error = [
+                    'message'   => $message['Message'],
+                    'data'      => $message['Data']
+                ];
+                //dd($error);
                 return view($this->opName. '.' . __FUNCTION__, compact('error'));
                 }
         }
