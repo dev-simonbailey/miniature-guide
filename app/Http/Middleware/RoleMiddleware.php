@@ -21,11 +21,14 @@ class RoleMiddleware
      */
     public function handle(Request $request, Closure $next, ...$user_roles)
     {
-        foreach($user_roles as $role){
-            if (Auth::User()->hasRole(trim($role))) {
-                return $next($request);
+        if (\Auth::check()) {
+            foreach ($user_roles as $role) {
+                if (Auth::User()->hasRole(trim($role))) {
+                    return $next($request);
+                }
             }
+            abort('403');
         }
-        abort('403');
+        return redirect('/login');
     }
 }
