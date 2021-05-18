@@ -54,6 +54,7 @@
                             <form name='ordersform' method='post' action = '/orders/show'>
                                 {{csrf_field()}}
                                 <input type='hidden' value='{{ $order['ref_no'] }}' name='ordernumber' id='ordernumber'/>
+                                <input type='hidden' value='{{ $currentpage }}' name='currentpage' id='currentpage'/>
                                 <input type="submit" value="View" class='btn btn-primary'>
                             </form>
                         </td>

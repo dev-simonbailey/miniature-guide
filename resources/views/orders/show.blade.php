@@ -6,7 +6,9 @@
 
 @section('content')
     <div class="content">
-        <a href="{{ route('orders.index') }}" class='btn btn-primary ml-1' style="float:left;">Back</a>
+
+        orders/?page=4
+        <a href="/orders/?page={{ $currentpage}}" class='btn btn-primary ml-1' style="float:left;">Back</a>
         <div class="title m-b-md my-auto">
             Order: {{ $order['ref_no'] }}
         </div>

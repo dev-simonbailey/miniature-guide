@@ -38,9 +38,10 @@ class OrdersController extends Controller
         $request = $client->request('GET', 'http://localhost:8080/api/orders');
         $response = $request->getBody();
         $orders_response = Collection::make(json_decode($response->getContents(),true));
-        $orders = $this->paginate($orders_response,5);
+        $orders = $this->paginate($orders_response,2);
         $orders->withPath('/orders/');
-        return view($this->opName. '.' . __FUNCTION__, compact('orders'));
+        $currentpage = $orders->currentPage();
+        return view($this->opName. '.' . __FUNCTION__, compact('orders','currentpage'));
     }
 
     /**
@@ -83,7 +84,8 @@ class OrdersController extends Controller
                 break;
         }
         $order = collect($order_array);
-        return view($this->opName. '.' . __FUNCTION__, compact('order','currency_symbol'));
+        $currentpage = $request->currentpage;
+        return view($this->opName. '.' . __FUNCTION__, compact('order','currency_symbol','currentpage'));
     }
 
     /**
