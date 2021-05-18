@@ -10,7 +10,11 @@
             < Back
         </a>
         <div class="title m-b-md my-auto">
-            Order: {{ $order['ref_no'] }}
+            @if(empty($error))
+                Order: {{ $order['ref_no'] }}
+            @else
+                ERROR
+            @endif
         </div>
         <br />
         @if(!empty($error))

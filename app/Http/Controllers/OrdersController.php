@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Orders;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\GuzzleException;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -26,30 +27,43 @@ class OrdersController extends Controller
     public function __construct()
     {
         $path = explode('\\', __CLASS__);
+
         $this->opName = strtolower(str_replace('Controller', '', array_pop($path)));
+
     }
 
     /**
-     * @return Factory|View
+     * Get all orders with pagination
+     *
+     * @return Application|\Illuminate\Contracts\View\Factory|View
+     * @throws GuzzleException
      */
     public function index()
     {
+
         $client = new Client;
-        $request = $client->request('GET', 'http://localhost:8080/api/orders');
+
+        $request = $client->request('GET', env('BLUESKY_API_HOST').'/api/orders');
+
         $response = $request->getBody();
+
         $orders_response = Collection::make(json_decode($response->getContents(),true));
+
         $orders = $this->paginate($orders_response,2);
+
         $orders->withPath('/orders/');
+
         $currentpage = $orders->currentPage();
+
         return view($this->opName. '.' . __FUNCTION__, compact('orders','currentpage'));
+
     }
 
     /**
-     * Get an order by order number
+     * Get order by order number
      *
-     * @param $ordernumber
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|View
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @param Request $request
+     * @return Application|\Illuminate\Contracts\View\Factory|View
      */
     public function show(Request $request)
     {
@@ -58,7 +72,7 @@ class OrdersController extends Controller
         ]);
         $client = new Client;
         try {
-            $response = $client->get('http://localhost:8080/api/orders/search-by-order-number', [
+            $response = $client->get(env('BLUESKY_API_HOST').'/api/orders/search-by-order-number', [
                 'connect_timeout' => 10,
                 'query' => [
                     'ordernumber' => $request->ordernumber
@@ -71,7 +85,8 @@ class OrdersController extends Controller
                     'message'   => $message['Message'],
                     'data'      => $message['Data']
                 ];
-                return view($this->opName. '.' . __FUNCTION__, compact('error'));
+                $currentpage = 1;
+                return view($this->opName. '.' . __FUNCTION__, compact('error','currentpage'));
                 }
         }
         $order_array = json_decode($response->getBody(), true);
@@ -161,9 +176,11 @@ class OrdersController extends Controller
     }
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
+     * @param $items
+     * @param int $perPage
+     * @param null $page
+     * @param array $options
+     * @return LengthAwarePaginator
      */
     public function paginate($items, $perPage = 5, $page = null, $options = [])
     {
