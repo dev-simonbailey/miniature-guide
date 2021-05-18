@@ -6,9 +6,10 @@
 
 @section('content')
     <div class="content">
-
-        orders/?page=4
-        <a href="/orders/?page={{ $currentpage}}" class='btn btn-primary ml-1' style="float:left;">Back</a>
+        <a href="/orders/?page={{ $currentpage}}" class='btn btn-primary ml-1' style="float:left;">
+            <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+            Back
+        </a>
         <div class="title m-b-md my-auto">
             Order: {{ $order['ref_no'] }}
         </div>
@@ -128,31 +129,31 @@
                 </tr>
                 <tr>
                     <td class="text-left">Total Line Value</td>
-                    <td class="text-left">{{$currency_symbol}}{{ $order['total_line_value'] }}</td>
+                    <td class="text-left">{{$currencysymbol}}{{ $order['total_line_value'] }}</td>
                 </tr>
                 <tr>
                     <td class="text-left">Total Charges</td>
-                    <td class="text-left">{{$currency_symbol}}{{ $order['total_charges'] }}</td>
+                    <td class="text-left">{{$currencysymbol}}{{ $order['total_charges'] }}</td>
                 </tr>
                 <tr>
                     <td class="text-left">Total Tax</td>
-                    <td class="text-left">{{$currency_symbol}}{{ $order['total_tax'] }}</td>
+                    <td class="text-left">{{$currencysymbol}}{{ $order['total_tax'] }}</td>
                 </tr>
                 <tr>
                     <td class="text-left">Total Discount</td>
-                    <td class="text-left">{{$currency_symbol}}{{ $order['total_discount'] }}</td>
+                    <td class="text-left">{{$currencysymbol}}{{ $order['total_discount'] }}</td>
                 </tr>
                 <tr>
                     <td class="text-left">Total Due</td>
-                    <td class="text-left">{{$currency_symbol}}{{ $order['total_due'] }}</td>
+                    <td class="text-left">{{$currencysymbol}}{{ $order['total_due'] }}</td>
                 </tr>
                 <tr>
                     <td class="text-left">Total Paid</td>
-                    <td class="text-left">{{$currency_symbol}}{{ $order['total_paid'] }}</td>
+                    <td class="text-left">{{$currencysymbol}}{{ $order['total_paid'] }}</td>
                 </tr>
                 <tr>
                     <td class="text-left">Total Order</td>
-                    <td class="text-left">{{$currency_symbol}}{{ $order['total_order'] }}</td>
+                    <td class="text-left">{{$currencysymbol}}{{ $order['total_order'] }}</td>
                 </tr>
                 <tr>
                     <td class="text-left">Home Total Line Value</td>

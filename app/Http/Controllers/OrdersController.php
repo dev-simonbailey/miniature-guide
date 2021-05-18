@@ -77,15 +77,15 @@ class OrdersController extends Controller
         $order_array = json_decode($response->getBody(), true);
         switch($order_array['currency_symbol']){
             case "GBP":
-                $currency_symbol = "£";
+                $currencysymbol = "£";
                 break;
             case "EURO":
-                $currency_symbol = "€";
+                $currencysymbol = "€";
                 break;
         }
         $order = collect($order_array);
         $currentpage = $request->currentpage;
-        return view($this->opName. '.' . __FUNCTION__, compact('order','currency_symbol','currentpage'));
+        return view($this->opName. '.' . __FUNCTION__, compact('order','currencysymbol','currentpage'));
     }
 
     /**
