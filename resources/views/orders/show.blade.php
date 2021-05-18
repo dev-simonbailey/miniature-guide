@@ -7,8 +7,7 @@
 @section('content')
     <div class="content">
         <a href="/orders/?page={{ $currentpage}}" class='btn btn-primary ml-1' style="float:left;">
-            <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
-            Back
+            < Back
         </a>
         <div class="title m-b-md my-auto">
             Order: {{ $order['ref_no'] }}
