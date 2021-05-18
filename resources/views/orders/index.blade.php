@@ -9,14 +9,13 @@
         <div class="title m-b-md">
             Orders
         </div>
-        <form name='ordersform' method='post' action = '/orders/show'>
+        <form name='ordersform' method='post' action = '/orders/details'>
             {{csrf_field()}}
             <input type='text' name='ordernumber' id='ordernumber' class="@error('ordernumber') is-invalid @enderror"/>
-            @error('ordernumber')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
             <input type="submit" value="Search" class='btn btn-primary'>
-            <a href="{{ route('orders.index') }}" class='btn btn-primary'>Show All</a>
+            @error('ordernumber')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
         </form>
         <br />
         <table class="table-striped table-bordered w-100">
@@ -51,7 +50,7 @@
                         <td>{{ $order['dt_created'] }}</td>
                         <td>{{ $order['last_updated'] }}</td>
                         <td>
-                            <form name='ordersform' method='post' action = '/orders/show'>
+                            <form name='ordersform' method='post' action = '/orders/details'>
                                 {{csrf_field()}}
                                 <input type='hidden' value='{{ $order['ref_no'] }}' name='ordernumber' id='ordernumber'/>
                                 <input type='hidden' value='{{ $currentpage }}' name='currentpage' id='currentpage'/>

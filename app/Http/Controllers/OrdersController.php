@@ -60,12 +60,12 @@ class OrdersController extends Controller
     }
 
     /**
-     * Get order by order number
+     * View the first level of detail of an order
      *
      * @param Request $request
      * @return Application|\Illuminate\Contracts\View\Factory|View
      */
-    public function show(Request $request)
+    public function details(Request $request)
     {
         request()->validate([
             'ordernumber' =>  'required'
@@ -104,78 +104,8 @@ class OrdersController extends Controller
     }
 
     /**
-     * @return Factory|View
-     */
-    public function create()
-    {
-        return view('errors.200');
-    }
-
-    /**
-     * @return Factory|View
-     */
-    public function getstore()
-    {
-        return view('errors.403');
-    }
-
-    /**
-     * @return Factory|View
-     */
-    public function store()
-    {
-        return view('errors.200');
-    }
-
-    /**
-     * @return Factory|View
-     */
-    public function edit()
-    {
-        return view('errors.200');
-    }
-
-    /**
-     * @return Factory|View
-     */
-    public function getupdate()
-    {
-        return view('errors.403');
-    }
-
-    /**
-     * @return Factory|View
-     */
-    public function update()
-    {
-        return view('errors.200');
-    }
-
-    /**
-     * @return Factory|View
-     */
-    public function delete()
-    {
-        return view('errors.200');
-    }
-
-    /**
-     * @return Factory|View
-     */
-    public function getdestroy()
-    {
-        return view('errors.403');
-    }
-
-    /**
-     * @return Factory|View
-     */
-    public function destroy()
-    {
-        return view('errors.200');
-    }
-
-    /**
+     * Create pagination of results
+     *
      * @param $items
      * @param int $perPage
      * @param null $page

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('page_title')
-    {{ "Orders" }}
+    {{ "Orders Search" }}
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
         </a>
         <div class="title m-b-md my-auto">
             @if(empty($error))
-                Order: {{ $order['ref_no'] }}
+                Search for Order: {{ $order['ref_no'] }}
             @else
                 ERROR
             @endif
@@ -190,8 +190,8 @@
                     <td class="text-left">Total Weight</td>
                     <td class="text-left">{{ $order['total_weight'] }}KG</td>
                 </tr>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
         @endif
     </div>
 @endsection

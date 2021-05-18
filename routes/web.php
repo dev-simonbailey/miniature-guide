@@ -90,21 +90,7 @@ Route::prefix('loginteractions')->group(function () {
 /* ORDERS */
 Route::prefix('orders')->group(function () {
     Route::get('/', ['middleware' => 'role:admin', 'uses' => 'OrdersController@index'])->name('orders.index');
-
-    Route::post('/show/', ['middleware' => 'role:admin', 'uses' => 'OrdersController@show'])->name('orders.show');
-
-
-    Route::get('/create','OrdersController@create')->name('orders.create');
-    Route::get('/store','OrdersController@getstore')->name('errors.403');
-    Route::post('/store','OrdersController@store')->name('orders.store');
-
-    Route::get('/edit','OrdersController@edit')->name('orders.edit');
-    Route::get('/update','OrdersController@getupdate')->name('errors.403');
-    Route::patch('/update','OrdersController@update')->name('orders.update');
-
-    Route::get('/delete','OrdersController@delete')->name('orders.delete');
-    Route::get('/destroy','OrdersController@getdestroy')->name('errors.403');
-    Route::delete('/destroy','OrdersController@destroy')->name('orders.destroy');
+    Route::post('/details/', ['middleware' => 'role:admin', 'uses' => 'OrdersController@details'])->name('orders.details');
 });
 
 
