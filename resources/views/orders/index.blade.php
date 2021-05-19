@@ -6,17 +6,23 @@
 
 @section('content')
     <div class="content">
-        <div class="title m-b-md">
-            Orders
+        <div class="h2 m-b-md">
+            Search for Order
         </div>
+        <div class="w-50 border border-dark bg-light mx-auto p-5">
         <form name='ordersform' method='post' action = '/orders/details'>
             {{csrf_field()}}
-            <input type='text' name='ordernumber' id='ordernumber' class="@error('ordernumber') is-invalid @enderror"/>
-            <input type="submit" value="Search" class='btn btn-primary'>
+            <label for="ordernumber" class="h5 mr-2">Order Number:</label>
+            <input type='text' name='ordernumber' id='ordernumber' class="@error('ordernumber') is-invalid @enderror w-25"/>
+            <br />
+            <input type="submit" value="Next" class='btn btn-primary mt-3 w-50'>
+
             @error('ordernumber')
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </form>
+        </div>
+        {{--
         <br />
         <table class="table-striped table-bordered w-100">
             <thead>
@@ -68,6 +74,6 @@
                 {{ $orders->links() }}
             </div>
         </div>
-
+    --}}
     </div>
 @endsection
