@@ -72,6 +72,37 @@
                             </div>
                         </div>
 
+
+                        <div class="form-group row">
+                            <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
+
+                            <div class="col-md-6">
+                                <!-- change to select and draw options from ROLES-->
+
+                                <input id="role" type="text" class="form-control @error('role') is-invalid @enderror" name="role" value="{{ old('role') }}" required autocomplete="role">
+
+                                @error('role')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="home" class="col-md-4 col-form-label text-md-right">{{ __('Home Page') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="home" type="text" class="form-control @error('home') is-invalid @enderror" name="home" value="{{ old('home') }}" required autocomplete="home">
+
+                                @error('home')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 

@@ -3,6 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Auth;
+use App\User;
+use App\Roles;
+use App\Permissions;
 
 class AppServiceProvider extends ServiceProvider
 {
