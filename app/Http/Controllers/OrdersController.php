@@ -12,51 +12,51 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
-use Illuminate\View\Factory;
 use Illuminate\View\View;
 use GuzzleHttp\Client;
 
-
+/**
+ * Controller for orders
+ *
+ * Class OrdersController
+ *
+ * @package App\Http\Controllers
+ */
 class OrdersController extends Controller
 {
 
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    use AuthorizesRequests;
+    use DispatchesJobs;
+    use ValidatesRequests;
 
     public $opName;
 
     public function __construct()
     {
-        $path = explode('\\', __CLASS__);
+        $pathToClass = explode('\\', __CLASS__);
 
-        $this->opName = strtolower(str_replace('Controller', '', array_pop($path)));
+        $this->opName = strtolower(str_replace('Controller', '', array_pop($pathToClass)));
 
     }
 
     /**
-     * Get all orders with pagination
+     * Show the orders search page
      *
      * @return Application|\Illuminate\Contracts\View\Factory|View
-     * @throws GuzzleException
      */
     public function index()
     {
-
+        /* TODO: LEAVING THIS IN FOR THE MOMENT IN CASE IT IS DECIDED TO SHOW LIST OF ORDERS INITIALLY
         $client = new Client;
-
-        $request = $client->request('GET', env('BLUESKY_API_HOST').'/api/orders');
-
+        $request = $client->request('GET', env('BLUESKY_API_HOST') . '/api/orders');
         $response = $request->getBody();
-
-        $orders_response = Collection::make(json_decode($response->getContents(),true));
-
-        $orders = $this->paginate($orders_response,2);
-
+        $ordersResponse = Collection::make(json_decode($response->getContents(), true));
+        $orders = $this->paginate($ordersResponse, 2);
         $orders->withPath('/orders/');
-
-        $currentpage = $orders->currentPage();
-
-        return view($this->opName. '.' . __FUNCTION__, compact('orders','currentpage'));
-
+        $currentPage = $orders->currentPage();
+        return view($this->opName . '.' . __FUNCTION__, compact('orders', 'currentPage'));
+        */
+        return view($this->opName . '.' . __FUNCTION__);
     }
 
     /**
@@ -68,39 +68,39 @@ class OrdersController extends Controller
     public function details(Request $request)
     {
         request()->validate([
-            'ordernumber' =>  'required'
+            'orderNumber' => 'required'
         ]);
         $client = new Client;
         try {
-            $response = $client->get(env('BLUESKY_API_HOST').'/api/orders/search-by-order-number', [
+            $response = $client->get(env('BLUESKY_API_HOST') . '/api/orders/search-by-order-number', [
                 'connect_timeout' => 10,
                 'query' => [
-                    'ordernumber' => $request->ordernumber
+                    'orderNumber' => $request->orderNumber
                 ]
             ]);
         } catch (ClientException $e) {
-            if($e->getCode() == 400){
-                $message = json_decode((string) $e->getResponse()->getBody(), true);
+            if ($e->getCode() == 400) {
+                $message = json_decode((string)$e->getResponse()->getBody(), true);
                 $error = [
-                    'message'   => $message['Message'],
-                    'data'      => $message['Data']
+                    'message' => $message['Message'],
+                    'data' => $message['Data']
                 ];
-                $currentpage = 1;
-                return view($this->opName. '.' . __FUNCTION__, compact('error','currentpage'));
-                }
+                $currentPage = 1;
+                return view($this->opName . '.' . __FUNCTION__, compact('error', 'currentPage'));
+            }
         }
-        $order_array = json_decode($response->getBody(), true);
-        switch($order_array['currency_symbol']){
+        $orderArray = json_decode($response->getBody(), true);
+        switch ($orderArray['currency_symbol']) {
             case "GBP":
-                $currencysymbol = "£";
+                $currencySymbol = "£";
                 break;
             case "EURO":
-                $currencysymbol = "€";
+                $currencySymbol = "€";
                 break;
         }
-        $order = collect($order_array);
-        $currentpage = $request->currentpage;
-        return view($this->opName. '.' . __FUNCTION__, compact('order','currencysymbol','currentpage'));
+        $order = collect($orderArray);
+        $currentPage = $request->currentPage;
+        return view($this->opName . '.' . __FUNCTION__, compact('order', 'currencySymbol', 'currentPage'));
     }
 
     /**
@@ -112,10 +112,12 @@ class OrdersController extends Controller
      * @param array $options
      * @return LengthAwarePaginator
      */
+    /* TODO: LEAVING THIS IN, IN CASE WE USE A LIST ON THE INITIAL VIEW OF THE ORDERS
     public function paginate($items, $perPage = 5, $page = null, $options = [])
     {
         $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
         $items = $items instanceof Collection ? $items : Collection::make($items);
         return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
+    */
 }

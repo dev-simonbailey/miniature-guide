@@ -3,7 +3,7 @@
     <div class="col">
         <table class="table-striped w-100 mt-5 table-bordered">
             <thead>
-            <tr  class="bg-dark text-white">
+            <tr class="bg-dark text-white">
                 <th>Type</th>
                 <th>Reference</th>
                 <th>Part</th>
@@ -26,7 +26,7 @@
                     <td>{{'{SA_QTY}'}}</td>
                     <td>{{'{SA_CREATED}'}}</td>
                     <td>{{'{SA_UPDATED}'}}</td>
-                    <td>{{'{SA_BYUSER}'}}</td>
+                    <td>{{'{SA_BY_USER}'}}</td>
                 </tr>
             @endfor
             </tbody>

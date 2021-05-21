@@ -5,11 +5,11 @@
 @endsection
 
 @section('content')
-<div class="content">
-    <div class="title m-b-md">
-        Unauthorised Access
+    <div class="content">
+        <div class="title m-b-md">
+            Unauthorised Access
+        </div>
     </div>
-</div>
 @endsection
 
 

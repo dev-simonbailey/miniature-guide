@@ -176,7 +176,7 @@
             <div class="col text-center">
                 <table class="table-striped w-100 mt-5 mb-3 table-bordered">
                     <thead>
-                    <tr  class="bg-dark text-white">
+                    <tr class="bg-dark text-white">
                         <th>Line</th>
                         <th>SKU</th>
                         <th>Item</th>
@@ -189,7 +189,7 @@
                             <td>{{'{EV_TABLE_LINE}'}}</td>
                             <td>{{'{EV_TABLE_SKU}'}}</td>
                             <td>{{'{EV_TABLE_ITEM}'}}</td>
-                            <td>{{'{EV_TABLE_SHIPPEd}'}}</td>
+                            <td>{{'{EV_TABLE_SHIPPED}'}}</td>
                         </tr>
                     @endfor
                     </tbody>

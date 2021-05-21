@@ -15,18 +15,18 @@
                     </div>
                     <div class="form-group row">
                         <label for="role" class="col-form-label">{{ __('Role Label') }}</label>
-                            <input
-                                id="role"
-                                type="text"
-                                class="form-control @error('role') is-invalid @enderror"
-                                name="role" value=""
-                                autocomplete="role"
-                                autofocus>
-                            @error('role')
-                                <span class="invalid-feedback" role="alert">
+                        <input
+                            id="role"
+                            type="text"
+                            class="form-control @error('role') is-invalid @enderror"
+                            name="role" value=""
+                            autocomplete="role"
+                            autofocus>
+                        @error('role')
+                        <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
-                            @enderror
+                        @enderror
                     </div>
                     <div class="form-group row">
                         <label for="view" class="col-form-label">{{ __('View') }}</label>
@@ -57,7 +57,7 @@
                         </select>
                     </div>
                     <div class="row pt-4">
-                        <input type="submit" class="btn btn-success" value="Add Role" >
+                        <input type="submit" class="btn btn-success" value="Add Role">
                     </div>
                 </div>
             </div>

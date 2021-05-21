@@ -38,7 +38,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
     /**
@@ -75,7 +76,8 @@ class User extends Authenticatable
      *
      * @param array $ids
      */
-    public function assignRolesByID(array $ids) {
+    public function assignRolesByID(array $ids)
+    {
         $this->roles()->detach();
         $roles = Role::whereIn('id', $ids);
         $this->roles()->saveMany($roles->get());
@@ -102,7 +104,7 @@ class User extends Authenticatable
      */
     public function roleNames(): string
     {
-        $roleNames = array_map(function(Role $role) {
+        $roleNames = array_map(function (Role $role) {
             return $role->name;
         }, $this->roles->all());
         return implode(',', $roleNames);

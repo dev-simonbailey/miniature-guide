@@ -27,6 +27,5 @@ class RegistrationSuccessController extends Controller
     public function index()
     {
         return redirect()->route('users.show');
-        //return view('/users/');
     }
 }

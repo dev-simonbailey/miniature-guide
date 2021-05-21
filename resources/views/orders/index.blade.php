@@ -10,19 +10,20 @@
             Search for Order
         </div>
         <div class="w-50 border border-dark bg-light mx-auto p-5">
-        <form name='ordersform' method='post' action = '/orders/details'>
-            {{csrf_field()}}
-            <label for="ordernumber" class="h5 mr-2">Order Number:</label>
-            <input type='text' name='ordernumber' id='ordernumber' class="@error('ordernumber') is-invalid @enderror w-25"/>
-            <br />
-            <input type="submit" value="Next" class='btn btn-primary mt-3 w-50'>
+            <form name='ordersForm' method='post' action='/orders/details'>
+                {{csrf_field()}}
+                <label for="orderNumber" class="h5 mr-2">Order Number:</label>
+                <input type='text' name='orderNumber' id='orderNumber'
+                       class="@error('orderNumber') is-invalid @enderror w-25"/>
+                <br/>
+                <input type="submit" value="Next" class='btn btn-primary mt-3 w-50'>
 
-            @error('ordernumber')
-            <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-        </form>
+                @error('orderNumber')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            </form>
         </div>
-        {{--
+        {{-- LEFT IN FOR THE MOMENT IN CASE IT IS DECIDED TO HAVE A LIST AS THE INITIAL VIEW
         <br />
         <table class="table-striped table-bordered w-100">
             <thead>
@@ -58,8 +59,8 @@
                         <td>
                             <form name='ordersform' method='post' action = '/orders/details'>
                                 {{csrf_field()}}
-                                <input type='hidden' value='{{ $order['ref_no'] }}' name='ordernumber' id='ordernumber'/>
-                                <input type='hidden' value='{{ $currentpage }}' name='currentpage' id='currentpage'/>
+                                <input type='hidden' value='{{ $order['ref_no'] }}' name='orderNumber' id='orderNumber'/>
+                                <input type='hidden' value='{{ $currentPage }}' name='currentPage' id='currentPage'/>
                                 <input type="submit" value="View" class='btn btn-primary'>
                             </form>
                         </td>

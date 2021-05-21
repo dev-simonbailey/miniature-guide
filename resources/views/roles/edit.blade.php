@@ -16,19 +16,19 @@
                     </div>
                     <div class="form-group row">
                         <label for="role" class="col-form-label">{{ __('Role') }}</label>
-                            <input
-                                id="role"
-                                type="text"
-                                class="form-control @error('role') is-invalid @enderror"
-                                name="role" value="{{ old('role') ?? $role_details->label}}"
-                                autocomplete="role"
-                                autofocus
-                                readonly>
-                            @error('role')
-                                <span class="invalid-feedback" role="alert">
+                        <input
+                            id="role"
+                            type="text"
+                            class="form-control @error('role') is-invalid @enderror"
+                            name="role" value="{{ old('role') ?? $role_details->label}}"
+                            autocomplete="role"
+                            autofocus
+                            readonly>
+                        @error('role')
+                        <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>1
                                 </span>
-                            @enderror
+                        @enderror
                     </div>
                     <div class="form-group row">
                         <label for="view" class="col-form-label">{{ __('View') }}</label>

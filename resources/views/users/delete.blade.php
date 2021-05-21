@@ -7,16 +7,16 @@
 @section('content')
     <div class="content">
         @foreach ($details as $detail)
-        <form action="/users/destroy/{{ $detail->id }}" enctype="multipart/form-data" method="POST">
-            @csrf
-            @method('DELETE')
-            <div class="row">
-                <div class="col-2 offset-5">
-                    <div class="row">
-                        <h1>Delete User</h1>
-                    </div>
-                    <div class="form-group row">
-                        <label for="name" class="col-form-label">{{ __('Name') }}</label>
+            <form action="/users/destroy/{{ $detail->id }}" enctype="multipart/form-data" method="POST">
+                @csrf
+                @method('DELETE')
+                <div class="row">
+                    <div class="col-2 offset-5">
+                        <div class="row">
+                            <h1>Delete User</h1>
+                        </div>
+                        <div class="form-group row">
+                            <label for="name" class="col-form-label">{{ __('Name') }}</label>
                             <input
                                 id="name"
                                 type="text"
@@ -26,13 +26,13 @@
                                 autofocus
                                 readonly>
                             @error('name')
-                                <span class="invalid-feedback" role="alert">
+                            <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                    </div>
-                    <div class="form-group row">
-                        <label for="username" class="col-form-label">{{ __('Username') }}</label>
+                        </div>
+                        <div class="form-group row">
+                            <label for="username" class="col-form-label">{{ __('Username') }}</label>
                             <input
                                 id="username"
                                 type="text"
@@ -42,13 +42,13 @@
                                 autofocus
                                 readonly>
                             @error('username')
-                                <span class="invalid-feedback" role="alert">
+                            <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                    </div>
-                    <div class="form-group row">
-                        <label for="email" class="col-form-label">{{ __('Email') }}</label>
+                        </div>
+                        <div class="form-group row">
+                            <label for="email" class="col-form-label">{{ __('Email') }}</label>
                             <input
                                 id="email"
                                 type="text"
@@ -58,13 +58,13 @@
                                 autofocus
                                 readonly>
                             @error('email')
-                                <span class="invalid-feedback" role="alert">
+                            <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                    </div>
-                    <div class="form-group row">
-                        <label for="department" class="col-form-label">{{ __('Department') }}</label>
+                        </div>
+                        <div class="form-group row">
+                            <label for="department" class="col-form-label">{{ __('Department') }}</label>
                             <input
                                 id="department"
                                 type="text"
@@ -74,13 +74,13 @@
                                 autofocus
                                 readonly>
                             @error('department')
-                                <span class="invalid-feedback" role="alert">
+                            <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                    </div>
-                    <div class="form-group row">
-                        <label for="role" class="col-form-label">{{ __('Role') }}</label>
+                        </div>
+                        <div class="form-group row">
+                            <label for="role" class="col-form-label">{{ __('Role') }}</label>
                             <input
                                 id="role"
                                 type="text"
@@ -90,13 +90,13 @@
                                 autofocus
                                 readonly>
                             @error('role')
-                                <span class="invalid-feedback" role="alert">
+                            <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                    </div>
-                    <div class="form-group row">
-                        <label for="home" class="col-form-label">{{ __('Home') }}</label>
+                        </div>
+                        <div class="form-group row">
+                            <label for="home" class="col-form-label">{{ __('Home') }}</label>
                             <input
                                 id="home"
                                 type="text"
@@ -106,18 +106,18 @@
                                 autofocus
                                 readonly>
                             @error('role')
-                                <span class="invalid-feedback" role="alert">
+                            <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                    </div>
-                    <div class="row pt-4">
-                        <a href="/users" class='btn btn-primary mr-3'>Cancel</a>
-                        <button class="btn btn-danger">Delete User</button>
+                        </div>
+                        <div class="row pt-4">
+                            <a href="/users" class='btn btn-primary mr-3'>Cancel</a>
+                            <button class="btn btn-danger">Delete User</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
         @endforeach
     </div>
 @endsection

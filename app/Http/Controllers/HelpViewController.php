@@ -17,7 +17,7 @@ class HelpViewController extends Controller
     /**
      * @return Factory|View
      */
-    public function start()
+    public function index()
     {
         return view(self::ROUTEPARENT . __FUNCTION__);
     }

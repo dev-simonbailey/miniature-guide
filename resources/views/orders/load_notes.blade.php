@@ -175,7 +175,7 @@
             <div class="col text-center">
                 <table class="table-striped w-100 mt-5 mb-3 table-bordered">
                     <thead>
-                    <tr  class="bg-dark text-white">
+                    <tr class="bg-dark text-white">
                         <th>Type</th>
                         <th>Line</th>
                         <th>Status</th>

@@ -3,7 +3,7 @@
     <div class="col">
         <table class="table-striped w-100 mt-5 table-bordered">
             <thead>
-            <tr  class="bg-dark text-white">
+            <tr class="bg-dark text-white">
                 <th>Pay Method</th>
                 <th>Value</th>
                 <th>Status</th>

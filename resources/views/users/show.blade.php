@@ -11,46 +11,51 @@
         </div>
         <table class="table-striped table-bordered w-100">
             <thead>
-                <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Username</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Department</th>
-                    <th scope="col">Role(s)</th>
-                    <th scope="col">Home</th>
-                    <th scope="col">Created At</th>
-                    <th scope="col">Updated At</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Username</th>
+                <th scope="col">Email</th>
+                <th scope="col">Department</th>
+                <th scope="col">Role(s)</th>
+                <th scope="col">Home</th>
+                <th scope="col">Created At</th>
+                <th scope="col">Updated At</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
             </thead>
             <tbody>
-                @foreach ($usersdata as $userdetails)
+            @foreach ($usersData as $userDetails)
                 <tr>
-                    <td>{{ $userdetails->name }}</td>
-                    <td>{{ $userdetails->username }}</td>
-                    <td>{{ $userdetails->email }}</td>
-                    <td>{{ $userdetails->department }}</td>
-                    <td>{{ $userdetails->roleNames() }}</td>
-                    <td>{{ $userdetails->home }}</td>
-                    <td>{{ $userdetails->created_at }}</td>
-                    <td>{{ $userdetails->updated_at }}</td>
+                    <td>{{ $userDetails->name }}</td>
+                    <td>{{ $userDetails->username }}</td>
+                    <td>{{ $userDetails->email }}</td>
+                    <td>{{ $userDetails->department }}</td>
+                    <td>{{ $userDetails->roleNames() }}</td>
+                    <td>{{ $userDetails->home }}</td>
+                    <td>{{ $userDetails->created_at }}</td>
+                    <td>{{ $userDetails->updated_at }}</td>
 
-                    @if(empty($userdetails->roleNames()))
-                        <td style="width:150px;"><a href='/users/edit/{{ $userdetails->id }}' class="btn btn-warning" style="min-width:120px;">Assign Role(s)</a></td>
+                    @if(empty($userDetails->roleNames()))
+                        <td style="width:150px;"><a href='/users/edit/{{ $userDetails->id }}' class="btn btn-warning"
+                                                    style="min-width:120px;">Assign Role(s)</a></td>
                     @else
-                        <td style="width:150px;"><a href='/users/edit/{{ $userdetails->id }}' class="btn btn-success" style="min-width:120px;">Edit</a></td>
+                        <td style="width:150px;"><a href='/users/edit/{{ $userDetails->id }}' class="btn btn-success"
+                                                    style="min-width:120px;">Edit</a></td>
                     @endif
 
-                    @if( $userdetails->id != Auth::User()->id)
-                        @if($userdetails->deleted_at == null)
+                    @if( $userDetails->id != Auth::User()->id)
+                        @if($userDetails->deleted_at == null)
 
-                            <td style="width:150px;"><a href='/users/delete/{{ $userdetails->id }}' class="btn btn-danger" style="min-width:120px;">Delete</a></td>
+                            <td style="width:150px;"><a href='/users/delete/{{ $userDetails->id }}'
+                                                        class="btn btn-danger" style="min-width:120px;">Delete</a></td>
                         @else
-                            <td style="width:150px;"><a href='/users/restore/{{ $userdetails->id }}' class="btn btn-warning" style="min-width:120px;">Restore</a></td>
+                            <td style="width:150px;"><a href='/users/restore/{{ $userDetails->id }}'
+                                                        class="btn btn-warning" style="min-width:120px;">Restore</a>
+                            </td>
                         @endif
                     @else
-                    <td style="width:150px;">&nbsp;</td>
-                    @endif
+                        <td style="width:150px;">&nbsp;</td>
+                @endif
 
             @endforeach
             </tbody>

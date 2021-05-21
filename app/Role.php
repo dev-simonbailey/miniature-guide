@@ -41,7 +41,8 @@ class Role extends Model
         $this->permissions()->save($permission);
     }
 
-    public function assignPermissionsByID(array $ids) {
+    public function assignPermissionsByID(array $ids)
+    {
         $this->permissions()->detach();
         $permissions = Permission::whereIn('id', $ids);
         $this->permissions()->saveMany($permissions->get());

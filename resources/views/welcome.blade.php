@@ -8,9 +8,9 @@
     <div class="content">
         <div class="title m-b-md">
             Welcome to Bluesky
-            <br />
+            <br/>
             {{ auth()->user()->name }}
-            <br />
+            <br/>
             {{--
             @if(Auth::User()->hasRole('admin'))
                 <a href="#">Add Admin User</a>

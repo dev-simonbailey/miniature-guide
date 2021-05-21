@@ -7,8 +7,6 @@ use App\Role;
 use Illuminate\View\Factory;
 use Illuminate\View\View;
 
-//use Illuminate\Http\Request;
-
 class RegisteredUsersController extends Controller
 {
 
@@ -27,13 +25,15 @@ class RegisteredUsersController extends Controller
      *
      * @return Factory|View
      */
-    public function show() {
-        $usersdata = User::withTrashed()->get()->sortByDesc("name");
-        return view('users.show', compact('usersdata'));
+    public function show()
+    {
+        $usersData = User::withTrashed()->get()->sortByDesc("name");
+        return view('users.show', compact('usersData'));
     }
 
     /**
      * Show the add user page
+     *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|View
      */
     public function add()
@@ -50,9 +50,9 @@ class RegisteredUsersController extends Controller
      */
     public function edit($id)
     {
-        $selecteduser = User::withTrashed()->findorfail($id);
+        $selectedUser = User::withTrashed()->findorfail($id);
         $roles = Role::all()->sortBy("name");
-        return view('users.edit', compact('selecteduser','roles'));
+        return view('users.edit', compact('selectedUser', 'roles'));
     }
 
     /**
@@ -64,12 +64,12 @@ class RegisteredUsersController extends Controller
     public function update(User $user)
     {
         $data = request()->validate([
-            'name'          =>  'required',
-            'username'      =>  'required',
-            'email'         =>  'required|email',
-            'department'    =>  'required',
-            'role'          =>  'required',
-            'home'          =>  'required'
+            'name' => 'required',
+            'username' => 'required',
+            'email' => 'required|email',
+            'department' => 'required',
+            'role' => 'required',
+            'home' => 'required'
         ]);
         $user->update($data);
         $user->assignRolesByID(request()->role);
@@ -90,6 +90,7 @@ class RegisteredUsersController extends Controller
 
     /**
      * Restore a soft deleted user
+     *
      * @param $id
      * @return Factory|View
      */
