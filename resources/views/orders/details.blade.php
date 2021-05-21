@@ -71,10 +71,10 @@
                         @include('orders.events')
                     </div>
                     <div class="tab-pane fade" id="comment-history">
-                        <p>Messages tab content ...</p>
+                        @include('orders.comment_history')
                     </div>
                     <div class="tab-pane fade" id="freshdesk">
-                        <p>Messages tab content ...</p>
+                        @include('orders.freshdesk')
                     </div>
                 </div>
 
