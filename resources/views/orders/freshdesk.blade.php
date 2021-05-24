@@ -1,27 +1,35 @@
-@inject('freshDesk', 'App\Http\Controllers\OrdersController')
+@inject('freshDeskFunctions', 'App\Http\Controllers\FreshdeskController')
 <p class="h2 text-left">Freshdesk</p>
-@for ($i = 0; $i <= 5; $i++)
-    <div class="row bg-light border mx-auto mt-3" style="border-left: 5px solid green!important">
+@foreach ($freshDeskData as $data)
+    <div class="row bg-light mx-auto mt-3 border-top-dark {{ $freshDeskFunctions::freshdeskTicketStatusColour($data['status']) }}">
         <div class="col">
             <div class="row">
                 <div class="col text-left">
-                    <span class="font-weight-bold">{{'subject'}}  - #{{'id'}}</span>
+                    <span class="font-weight-bold">{{ $data['subject'] }}  - #{{ $data['id'] }}</span>
                 </div>
             </div>
             <div class="row text-left">
                 <div class="col text-left">
-                    Status: <span class="font-weight-bold"> {{"freshdesk_convert_status('status')"}}</span> -
-                    Priority: <span class="font-weight-bold"> {{"freshdesk_convert_priority('priority')"}}</span> -
-                    Group: <span class="font-weight-bold"> {{"freshdesk_convert_group('group_id')"}}</span> -
-                    Assigned Agent: <span class="font-weight-bold"> {{$freshDesk::freshdesk_convert_responder_id('22026674906')}}</span>
+                    Status: <span class="font-weight-bold"> {{ $freshDeskFunctions::freshdeskConvertStatus($data['status']) }}</span> -
+                    Priority: <span class="font-weight-bold"> {{ $freshDeskFunctions::freshdeskConvertPriority($data['priority']) }}</span> -
+                    @if(!empty($data['group_id']))
+                        Group: <span class="font-weight-bold"> {{ $freshDeskFunctions::freshdeskConvertGroup($data['group_id']) }}</span> -
+                    @else
+                        Group: <span class="font-weight-bold"> {{ 'NONE' }}</span> -
+                    @endif
+                    @if(!empty($data['responder_id']))
+                        Assigned Agent: <span class="font-weight-bold"> {{ $freshDeskFunctions::freshdeskConvertResponderId( $data['responder_id']) }}</span>
+                    @else
+                        Assigned Agent: <span class="font-weight-bold"> {{ 'NONE' }}</span>
+                    @endif
                 </div>
             </div>
             <div class="row">
                 <div class="col text-left">
-                    Created: <span class="font-weight-bold">{{'created_at'}}</span>
-                    Last Updated: <span class="font-weight-bold">{{'updated_at'}}</span>
+                    Created: <span class="font-weight-bold">{{ $freshDeskFunctions::freshdeskDateFormatter($data['created_at']) }}</span>
+                    Last Updated: <span class="font-weight-bold">{{ $freshDeskFunctions::freshdeskDateFormatter($data['updated_at'])}}</span>
                 </div>
             </div>
         </div>
     </div>
-@endfor
+@endforeach

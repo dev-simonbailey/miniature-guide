@@ -1,6 +1,6 @@
 <p class="h2 text-left">Comment History</p>
 @for ($i = 0; $i <= 5; $i++)
-<div class="row bg-light border mx-auto mt-3" style="border-left: 5px solid green!important">
+<div class="row bg-light mx-auto mt-3 leftGreen">
     <div class="col w-25">
             <div class="row">
                 <div class="col text-left">

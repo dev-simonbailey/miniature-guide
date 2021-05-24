@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('page_title')
-    {{ "Orders Search" }}
+    {{ 'Orders Search' }}
 @endsection
 
 @section('content')
@@ -51,7 +51,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="#freshdesk" class="nav-link" data-toggle="tab">Freshdesk <span
-                                class="badge badge-primary">6</span></a>
+                                class="badge badge-primary">{{ count($freshDeskData) }}</span></a>
                     </li>
                 </ul>
                 <div class="tab-content p-5">

@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Agent;
 use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Collection;
+//use Illuminate\Pagination\Paginator;
+//use Illuminate\Support\Collection;
 use Illuminate\View\View;
 use GuzzleHttp\Client;
+use App\Http\Controllers\FreshDeskController as FreshDesk;
 
 /**
  * Controller for orders
@@ -43,7 +43,7 @@ class OrdersController extends Controller
     /**
      * Show the orders search page
      *
-     * @return Application|\Illuminate\Contracts\View\Factory|View
+     * @return Application|Factory|View
      */
     public function index()
     {
@@ -57,6 +57,7 @@ class OrdersController extends Controller
         $currentPage = $orders->currentPage();
         return view($this->opName . '.' . __FUNCTION__, compact('orders', 'currentPage'));
         */
+
         return view($this->opName . '.' . __FUNCTION__);
     }
 
@@ -64,7 +65,7 @@ class OrdersController extends Controller
      * View the first level of detail of an order
      *
      * @param Request $request
-     * @return Application|\Illuminate\Contracts\View\Factory|View
+     * @return Application|Factory|View
      */
     public function details(Request $request)
     {
@@ -92,191 +93,20 @@ class OrdersController extends Controller
         }
         $orderArray = json_decode($response->getBody(), true);
         switch ($orderArray['currency_symbol']) {
-            case "GBP":
-                $currencySymbol = "£";
+            case 'GBP':
+                $currencySymbol = '£';
                 break;
-            case "EURO":
-                $currencySymbol = "€";
+            case 'EURO':
+                $currencySymbol = '€';
                 break;
         }
         $order = collect($orderArray);
         $currentPage = $request->currentPage;
-        return view($this->opName . '.' . __FUNCTION__, compact('order', 'currencySymbol', 'currentPage'));
+
+        $freshDeskData = FreshDesk::getFreshDeskDataByEmail($orderArray['email']);
+
+        return view($this->opName . '.' . __FUNCTION__, compact('order', 'currencySymbol', 'currentPage', 'freshDeskData'));
     }
-
-    /**
-     * Convert status integers to real names
-     * Status ID's - Remember to update ticket status colour below if you are editing this!
-     *
-     * @param $val
-     * @return string
-     */
-    public function freshdesk_convert_status($val)
-    {
-        switch ($val) {
-            case '2':
-                $convertedStatus = 'open';
-                break;
-            case '3':
-                $convertedStatus = 'Pending';
-                break;
-            case '4':
-                $convertedStatus = 'Resolved';
-                break;
-            case '5':
-                $convertedStatus = 'Closed';
-                break;
-            case '7':
-                $convertedStatus = 'Waiting on Third Party - Internal';
-                break;
-            case '8':
-                $convertedStatus = 'Customer Responded';
-                break;
-            case '9':
-                $convertedStatus = 'Awaiting Callback';
-                break;
-            case '10':
-                $convertedStatus = 'Waiting on Third Party - External';
-                break;
-            case '11':
-                $convertedStatus = 'Chase up Third Party';
-                break;
-            default:
-                $convertedStatus = $val;
-                break;
-        }
-        return $convertedStatus;
-    }
-
-    /**
-     * Set left border colour based on ticket status
-     *
-     * @param $val
-     * @return string
-     */
-    public function freshdesk_ticket_status_colour($val)
-    {
-        switch ($val) {
-            case '2':
-                $convertedColor = 'leftOrange';
-                break;
-            case '3':
-                $convertedColor = 'leftGreen';
-                break;
-            case '4':
-                $convertedColor = 'leftGray';
-                break;
-            case '5':
-                $convertedColor = 'leftGray';
-                break;
-            case '7':
-                $convertedColor = 'leftGreen';
-                break;
-            case '8':
-                $convertedColor = 'leftOrange';
-                break;
-            case '9':
-                $convertedColor = 'leftOrange';
-                break;
-            case '10':
-                $convertedColor = 'leftGreen';
-                break;
-            case '11':
-                $convertedColor = 'leftOrange';
-                break;
-            default:
-                $convertedColor = $val;
-                break;
-        }
-        return $convertedColor;
-    }
-
-
-    /**
-     * Convert group ID's to real name
-     *
-     * @param $val
-     * @return string
-     */
-    function freshdesk_convert_group($val)
-    {
-        switch ($val) {
-            case "22000164482":
-                $convertedGroup = 'Accounts';
-                break;
-            case "22000163137":
-                $convertedGroup = 'Bike Returns';
-                break;
-            case "22000162048":
-                $convertedGroup = 'GDPR';
-                break;
-            case "22000164345":
-                $convertedGroup = 'IT Support';
-                break;
-            case "22000159047":
-                $convertedGroup = 'PAC Returns';
-                break;
-            case "22000163436":
-                $convertedGroup = 'Sales';
-                break;
-            case "22000150665":
-                $convertedGroup = 'Support';
-                break;
-            case "22000158531":
-                $convertedGroup = 'Workshop';
-                break;
-            default:
-                $convertGroup = $val;
-                break;
-        }
-        return $converted;
-    }
-
-
-    /**
-     * Convert Priority integers to real names
-     *
-     * @param $val
-     * @return mixed
-     */
-    function freshdesk_convert_priority($val)
-    {
-        switch ($val) {
-            case "1":
-                $convertedPriority = 'Low';
-                break;
-            case "2":
-                $convertedPriority = 'Medium';
-                break;
-            case "3":
-                $convertedPriority = 'High';
-                break;
-            case "4":
-                $convertedPriority = 'Urgent';
-                break;
-            default:
-                $convertedPriority = $val;
-                break;
-        }
-        return $converted;
-    }
-
-    /**
-     * Get the Responders name from the id
-     *
-     * @param $val
-     * @return mixed
-     */
-    static function freshdesk_convert_responder_id($val)
-    {
-        try {
-            $agent = Agent::where('responder_id', '=', '22026674906')->firstOrFail();
-        } catch (ModelNotFoundException $e) {
-            return $val;
-        }
-        return $agent->agent_name;
-    }
-
 
 
     /**

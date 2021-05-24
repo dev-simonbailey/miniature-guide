@@ -3,7 +3,7 @@ $body-bg: #f8fafc;
 
 // Typography
 $font-family-sans-serif: 'Nunito', sans-serif;
-$font-size-base: 12px; //0.9rem;
+$font-size-base: 0.9rem; //0.9rem;
 $line-height-base: 1.6;
 
 // Colors
@@ -17,3 +17,25 @@ $yellow: #ffed4a;
 $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
+
+/* general styling  taken from Toms work*/
+
+.leftRed{
+    border-left: 8px solid #ff0000 !important;
+}
+
+.leftBlue{
+    border-left: 8px solid #00b3e3!important;
+}
+
+.leftGreen{
+    border-left: 8px solid #0cbf65!important;
+}
+
+.leftOrange{
+    border-left: 8px solid #ff9f16!important;
+}
+
+.leftGray{
+    border-left: 8px solid #bbbbbb!important;
+}
