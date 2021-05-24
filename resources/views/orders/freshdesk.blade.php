@@ -1,3 +1,4 @@
+@inject('freshDesk', 'App\Http\Controllers\OrdersController')
 <p class="h2 text-left">Freshdesk</p>
 @for ($i = 0; $i <= 5; $i++)
     <div class="row bg-light border mx-auto mt-3" style="border-left: 5px solid green!important">
@@ -12,7 +13,7 @@
                     Status: <span class="font-weight-bold"> {{"freshdesk_convert_status('status')"}}</span> -
                     Priority: <span class="font-weight-bold"> {{"freshdesk_convert_priority('priority')"}}</span> -
                     Group: <span class="font-weight-bold"> {{"freshdesk_convert_group('group_id')"}}</span> -
-                    Assigned Agent: <span class="font-weight-bold"> {{"freshdesk_convert_responder_id('responder_id'"}}</span>
+                    Assigned Agent: <span class="font-weight-bold"> {{$freshDesk::freshdesk_convert_responder_id('22026674906')}}</span>
                 </div>
             </div>
             <div class="row">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Agent;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Contracts\Foundation\Application;
@@ -266,10 +267,10 @@ class OrdersController extends Controller
      * @param $val
      * @return mixed
      */
-    function freshdesk_convert_responder_id($val)
+    static function freshdesk_convert_responder_id($val)
     {
         try {
-            $agent = Agent::where('responder_id', '=', $val)->firstOrFail();
+            $agent = Agent::where('responder_id', '=', '22026674906')->firstOrFail();
         } catch (ModelNotFoundException $e) {
             return $val;
         }
