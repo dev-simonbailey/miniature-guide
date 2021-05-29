@@ -35,19 +35,19 @@
                     </li>
                     <li class="nav-item">
                         <a href="#stock-allocations" class="nav-link" data-toggle="tab">Stock Allocations <span
-                                class="badge badge-primary">34</span></a>
+                                class="badge badge-primary">{{ count($stockAllocations) }}</span></a>
                     </li>
                     <li class="nav-item">
                         <a href="#load-notes" class="nav-link" data-toggle="tab">Load Notes <span
-                                class="badge badge-primary">4</span></a>
+                                class="badge badge-primary">0</span></a>
                     </li>
                     <li class="nav-item">
                         <a href="#events" class="nav-link" data-toggle="tab">Events <span
-                                class="badge badge-primary">12</span></a>
+                                class="badge badge-primary">0</span></a>
                     </li>
                     <li class="nav-item">
                         <a href="#comment-history" class="nav-link" data-toggle="tab">Comment History <span
-                                class="badge badge-primary">3</span></a>
+                                class="badge badge-primary">{{ count($comments) }}</span></a>
                     </li>
                     <li class="nav-item">
                         <a href="#freshdesk" class="nav-link" data-toggle="tab">Freshdesk <span

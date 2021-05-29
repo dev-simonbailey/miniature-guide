@@ -1,4 +1,4 @@
-@inject('freshDeskFunctions', 'App\Http\Controllers\FreshdeskController')
+@inject('freshDeskFunctions', 'App\FreshDesk')
 <p class="h2 text-left">Freshdesk</p>
 @foreach ($freshDeskData as $data)
     <div class="row bg-light mx-auto mt-3 border-top-dark {{ $freshDeskFunctions::freshdeskTicketStatusColour($data['status']) }}">

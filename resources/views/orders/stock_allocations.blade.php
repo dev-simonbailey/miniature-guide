@@ -16,19 +16,19 @@
             </tr>
             </thead>
             <tbody>
-            @for ($i = 0; $i <= 5; $i++)
+            @foreach($stockAllocations as $allocation)
                 <tr>
-                    <td>{{'{SA_TYPE}'}}</td>
-                    <td>{{'{SA_REFERENCE}'}}</td>
-                    <td>{{'{SA_PART}'}}</td>
-                    <td>{{'{SA_STORE}'}}</td>
-                    <td>{{'{SA_BIN}'}}</td>
-                    <td>{{'{SA_QTY}'}}</td>
-                    <td>{{'{SA_CREATED}'}}</td>
-                    <td>{{'{SA_UPDATED}'}}</td>
-                    <td>{{'{SA_BY_USER}'}}</td>
+                    <td>{{ $allocation['type'] }}</td>
+                    <td>{{ $allocation['reference'] }}</td>
+                    <td>{{ $allocation['part'] }}</td>
+                    <td>{{ $allocation['store'] }}</td>
+                    <td>{{ $allocation['bin'] }}</td>
+                    <td>{{ $allocation['qty'] }}</td>
+                    <td>{{ $allocation['dt_created'] }}</td>
+                    <td>{{ $allocation['last_updated'] }}</td>
+                    <td>{{ $allocation['last_upd_user'] }}</td>
                 </tr>
-            @endfor
+            @endforeach
             </tbody>
         </table>
     </div>

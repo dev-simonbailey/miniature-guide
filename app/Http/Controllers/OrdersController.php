@@ -2,6 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
+use App\DeliveryAddress;
+use App\FreshDesk;
+use App\InvoiceAddress;
+use App\OrderLine;
+use App\Payment;
+use App\StockAllocation;
+use App\TrackingCodes;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -10,11 +18,13 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+
 //use Illuminate\Pagination\Paginator;
 //use Illuminate\Support\Collection;
 use Illuminate\View\View;
 use GuzzleHttp\Client;
-use App\Http\Controllers\FreshDeskController as FreshDesk;
+
+//use App\Http\Controllers\FreshDeskController as FreshDesk;
 
 /**
  * Controller for orders
@@ -72,7 +82,7 @@ class OrdersController extends Controller
         request()->validate([
             'orderNumber' => 'required'
         ]);
-        $client = new Client;
+        $client = new Client();
         try {
             $response = $client->get(env('BLUESKY_API_HOST') . '/api/orders/search-by-order-number', [
                 'connect_timeout' => 10,
@@ -101,11 +111,38 @@ class OrdersController extends Controller
                 break;
         }
         $order = collect($orderArray);
+
         $currentPage = $request->currentPage;
 
         $freshDeskData = FreshDesk::getFreshDeskDataByEmail($orderArray['email']);
 
-        return view($this->opName . '.' . __FUNCTION__, compact('order', 'currencySymbol', 'currentPage', 'freshDeskData'));
+        $invoiceAddress = InvoiceAddress::getInvoiceDetails($orderArray['customer']);
+
+        $deliveryAddress = DeliveryAddress::getDeliveryDetails($orderArray['customer']);
+
+        $paymentData = Payment::getPaymentDetails($request->orderNumber);
+
+        $orderLines = OrderLine::getOrderLines($request->orderNumber);
+
+        $stockAllocations = StockAllocation::getStockAllocations($request->orderNumber);
+
+        $comments = Comment::getComments($orderArray['customer']);
+
+        $tracking = TrackingCodes::getTrackingCodes($stockAllocations[0]['reference']);
+
+
+        return view($this->opName . '.' . __FUNCTION__, compact(
+            'order',
+            'currencySymbol',
+            'currentPage',
+            'freshDeskData',
+            'invoiceAddress',
+            'deliveryAddress',
+            'paymentData',
+            'orderLines',
+            'stockAllocations',
+            'comments',
+            'tracking'));
     }
 
 
@@ -126,4 +163,6 @@ class OrdersController extends Controller
         return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
     */
+
+
 }

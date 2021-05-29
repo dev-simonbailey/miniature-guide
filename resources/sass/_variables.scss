@@ -20,22 +20,75 @@ $cyan: #6cb2eb;
 
 /* general styling  taken from Toms work*/
 
-.leftRed{
+.leftRed {
     border-left: 8px solid #ff0000 !important;
 }
 
-.leftBlue{
-    border-left: 8px solid #00b3e3!important;
+.leftBlue {
+    border-left: 8px solid #00b3e3 !important;
 }
 
-.leftGreen{
-    border-left: 8px solid #0cbf65!important;
+.leftGreen {
+    border-left: 8px solid #0cbf65 !important;
 }
 
-.leftOrange{
-    border-left: 8px solid #ff9f16!important;
+.leftOrange {
+    border-left: 8px solid #ff9f16 !important;
 }
 
-.leftGray{
-    border-left: 8px solid #bbbbbb!important;
+.leftGray {
+    border-left: 8px solid #bbbbbb !important;
 }
+
+.availability-Available {
+    background: #98fb98 !important;
+}
+
+.availability-Limited {
+    background: #fcffc2 !important;
+}
+
+.availability-Unavailable {
+    background: #ffd0c8 !important;
+}
+
+.availability-Non-Stock {
+    background: #00cfff !important;
+}
+
+
+.availability-available {
+    background: #98fb98 !important;
+}
+
+.availability-limited {
+    background: #fcffc2 !important;
+}
+
+.availability-unavailable {
+    background: #ffd0c8 !important;
+}
+
+.availability-available-line {
+    background: #24ff24 !important;
+}
+
+.availability-limited-line {
+    background: #f7ff5a !important;
+}
+
+.availability-unavailable-line {
+    background: #ff9797 !important;
+}
+
+.availability-pac {
+    background: #f3f4f6 !important;
+}
+
+.border-correction {
+    border-top: 8px solid #343a40!important;
+    border-bottom: 8px solid #343a40!important;
+    border-left: 2px solid #343a40!important;
+    border-right: 2px solid #343a40!important;
+}
+

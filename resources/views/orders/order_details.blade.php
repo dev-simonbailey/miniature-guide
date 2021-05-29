@@ -156,7 +156,9 @@
                         <span class="font-weight-bold">Tracking Codes:</span>
                     </div>
                     <div class="col">
-                        {{ $order['in_tracking'] }}
+                        @foreach ($tracking as $item)
+                            {{ $item['carrier_ref'] }}
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -200,7 +202,7 @@
                         <span class="font-weight-bold">Name:</span>
                     </div>
                     <div class="col">
-                        {{ '{INVOICE_NAME}'  }}
+                        {{ $invoiceAddress['name']  }}
                     </div>
                 </div>
             </div>
@@ -210,7 +212,7 @@
                         <span class="font-weight-bold">Name</span>
                     </div>
                     <div class="col">
-                        {{ 'DELIVERY_NAME' }}
+                        {{ $deliveryAddress['name'] }}
                     </div>
                 </div>
             </div>
@@ -232,7 +234,7 @@
                         <span class="font-weight-bold">Address:</span>
                     </div>
                     <div class="col">
-                        {{ '{INVOICE_ADDR}'  }}
+                        {{ $invoiceAddress['address']  }}
                     </div>
                 </div>
             </div>
@@ -242,7 +244,7 @@
                         <span class="font-weight-bold">Address</span>
                     </div>
                     <div class="col">
-                        {{ 'DELIVERY_ADDR' }}
+                        {{ $deliveryAddress['address'] }}
                     </div>
                 </div>
             </div>
@@ -264,7 +266,7 @@
                         <span class="font-weight-bold">City:</span>
                     </div>
                     <div class="col">
-                        {{ '{INVOICE_CITY}'  }}
+                        {{ $invoiceAddress['city']  }}
                     </div>
                 </div>
             </div>
@@ -274,7 +276,7 @@
                         <span class="font-weight-bold">City</span>
                     </div>
                     <div class="col">
-                        {{ 'DELIVERY_CITY' }}
+                        {{ $deliveryAddress['city'] }}
                     </div>
                 </div>
             </div>
@@ -296,7 +298,7 @@
                         <span class="font-weight-bold">County:</span>
                     </div>
                     <div class="col">
-                        {{ '{INVOICE_COUNTY}'  }}
+                        {{ $invoiceAddress['county']  }}
                     </div>
                 </div>
             </div>
@@ -306,7 +308,7 @@
                         <span class="font-weight-bold">County</span>
                     </div>
                     <div class="col">
-                        {{ 'DELIVERY_COUNTY' }}
+                        {{ $deliveryAddress['county'] }}
                     </div>
                 </div>
             </div>
@@ -328,7 +330,7 @@
                         <span class="font-weight-bold">Postcode:</span>
                     </div>
                     <div class="col">
-                        {{ '{INVOICE_POSTCODE}'  }}
+                        {{ $invoiceAddress['postcode']  }}
                     </div>
                 </div>
             </div>
@@ -338,7 +340,7 @@
                         <span class="font-weight-bold">Postcode</span>
                     </div>
                     <div class="col">
-                        {{ 'DELIVERY_POSTCODE' }}
+                        {{ $deliveryAddress['postcode'] }}
                     </div>
                 </div>
             </div>
@@ -360,7 +362,7 @@
                         <span class="font-weight-bold">Country:</span>
                     </div>
                     <div class="col">
-                        {{ '{INVOICE_COUNTRY}'  }}
+                        {{ $invoiceAddress['country']  }}
                     </div>
                 </div>
             </div>
@@ -370,7 +372,7 @@
                         <span class="font-weight-bold">Country</span>
                     </div>
                     <div class="col">
-                        {{ 'DELIVERY_COUNTRY' }}
+                        {{ $deliveryAddress['country'] }}
                     </div>
                 </div>
             </div>

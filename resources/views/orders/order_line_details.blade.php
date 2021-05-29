@@ -1,44 +1,44 @@
 <p class="h2 text-left mt-5">Order Lines</p>
 <div class="row bg-light border my-auto">
     <div class="col">
-        <table class="table-striped w-100 mt-5 table-bordered">
+        <table class="table-striped w-100 mt-5 mb-5 table-bordered">
             <thead>
-            <tr class="bg-dark text-white">
-                <th>Type</th>
-                <th>Line</th>
-                <th>Item #</th>
-                <th>Status</th>
-                <th>Sku</th>
-                <th>Item</th>
-                <th>Price</th>
-                <th>Qty</th>
-                <th>Component Type</th>
-                <th>Allocation Availability</th>
-                <th>Date Available</th>
-                <th>Est Build Date</th>
-                <th>Load Note</th>
-                <th>Qty Issued</th>
+            <tr class="bg-dark text-white border-correction">
+                <th scope="col" style="border-bottom-width:2px;">Type</th>
+                <th scope="col" style="border-bottom-width:2px;">Line</th>
+                <th scope="col" style="border-bottom-width:2px;">Item #</th>
+                <th scope="col" style="border-bottom-width:2px;">Status</th>
+                <th scope="col" style="border-bottom-width:2px;">Sku</th>
+                <th scope="col" style="border-bottom-width:2px;">Item</th>
+                <th scope="col" style="border-bottom-width:2px;">Price</th>
+                <th scope="col" style="border-bottom-width:2px;">Qty</th>
+                <th scope="col" style="border-bottom-width:2px;">Component Type</th>
+                <th scope="col" style="border-bottom-width:2px;">Allocation Availability</th>
+                <th scope="col" style="border-bottom-width:2px;">Date Available</th>
+                <th scope="col" style="border-bottom-width:2px;">Est Build Date</th>
+                <th scope="col" style="border-bottom-width:2px;">Load Note</th>
+                <th scope="col" style="border-bottom-width:2px;">Qty Issued</th>
             </tr>
             </thead>
             <tbody>
-            @for ($i = 0; $i <= 5; $i++)
-                <tr>
-                    <td>{{'{LINE_TYPE}'}}</td>
-                    <td>{{'{LINE_NUMBER}'}}</td>
-                    <td>{{'{ITEM_NUMBER}'}}</td>
-                    <td>{{'{LINE_STATUS}'}}</td>
-                    <td>{{'{LINE_SKU}'}}</td>
-                    <td>{{'{LINE_ITEM}'}}</td>
-                    <td>{{'{LINE_PRICE}'}}</td>
-                    <td>{{'{LINE_QTY}'}}</td>
-                    <td>{{'{LINE_COMPONENT_TYPE}'}}</td>
-                    <td>{{'{LINE_ALLOCATION_AVAILABILITY}'}}</td>
-                    <td>{{'{LINE_DATE_AVAILABLE}'}}</td>
-                    <td>{{'{LINE_EST_BUILD_DATE}'}}</td>
-                    <td>{{'{LINE_LOAD_NOTE}'}}</td>
-                    <td>{{'{LINE_QTY)_ISSUED}'}}</td>
+            @foreach ($orderLines as $line)
+                <tr scope="row" class="{{ $line['row_colour']}}">
+                    <td>{{ $line['line_type'] }}</td>
+                    <td>{{ $line['line'] }}</td>
+                    <td>{{ $line['item_no'] }}</td>
+                    <td>{{ $line['line_status'] }}</td>
+                    <td>{{ $line['part'] }}</td>
+                    <td>{{ $line['item'] }}</td>
+                    <td>{{ $line['total_value'] }}</td>
+                    <td>{{ $line['qty'] }}</td>
+                    <td>{{ $line['component_type'] }}</td>
+                    <td>{{ $line['allocation_availability'] }}</td>
+                    <td>{{ $line['date_available'] }}</td>
+                    <td>{{ $line['estimated_build_date'] }}</td>
+                    <td>{{ $line['load_note'] }}</td>
+                    <td>{{ $line['qty_issued'] }}</td>
                 </tr>
-            @endfor
+            @endforeach
             </tbody>
         </table>
     </div>
