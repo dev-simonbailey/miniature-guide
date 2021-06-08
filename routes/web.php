@@ -11,67 +11,151 @@
 |
 */
 
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', 'WelcomeViewController@welcome')->name('welcome');
+Route::get('/register', 'WelcomeViewController@welcome')->name('welcome');
+Route::get('/registration-success', 'RegistrationSuccessController@index');
 
 /* HELP */
 Route::prefix('help')->group(function () {
-    Route::get('start','HelpViewController@start')->name('help.start');
+    Route::get('start', 'HelpViewController@start');
 });
 
-/* ADMIN */
-Route::prefix('admin')->group(function () {
-    Route::get('knowledge-base','AdminViewController@knowledge_base')->name('admin.knowledge_base');
-    Route::get('ilog-add','AdminViewController@ilog_add')->name('admin.ilog_add');
-});
-
-
-/* SEARCH */
-Route::prefix('search')->group(function () {
-    Route::get('orders','SearchViewController@order')->name('search.order');
-    Route::get('by-part','SearchViewController@by_part')->name('search.by_part');
-    Route::get('customers','SearchViewController@customer')->name('search.customer');
-    Route::get('stock-check','SearchViewController@stock_check')->name('search.stock_check');
-});
-
-
-/* DASHBOARD */
-Route::prefix('dashboard')->group(function () {
-    Route::get('bike-wip','DashboardViewController@bike_wip')->name('dashboard.bike_wip');
-    Route::get('pac-wip','DashboardViewController@pac_wip')->name('dashboard.pac_wip');
-    Route::get('pick-wip','DashboardViewController@pick_wip')->name('dashboard.pick_wip');
-    Route::get('returns','DashboardViewController@returns')->name('dashboard.returns');
+/* USERS */
+Route::prefix('users')->group(function () {
+    Route::get('/', ['middleware' => 'role:admin', 'uses' => 'RegisteredUsersController@show'])->name('users.show');
+    Route::get('/show', ['middleware' => 'role:admin', 'uses' => 'RegisteredUsersController@show'])->name('users.show');
+    Route::get('/add', ['middleware' => 'role:admin', 'uses' => 'RegisteredUsersController@add'])->name('users.add');
+    Route::post('/store',
+        ['middleware' => 'role:admin', 'uses' => 'RegisteredUsersController@store'])->name('users.store');
+    Route::get('/edit/{id}',
+        ['middleware' => 'role:admin', 'uses' => 'RegisteredUsersController@edit'])->name('users.edit');
+    Route::patch('/update/{user}',
+        ['middleware' => 'role:admin', 'uses' => 'RegisteredUsersController@update'])->name('users.update');
+    Route::get('/delete/{id}', ['middleware' => 'role:admin', 'uses' => 'RegisteredUsersController@deleteUser']);
+    Route::get('/restore/{id}',
+        ['middleware' => 'role:admin', 'uses' => 'RegisteredUsersController@restore'])->name('users.restoreUser');
 });
 
 
-/* WORKSHOP */
-Route::prefix('workshop')->group(function () {
-    Route::get('add-inbound-build','WorkshopViewController@add_inbound_build')->name('workshop.add_inbound_build');
-    Route::get('add-outbound-build','WorkshopViewController@add_outbound_build')->name('workshop.add_outbound_build');
-    Route::get('add-pdi','WorkshopViewController@add_pdi')->name('workshop.add_pdi');
-    Route::get('add-new-pack','WorkshopViewController@add_new_pack')->name('workshop.add_new_pack');
+/* ROLES */
+Route::prefix('roles')->group(function () {
+    Route::get('/', ['middleware' => 'role:admin', 'uses' => 'RolesController@index'])->name('roles.index');
+    Route::get('/show', ['middleware' => 'role:admin', 'uses' => 'RolesController@index'])->name('roles.index');
+    Route::get('/add', ['middleware' => 'role:admin', 'uses' => 'RolesController@add'])->name('roles.add');
+    Route::post('/store', ['middleware' => 'role:admin', 'uses' => 'RolesController@store'])->name('roles.store');
+    Route::get('/edit/{role}', ['middleware' => 'role:admin', 'uses' => 'RolesController@edit'])->name('roles.edit');
+    Route::patch('/update/{role}',
+        ['middleware' => 'role:admin', 'uses' => 'RolesController@update'])->name('roles.update');
+    Route::get('/delete/{role}',
+        ['middleware' => 'role:admin', 'uses' => 'RolesController@delete'])->name('roles.delete');
+    Route::delete('/destroy/{role}',
+        ['middleware' => 'role:admin', 'uses' => 'RolesController@destroy'])->name('roles.destroy');
+});
+
+
+/* KNOWLEDGEBASE */
+Route::prefix('knowledgebase')->group(function () {
+    Route::get('/index', 'KnowledgeBaseController@index')->name('knowledgebase.index');
+});
+
+/* LOGINTERACTIONS */
+Route::prefix('loginteractions')->group(function () {
+    Route::get('/index', 'LogInteractionsController@index')->name('loginteractions.index');
+});
+
+
+/* ORDERS */
+Route::prefix('orders')->group(function () {
+    Route::get('/', ['middleware' => 'role:admin', 'uses' => 'OrdersController@index'])->name('orders.index');
+    Route::post('/details/',
+        ['middleware' => 'role:admin', 'uses' => 'OrdersController@details'])->name('orders.details');
+});
+
+
+/* ORDERSBYPART */
+Route::prefix('ordersbypart')->group(function () {
+    Route::get('/index', 'OrdersByPartController@index')->name('ordersbypart.index');
+});
+
+/* CUSTOMERS */
+Route::prefix('customers')->group(function () {
+    Route::get('/index', 'CustomersController@index')->name('customers.index');
+});
+
+/* STOCKCHECK */
+Route::prefix('stockcheck')->group(function () {
+    Route::get('/index', 'StockCheckController@index')->name('stockcheck.index');
+});
+
+/* BIKEWIP */
+Route::prefix('bikewip')->group(function () {
+    Route::get('/index', 'BikeWipController@index')->name('bikewip.index');
+});
+
+/* PACWIP */
+Route::prefix('pacwip')->group(function () {
+    Route::get('/index', 'PacWipController@index')->name('pacwip.index');
+});
+
+/* PICKWIP */
+Route::prefix('pickwip')->group(function () {
+    Route::get('/index', 'PickWipController@index')->name('pickwip.index');
+});
+
+/* RETURNS */
+Route::prefix('returns')->group(function () {
+    Route::get('/index', 'ReturnsController@index')->name('returns.index');
+});
+
+/* ADDINBOUNDBUILD */
+Route::prefix('addinboundbuild')->group(function () {
+    Route::get('/index', 'AddInboundBuildController@index')->name('addinboundbuild.index');
+});
+
+/* ADDOUTBOUNDBUILD */
+Route::prefix('addoutboundbuild')->group(function () {
+    Route::get('/index', 'AddOutboundBuildController@index')->name('addoutboundbuild.index');
+});
+
+/* ADDPDI */
+Route::prefix('addpdi')->group(function () {
+    Route::get('/index', 'AddPdiController@index')->name('addpdi.index');
+});
+
+/* ADDNEWPACK */
+Route::prefix('addnewpack')->group(function () {
+    Route::get('/index', 'AddNewPackController@index')->name('addnewpack.index');
 });
 
 
 /* Reports */
 Route::prefix('reports')->group(function () {
-    Route::get('build-schedule','ReportsViewController@build_schedule')->name('reports.build_schedule');
-    Route::get('incoming-builds','ReportsViewController@incoming_builds')->name('reports.incoming_builds');
-    Route::get('wip-custom-colour-orders','ReportsViewController@wip_custom_colour_orders')->name('reports.wip_custom_colour_orders');
-    Route::get('build-outbound-view','ReportsViewController@build_outbound_view')->name('reports.build_outbound_view');
-    Route::get('build-inbound-view','ReportsViewController@build_inbound_view')->name('reports.build_inbound_view');
-    Route::get('pdi-view','ReportsViewController@pdi_view')->name('reports.pdi_view');
-    Route::get('packing-view','ReportsViewController@packing_view')->name('reports.packing_view');
-    Route::get('completed-bike-orders','ReportsViewController@completed_bike_orders')->name('reports.completed_bike_orders');
-    Route::get('stock-demand','ReportsViewController@stock_demand')->name('reports.stock_demand');
-    Route::get('essential-component-shortages','ReportsViewController@essential_component_shortages')->name('reports.essential_component_shortages');
-    Route::get('expected-non-essential-shortages','ReportsViewController@expected_non_essential_shortages')->name('reports.expected_non_essential_shortages');
-    Route::get('wip-fast-track-schedule','ReportsViewController@wip_fast_track_schedule')->name('reports.wip_fast_track_schedule');
-    Route::get('frame-availability','ReportsViewController@frame_availability')->name('reports.frame_availability');
-    Route::get('wip-overdue-builds','ReportsViewController@wip_overdue_builds')->name('reports.wip_overdue_builds');
-    Route::get('mechanic-kpi','ReportsViewController@mechanic_kpi')->name('reports.mechanic_kpi');
-    Route::get('pdi-stats','ReportsViewController@pdi_stats')->name('reports.pdi_stats');
-    Route::get('bike-wip-stats','ReportsViewController@bike_wip_stats')->name('reports.bike_wip_stats');
-    Route::get('qlik-data','ReportsViewController@qlik_data')->name('reports.qlik_data');
+    Route::get('/build-schedule', 'ReportsController@build_schedule')->name('reports.build_schedule');
+    Route::get('/incoming-builds', 'ReportsController@incoming_builds')->name('reports.incomingbuilds');
+    Route::get('/wip-custom-colour-orders',
+        'ReportsController@wip_custom_colour_orders')->name('reports.wipcustomcolourorders');
+    Route::get('/build-outbound', 'ReportsController@build_outbound')->name('reports.buildoutbound');
+    Route::get('/build-inbound', 'ReportsController@build_inbound')->name('reports.buildinbound');
+    Route::get('/pdi', 'ReportsController@pdi')->name('reports.pdi');
+    Route::get('/packing', 'ReportsController@packing')->name('reports.packing');
+    Route::get('/shipped-bikes', 'ReportsController@shipped_bikes')->name('reports.shipped_bikes');
+    Route::get('/stock-demand', 'ReportsController@stock_demand')->name('reports.stock_demand');
+    Route::get('/essential-component-shortages',
+        'ReportsController@essential_component_shortages')->name('reports.essential_component_shortages');
+    Route::get('/expected-non-essential-shortages',
+        'ReportsController@expected_non_essential_shortages')->name('reports.expected_non_essential_shortages');
+    Route::get('/wip-fast-track-schedule',
+        'ReportsController@wip_fast_track_schedule')->name('reports.wip_fast_track_schedule');
+    Route::get('/frame-availability', 'ReportsController@frame_availability')->name('reports.frame_availability');
+    Route::get('/wip-overdue-builds', 'ReportsController@wip_overdue_builds')->name('reports.wip_overdue_builds');
+    Route::get('/mechanic-kpi', 'ReportsController@mechanic_kpi')->name('reports.mechanic_kpi');
+    Route::get('/pdi-stats', 'ReportsController@pdi_stats')->name('reports.pdi_stats');
+    Route::get('/bike-wip-stats', 'ReportsController@bike_wip_stats')->name('reports.bike_wip_stats');
+    Route::get('/qlik-data', 'ReportsController@qlik_data')->name('reports.qlik_data');
 });
 
 Auth::routes();

@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
+use App\Roles;
+use App\Permissions;
 
 class WelcomeViewController extends Controller
 {
+
     /**
      * Create a new controller instance.
      *
@@ -26,3 +30,4 @@ class WelcomeViewController extends Controller
         return view('welcome');
     }
 }
+

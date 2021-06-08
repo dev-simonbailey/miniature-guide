@@ -3,18 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\View\Factory;
+use Illuminate\View\View;
 
 class HelpViewController extends Controller
 {
+
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     const ROUTEPARENT = 'help.';
+
     /**
      * @return Factory|View
      */
-     public function start(){
-         return view(self::ROUTEPARENT.__FUNCTION__);
-     }
+    public function index()
+    {
+        return view(self::ROUTEPARENT . __FUNCTION__);
+    }
 }
