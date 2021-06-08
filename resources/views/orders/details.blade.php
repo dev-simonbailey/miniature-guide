@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+
     <div class="content">
         {{-- USE IF WE DECIDE TO LIST VIEW INITIAL ORDERS VIEW
         <a href="/orders/?page={{ $currentPage}}" class='btn btn-primary ml-1' style="float:left;">
@@ -39,7 +40,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="#load-notes" class="nav-link" data-toggle="tab">Load Notes <span
-                                class="badge badge-primary">0</span></a>
+                                class="badge badge-primary">{{ count($loadNoteHeader) }}</span></a>
                     </li>
                     <li class="nav-item">
                         <a href="#events" class="nav-link" data-toggle="tab">Events <span

@@ -156,9 +156,11 @@
                         <span class="font-weight-bold">Tracking Codes:</span>
                     </div>
                     <div class="col">
-                        @foreach ($tracking as $item)
-                            {{ $item['carrier_ref'] }}
-                        @endforeach
+                        @if(!empty($tracking))
+                            @foreach ($tracking as $item)
+                                {{ $item['carrier_ref'] }}
+                            @endforeach
+                        @endif
                     </div>
                 </div>
             </div>

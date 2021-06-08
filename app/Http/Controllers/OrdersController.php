@@ -6,6 +6,9 @@ use App\Comment;
 use App\DeliveryAddress;
 use App\FreshDesk;
 use App\InvoiceAddress;
+use App\LoadNoteComponent;
+use App\LoadNoteHeader;
+use App\LoadNoteLine;
 use App\OrderLine;
 use App\Payment;
 use App\StockAllocation;
@@ -128,8 +131,36 @@ class OrdersController extends Controller
 
         $comments = Comment::getComments($orderArray['customer']);
 
-        $tracking = TrackingCodes::getTrackingCodes($stockAllocations[0]['reference']);
+        if (!empty($stockAllocations)) {
+            $tracking = TrackingCodes::getTrackingCodes($stockAllocations[0]['reference']);
+        } else {
+            $tracking = [];
+        }
+        $count = 0;
 
+        $loadNoteHeader = [];
+        foreach (LoadNoteHeader::getLoadNoteHeader($request->orderNumber) as $header) {
+            $header['lines'] = LoadNoteLine::getLoadNoteLines($request->orderNumber);
+            switch ($header['status']) {
+                case 'Cancelled':
+                    $header['color'] = 'leftRed';
+                    break;
+                case 'Complete':
+                    $header['color'] = 'leftGreen';
+                    break;
+                default:
+                    $header['color'] = 'leftBlue';
+                    break;
+            }
+            foreach ($header['lines'] as $key => $line) {
+                $header['lines'][$key]['items'] = LoadNoteComponent::getLoadNoteComponents($header['load_note'],
+                    $line['line']);
+            }
+            array_push($loadNoteHeader, $header);
+            $count++;
+        }
+
+        //dd($loadNoteHeader);
 
         return view($this->opName . '.' . __FUNCTION__, compact(
             'order',
@@ -142,7 +173,8 @@ class OrdersController extends Controller
             'orderLines',
             'stockAllocations',
             'comments',
-            'tracking'));
+            'tracking',
+            'loadNoteHeader'));
     }
 
 
