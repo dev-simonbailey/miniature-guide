@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Comment;
 use App\DeliveryAddress;
 use App\FreshDesk;
+use App\HoldReason;
 use App\InvoiceAddress;
 use App\LoadNoteComponent;
 use App\LoadNoteHeader;
@@ -115,6 +116,8 @@ class OrdersController extends Controller
         }
         $order = collect($orderArray);
 
+        $holdReasons = HoldReason::getHoldReasons($request->orderNumber);
+
         $currentPage = $request->currentPage;
 
         $freshDeskData = FreshDesk::getFreshDeskDataByEmail($orderArray['email']);
@@ -164,6 +167,7 @@ class OrdersController extends Controller
 
         return view($this->opName . '.' . __FUNCTION__, compact(
             'order',
+            'holdReasons',
             'currencySymbol',
             'currentPage',
             'freshDeskData',

@@ -57,6 +57,9 @@
                 </ul>
                 <div class="tab-content p-5">
                     <div class="tab-pane fade show active" id="order-details">
+                        @if(!empty($holdReasons))
+                            @include('orders.hold_reasons')
+                        @endif
                         @include('orders.order_details')
                         @include('orders.payment_details')
                         @include('orders.order_line_details')
