@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use App\DeliveryAddress;
+use App\DespatchEvent;
+use App\DespatchEventLine;
 use App\FreshDesk;
 use App\HoldReason;
 use App\InvoiceAddress;
@@ -12,6 +14,7 @@ use App\LoadNoteHeader;
 use App\LoadNoteLine;
 use App\OrderLine;
 use App\Payment;
+use App\PdiEvent;
 use App\StockAllocation;
 use App\TrackingCodes;
 use GuzzleHttp\Exception\ClientException;
@@ -139,7 +142,6 @@ class OrdersController extends Controller
         } else {
             $tracking = [];
         }
-        $count = 0;
 
         $loadNoteHeader = [];
         foreach (LoadNoteHeader::getLoadNoteHeader($request->orderNumber) as $header) {
@@ -160,10 +162,17 @@ class OrdersController extends Controller
                     $line['line']);
             }
             array_push($loadNoteHeader, $header);
-            $count++;
         }
 
-        //dd($loadNoteHeader);
+        $pdiEvents = PdiEvent::getPdiEvents($request->orderNumber);
+
+        $despatchEvents = [];
+        foreach (DespatchEvent::getDespatchEvents($request->orderNumber) as $event) {
+            $event['lines'] = DespatchEventLine::getDespatchEventLines($event['load_note']);
+            array_push($despatchEvents, $event);
+        }
+
+        $eventsCount = count($pdiEvents) + count($despatchEvents);
 
         return view($this->opName . '.' . __FUNCTION__, compact(
             'order',
@@ -178,7 +187,10 @@ class OrdersController extends Controller
             'stockAllocations',
             'comments',
             'tracking',
-            'loadNoteHeader'));
+            'loadNoteHeader',
+            'eventsCount',
+            'pdiEvents',
+            'despatchEvents'));
     }
 
 

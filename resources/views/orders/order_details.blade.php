@@ -150,6 +150,7 @@
                     </div>
                 </div>
             </div>
+            {{-- TODO: create loop to stack all the tracking codes as links --}}
             <div class="col border-bottom text-left mx-5 my-2">
                 <div class="row">
                     <div class="col">

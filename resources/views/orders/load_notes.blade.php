@@ -174,7 +174,7 @@
         </div>
         <div class="row">
             <div class="col text-center w-100">
-                <table class="table-striped w-100 mt-5 mb-3 table-bordered" style="display: none" id="{{ $loadNoteData['load_note'] }}_table">
+                <table class="table-striped w-100 mt-5 mb-3 table-bordered" style="display: none" id="{{ $loadNoteData['load_note'] }}_load_note_table">
                     <thead>
                     <tr class="bg-dark text-white">
                         <th>Type</th>
@@ -218,7 +218,7 @@
                     </tbody>
                 </table>
                 <br />
-                <a id="{{ $loadNoteData['load_note'] }}_button" href="javascript:showHide('{{ $loadNoteData['load_note'] }}')" class="btn btn-primary mb-2 w-25 mx-auto">Show Details</a>
+                <a id="{{ $loadNoteData['load_note'] }}_load_note_button" href="javascript:showHide('{{ $loadNoteData['load_note'] }}_load_note')" class="btn btn-primary mb-2 w-25 mx-auto">Show Details</a>
             </div>
         </div>
     </div>

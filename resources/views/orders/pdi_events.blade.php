@@ -1,31 +1,63 @@
-{{--<p class="h2 text-left">Events</p>--}}
-    @include('orders.despatch_events')
-<div class="m-5"></div>
-    @include('orders.pdi_events')
 
-
-
-{{--
-<div class="row bg-light border my-auto">
-    <div class="col border-bottom text-left mx-5 my-2">
+@foreach($pdiEvents as $pdiEvent)
+<div class="row bg-light my-auto leftGreen">
+    <div class="col">
         <div class="row">
             <div class="col border-bottom text-left mx-5 my-2">
-                <div class="row h2">
+                <div class="row">
                     <div class="col">
-                        <span class="font-weight-bold">Despatch</span>
-                    </div>
-                    <div class="col">
-                        {{ '{EV_STATUS}' }}
+                        <p class="h2 text-left">Pre Delivery Inspection</p>
                     </div>
                 </div>
             </div>
             <div class="col border-bottom text-left mx-5 my-2">
-                &nbsp;
+                <div class="row">
+                    <div class="col">
+                        &nbsp;
+                    </div>
+                </div>
             </div>
             <div class="col border-bottom text-left mx-5 my-2">
-                &nbsp;
+                <div class="row">
+                    <div class="col">
+                       &nbsp;
+                    </div>
+                </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col border-bottom text-left mx-5 my-2">
+                <div class="row">
+                    <div class="col">
+                        <span class="font-weight-bold">Order Number:</span>
+                    </div>
+                    <div class="col">
+                        {{ $pdiEvent['ref_no'] }}
+                    </div>
+                </div>
+            </div>
+            <div class="col border-bottom text-left mx-5 my-2">
+                <div class="row">
+                    <div class="col">
+                        <span class="font-weight-bold">Date PDI'd:</span>
+                    </div>
+                    <div class="col">
+                        {{ $pdiEvent['pdi_date'] }}
+                    </div>
+                </div>
+            </div>
+            <div class="col border-bottom text-left mx-5 my-2">
+                <div class="row">
+                    <div class="col">
+                        <span class="font-weight-bold">Mechanic:</span>
+                    </div>
+                    <div class="col">
+                        {{ $pdiEvent['mechanic'] }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col border-bottom text-left mx-5 my-2">
                 <div class="row">
@@ -33,176 +65,185 @@
                         <span class="font-weight-bold">Load Note:</span>
                     </div>
                     <div class="col">
-                        {{ '{EV_LOAD_NOTE}' }}
+                        {{ $pdiEvent['load_note'] }}
                     </div>
                 </div>
             </div>
             <div class="col border-bottom text-left mx-5 my-2">
                 <div class="row">
                     <div class="col">
-                        <span class="font-weight-bold">Carrier:</span>
+                        <span class="font-weight-bold">Days Since Ordered:</span>
                     </div>
                     <div class="col">
-                        {{ '{EV_CARRIER}' }}
+                        {{ $pdiEvent['days_taken'] }}
                     </div>
                 </div>
             </div>
             <div class="col border-bottom text-left mx-5 my-2">
                 <div class="row">
                     <div class="col">
-                        <span class="font-weight-bold">Address:</span>
+                        <span class="font-weight-bold">Returned to Mechanic:</span>
                     </div>
                     <div class="col">
-                        {{ '{EV_ADDR}' }}
+                        {{ $pdiEvent['returned'] }}
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="row">
             <div class="col border-bottom text-left mx-5 my-2">
                 <div class="row">
                     <div class="col">
-                        <span class="font-weight-bold">Date Despatched:</span>
+                        <span class="font-weight-bold">Load Note Line:</span>
                     </div>
                     <div class="col">
-                        {{ '{EV_DATE_DESPATCHED}' }}
-                    </div>
-                </div>
-            </div>
-            <div class="col border-bottom text-left mx-5 my-2">
-                <div class="row">
-                    <div class="col">
-                        <span class="font-weight-bold">Service:</span>
-                    </div>
-                    <div class="col">
-                        {{ '{EV_SERVICE}' }}
+                        {{ $pdiEvent['line'] }}
                     </div>
                 </div>
             </div>
             <div class="col border-bottom text-left mx-5 my-2">
                 <div class="row">
                     <div class="col">
-                        <span class="font-weight-bold">City:</span>
+                        <span class="font-weight-bold">Fast Track:</span>
                     </div>
                     <div class="col">
-                        {{ '{EV_CITY}' }}
+                        {{ $pdiEvent['fast_track'] }}
+                    </div>
+                </div>
+            </div>
+            <div class="col border-bottom text-left mx-5 my-2">
+                <div class="row">
+                    <div class="col">
+                        <span class="font-weight-bold">Return Notes:</span>
+                    </div>
+                    <div class="col">
+                        {{ $pdiEvent['returned_notes'] }}
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="row">
+            <div class="col border-bottom text-left mx-5 my-2">
+                <div class="row">
+                    <div class="col">
+                        <span class="font-weight-bold">SKU:</span>
+                    </div>
+                    <div class="col">
+                        {{ $pdiEvent['line'] }}
+                    </div>
+                </div>
+            </div>
+            <div class="col border-bottom text-left mx-5 my-2">
+                <div class="row">
+                    <div class="col">
+                        <span class="font-weight-bold">Processed as Fast Track:</span>
+                    </div>
+                    <div class="col">
+                        {{ $pdiEvent['fast_track'] }}
+                    </div>
+                </div>
+            </div>
+            <div class="col border-bottom text-left mx-5 my-2">
+                <div class="row">
+                    <div class="col">
+                        <span class="font-weight-bold">PDI Notes:</span>
+                    </div>
+                    <div class="col">
+                        {{ $pdiEvent['pdi_notes'] }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col border-bottom text-left mx-5 my-2">
+                <div class="row">
+                    <div class="col">
+                        <span class="font-weight-bold">Bike:</span>
+                    </div>
+                    <div class="col">
+                        {{ $pdiEvent['bike'] }}
+                    </div>
+                </div>
+            </div>
             <div class="col border-bottom text-left mx-5 my-2">
                 <div class="row">
                     <div class="col">
                         <span class="font-weight-bold">Last Updated:</span>
                     </div>
                     <div class="col">
-                        {{ '{EV_LAST_UPDATED}' }}
+                        {{ $pdiEvent['last_updated'] }}
                     </div>
                 </div>
             </div>
-            <div class="col border-bottom text-left mx-5 my-2">
+            <div class="col text-left mx-5 my-2">
                 <div class="row">
                     <div class="col">
-                        <span class="font-weight-bold">Tracking:</span>
-                    </div>
-                    <div class="col">
-                        {{ '{EV_TRACKING}' }}
-                    </div>
-                </div>
-            </div>
-            <div class="col border-bottom text-left mx-5 my-2">
-                <div class="row">
-                    <div class="col">
-                        <span class="font-weight-bold">County:</span>
-                    </div>
-                    <div class="col">
-                        {{ '{EV_COUNTY}' }}
+                        &nbsp;
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="row">
+            <div class="col border-bottom text-left mx-5 my-2">
+                <div class="row">
+                    <div class="col">
+                        <span class="font-weight-bold">Customer Name:</span>
+                    </div>
+                    <div class="col">
+                        {{ $pdiEvent['name'] }}
+                    </div>
+                </div>
+            </div>
             <div class="col border-bottom text-left mx-5 my-2">
                 <div class="row">
                     <div class="col">
                         <span class="font-weight-bold">Updated By:</span>
                     </div>
                     <div class="col">
-                        {{ '{EV_UPDATED_BY}' }}
+                        {{ $pdiEvent['last_updated_by'] }}
                     </div>
                 </div>
             </div>
-            <div class="col border-bottom text-left mx-5 my-2">
+            <div class="col text-left mx-5 my-2">
                 <div class="row">
                     <div class="col">
-                        <span class="font-weight-bold">Weight:</span>
-                    </div>
-                    <div class="col">
-                        {{ '{EV_WEIGHT}' }}
-                    </div>
-                </div>
-            </div>
-            <div class="col border-bottom text-left mx-5 my-2">
-                <div class="row">
-                    <div class="col">
-                        <span class="font-weight-bold">Postcode:</span>
-                    </div>
-                    <div class="col">
-                        {{ '{EV_POSTCODE}' }}
+                        &nbsp;
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="row">
-            <div class="col border-bottom text-left mx-5 my-2">
-                &nbsp;
-            </div>
             <div class="col border-bottom text-left mx-5 my-2">
                 <div class="row">
                     <div class="col">
-                        <span class="font-weight-bold">Boxes:</span>
+                        <span class="font-weight-bold">Serial Number:</span>
                     </div>
                     <div class="col">
-                        {{ '{EV_BOXES}' }}
+                        {{ $pdiEvent['serial_number'] }}
                     </div>
                 </div>
             </div>
             <div class="col border-bottom text-left mx-5 my-2">
                 <div class="row">
                     <div class="col">
-                        <span class="font-weight-bold">Country:</span>
-                    </div>
-                    <div class="col">
-                        {{ '{EV_COUNTRY}' }}
+                        &nbsp;
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col text-center">
-                <table class="table-striped w-100 mt-5 mb-3 table-bordered">
-                    <thead>
-                    <tr class="bg-dark text-white">
-                        <th>Line</th>
-                        <th>SKU</th>
-                        <th>Item</th>
-                        <th>QTY Shipped</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @for ($i = 0; $i <= 5; $i++)
-                        <tr>
-                            <td>{{'{EV_TABLE_LINE}'}}</td>
-                            <td>{{'{EV_TABLE_SKU}'}}</td>
-                            <td>{{'{EV_TABLE_ITEM}'}}</td>
-                            <td>{{'{EV_TABLE_SHIPPED}'}}</td>
-                        </tr>
-                    @endfor
-                    </tbody>
-                </table>
+            <div class="col text-left mx-5 my-2">
+                <div class="row">
+                    <div class="col">
+                        &nbsp;
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
---}}
+@endforeach
+
